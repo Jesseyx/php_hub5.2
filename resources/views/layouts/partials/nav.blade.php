@@ -13,17 +13,20 @@
                     <a href="#" target="_blank">{{ lang('Jobs') }}</a>
                 </li>
                 <li>
-                    <a href="#" target="_blank">{{ lang('Wiki') }}</a>
+                    <a href="#" target="_blank">{{ lang('Share') }}</a>
                 </li>
                 <li>
-                    <a href="#" target="_blank">{{ lang('Document') }}</a>
-                </li>
-                <li>
-                    <a href="https://cs.phphub.org/" target="_blank">LTS 速查表</a>
+                    <a href="#" target="_blank">{{ lang('Q&A') }}</a>
                 </li>
             </ul>
 
             <div class="navbar-right">
+
+                <form class="navbar-form navbar-left" method="GET" action="#" accept-charset="utf-8" target="_blank">
+                    <div class="form-group">
+                        <input class="form-control search-input mac-style" name="q" type="text" placeholder="{{ lang('Search') }}">
+                    </div>
+                </form>
 
                 <ul class="nav navbar-nav github-login">
                     @if (Auth::check())

@@ -26,6 +26,8 @@
             },
             token: '{{ csrf_token() }}',
         };
+
+        var ShowCrxHint = 'no';
     </script>
 
     @yield('styles')

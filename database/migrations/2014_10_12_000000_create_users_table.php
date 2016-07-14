@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable()->index();
             $table->string('real_name')->nullable();
             $table->string('email')->nullable()->index();
+            // github avatar_url
             $table->string('image_url')->nullable();
             $table->string('avatar');
             $table->string('city')->nullable();

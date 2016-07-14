@@ -2,34 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Phphub\Listeners\UserCreatorListener;
 use App\User;
-use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use Socialite;
+use Session;
 
-class AuthController extends Controller
+class AuthController extends Controller implements UserCreatorListener
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
     /**
      * Create a new authentication controller instance.
      *
@@ -37,36 +18,86 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /*
+     * Login
+     */
+    public function login(Request $request)
+    {
+        if ($request->has('code')) {
+            // 返回了
+            // windows 系统会因为 ssl 证书报错，请参考下面的解决办法
+            // https://laracasts.com/discuss/channels/laravel/how-to-solve-curl-error-60-ssl-certificate-in-laravel-5-while-facebook-authentication
+            // lalitesh       If someone is still looking for a solution, there is an easy fix   ...
+            // App::make 从容器中解析对象，已通过 composer.json psr-4 自动加载
+
+            $githubUser = Socialite::driver('github')->user();
+            $user = User::getByGithubId($githubUser->id);
+
+            if ($user) {
+                return $this->loginUser($user);
+            }
+
+            return $this->userNotFound($githubUser);
+        }
+
+        // 将用户重定向到 GitHub 认证页面
+        return Socialite::driver('github')->redirect();
+    }
+
+    // 数据库中有，登录用户
+    private function loginUser($user)
+    {
+        dd('adasdasd');
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * ----------------------------------------
+     * GithubAuthenticatorListener Delegate
+     * ----------------------------------------
      */
-    protected function validator(array $data)
+
+    // 数据库找不到用户, 执行新用户注册
+    private function userNotFound($githubData)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
+        $githubUserData = $githubData->user;
+        $githubUserData['image_url'] = $githubData->user['avatar_url'];
+        $githubUserData['github_id'] = $githubData->user['id'];
+        $githubUserData['github_url'] = $githubData->user['url'];
+        $githubUserData['github_name'] = $githubData->nickname;
+
+        Session::put('githubUserData', $githubUserData);
+
+        return redirect(route('signup'));
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
+     * Shows a user what their new account will look like.
      */
-    protected function create(array $data)
+    public function create()
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        if (! Session::has('githubUserData')) {
+            return redirect(route('login'));
+        }
+
+        $githubUser = array_merge(Session::get('githubUserData'), Session::get('_old_input', []));
+        return view('auth.signupconfirm', compact('githubUser'));
+    }
+
+    /**
+     * ----------------------------------------
+     * UserCreatorListener Delegate
+     * ----------------------------------------
+     */
+    public function userValidationError($errors)
+    {
+        // TODO: Implement userValidationError() method.
+    }
+
+    public function userCreated($user)
+    {
+        // TODO: Implement userCreated() method.
     }
 }

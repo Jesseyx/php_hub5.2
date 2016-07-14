@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Phphub\Listeners\UserCreatorListener;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -84,6 +85,21 @@ class AuthController extends Controller implements UserCreatorListener
 
         $githubUser = array_merge(Session::get('githubUserData'), Session::get('_old_input', []));
         return view('auth.signupconfirm', compact('githubUser'));
+    }
+
+    /**
+     * Actually creates the new user account
+     */
+    public function store(StoreUserRequest $request)
+    {
+        if (! Session::has('githubUserData')) {
+            return redirect(route('login'));
+        }
+
+        $githubUser = array_merge(Session::get('githubUserData'), $request->only('github_id', 'name', 'github_name', 'email'));
+        $githubUser = array_only($githubUser, array_keys($request->rules()));
+
+        dd($githubUser);
     }
 
     /**

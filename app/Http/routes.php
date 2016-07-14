@@ -19,3 +19,4 @@ Route::get('/', function () {
 # ------------------ Authentication ------------------------
 Route::get('login', 'Auth\AuthController@login')->name('login');
 Route::get('signup', 'Auth\AuthController@create')->name('signup');
+Route::post('signup', 'Auth\AuthController@store');

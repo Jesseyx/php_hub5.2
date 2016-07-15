@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+# ------------------ Page Route ------------------------
+Route::get('/', 'PagesController@home')->name('home');
 
 
 # ------------------ Authentication ------------------------

@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "predis/predis": "^1.1",
         "laravel/socialite": "^2.0",
-        "laravelcollective/html": "^5.2"
+        "laravelcollective/html": "^5.2",
+        "laracasts/presenter": "^0.2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

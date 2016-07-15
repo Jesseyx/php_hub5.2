@@ -5,10 +5,15 @@ namespace App;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laracasts\Presenter\PresentableTrait;
 
 class User extends Authenticatable
 {
     use SoftDeletes;
+
+    // Using: $user->present()->anyMethodYourWant()
+    use PresentableTrait;
+    protected $presenter = 'App\Phphub\Presenters\UserPresenter';
 
     /**
      * The attributes that are mass assignable.

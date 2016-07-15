@@ -113,7 +113,7 @@ class AuthController extends Controller implements UserCreatorListener
      */
     public function userValidationError($errors)
     {
-        return redirect('/');
+        return redirect()->route('home');
     }
 
     public function userCreated($user)

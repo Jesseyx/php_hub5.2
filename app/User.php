@@ -17,6 +17,19 @@ class User extends Authenticatable
      */
     protected $guarded = ['id', 'is_banned'];
 
+    /*
+     * Define relationship
+     */
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

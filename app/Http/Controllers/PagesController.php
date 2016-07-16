@@ -24,5 +24,6 @@ class PagesController extends Controller
      */
     public function search(Request $request)
     {
+        dd($request->input('q'));
     }
 }

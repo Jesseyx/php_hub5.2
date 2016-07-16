@@ -22,7 +22,7 @@
 
             <div class="navbar-right">
 
-                <form class="navbar-form navbar-left" method="GET" action="#" accept-charset="utf-8" target="_blank">
+                <form class="navbar-form navbar-left" method="GET" action="{{ route('search') }}" accept-charset="utf-8" target="_blank">
                     <div class="form-group">
                         <input class="form-control search-input mac-style" name="q" type="text" placeholder="{{ lang('Search') }}">
                     </div>

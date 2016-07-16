@@ -13,6 +13,7 @@
 
 # ------------------ Page Route ------------------------
 Route::get('/', 'PagesController@home')->name('home');
+Route::get('/search', 'PagesController@search')->name('search');
 
 
 # ------------------ Authentication ------------------------

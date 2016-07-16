@@ -18,4 +18,11 @@ class PagesController extends Controller
 
         return view('pages.home', compact('topics'));
     }
+
+    /*
+     * Search page, using google's.
+     */
+    public function search(Request $request)
+    {
+    }
 }

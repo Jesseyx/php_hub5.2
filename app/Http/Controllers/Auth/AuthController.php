@@ -52,7 +52,11 @@ class AuthController extends Controller implements UserCreatorListener
     // 数据库中有，登录用户
     private function loginUser($user)
     {
-        dd('adasdasd');
+        if ($user->is_banned == 'yes') {
+            return $this->userIsBanned($user);
+        }
+
+        return $this->userFound($user);
     }
 
     /**
@@ -73,6 +77,19 @@ class AuthController extends Controller implements UserCreatorListener
         Session::put('githubUserData', $githubUserData);
 
         return redirect(route('signup'));
+    }
+
+    private function userIsBanned($user)
+    {
+        return redirect(route('user-banned'));
+    }
+
+    private function userFound($user)
+    {
+        Auth::login($user, true);
+        Session::forget('githubUserData');
+
+        return redirect()->intended();
     }
 
     /**
@@ -104,6 +121,16 @@ class AuthController extends Controller implements UserCreatorListener
         // 使用 ClassName::class 你可以获取一个字符串，包含了类 ClassName 的完全限定名称。
         // 这对使用了 命名空间 的类尤其有用。
         return app(\App\Phphub\Creators\UserCreator::class)->create($this, $githubUser);
+    }
+
+    /*
+     * Logout
+     */
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect(route('home'));
     }
 
     /**

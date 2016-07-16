@@ -17,4 +17,6 @@ return [
     'Excellent Topics' => '社区精华帖',
     'More Excellent Topics' => '查看更多精华帖',
     'Dont have any data Yet' => '还未有主题',
+    'Are you sure want to logout?' => '你确定要退出吗?',
+    
 ];

@@ -20,4 +20,20 @@ class UserPresenter extends Presenter
 
         return "https://avatars{$domainNumber}.githubusercontent.com/u/{$github_id}?v=2&s={$size}";
     }
+
+    /*
+     * 是否有徽章
+     */
+    public function hasBadge()
+    {
+        return true;
+    }
+
+    /*
+     * 获取徽章名称
+     */
+    public function badgeName()
+    {
+        return '将军';
+    }
 }

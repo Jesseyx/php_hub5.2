@@ -21,3 +21,6 @@ Route::get('login', 'Auth\AuthController@login')->name('login');
 Route::get('signup', 'Auth\AuthController@create')->name('signup');
 Route::post('signup', 'Auth\AuthController@store');
 Route::get('logout', 'Auth\AuthController@logout')->name('logout');
+
+# ------------------ Topic ------------------------
+Route::get('/topics/{id}', 'TopicsController@show')->name('topics.show');

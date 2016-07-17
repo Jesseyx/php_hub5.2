@@ -43,6 +43,33 @@ class Topic extends Model
     }
 
     /*
+     * getRepliesWithLimit
+     */
+    public function getRepliesWithLimit($limit = 30)
+    {
+        $pageName = 'page';
+
+        // Default display the latest reply
+        $latest_page = is_null(request($pageName)) ? ceil($this->reply_count / $limit) : 1;
+
+        $this->replies()
+            ->orderBy('created_at', 'desc')
+            ->with('user')
+            ->paginate($limit, ['*'], $pageName, $latest_page);
+    }
+
+    /*
+     * getSameCategoryTopics
+     */
+    public function getSameCategoryTopics($limit = 8)
+    {
+        return Topic::where('category_id', '=', $this->category_id)
+                ->recent()
+                ->take($limit)
+                ->get();
+    }
+
+    /*
      * applyFilter
      */
     public function applyFilter($filter)

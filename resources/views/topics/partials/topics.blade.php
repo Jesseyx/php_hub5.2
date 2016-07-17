@@ -31,7 +31,7 @@
                 <div class="infos">
                     <div class="media-heading">
 
-                        <a href="" title="{{ $topic->title }}">
+                        <a href="{{ route('topics.show', [$topic->id]) }}" title="{{ $topic->title }}">
                             {{ $topic->title }}
                         </a>
                     </div>

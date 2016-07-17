@@ -18,5 +18,12 @@ return [
     'More Excellent Topics' => '查看更多精华帖',
     'Dont have any data Yet' => '还未有主题',
     'Are you sure want to logout?' => '你确定要退出吗?',
-    
+    'Total Reply Count' => '回复数量',
+    'No comments' => '暂无评论',
+    'at' => '于',
+    'Last Reply by' => '最后由',
+    'Reads' => '阅读',
+    'This topic has been mark as Excenllent Topic.' => '本帖已被设为精华帖！',
+    'This is a Community Wiki.' => '本帖已被设为社区 Wiki！',
+
 ];

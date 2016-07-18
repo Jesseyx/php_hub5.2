@@ -59,7 +59,7 @@
 
             <div class="panel-body">
                 @if (count($replies))
-                    {{--@include('topics.partials.replies')--}}
+                    @include('topics.partials.replies')
                     <div id="replies-empty-block" class="empty-block hide">{{ lang('No comments') }}~~</div>
                 @else
                     <ul class="list-group row"></ul>
@@ -75,7 +75,7 @@
 
         <!-- Reply Box -->
         <div class="reply-box form box-block">
-            {{--@include('layouts.partials.errors')--}}
+            @include('layouts.partials.errors')
 
         </div>
     </div>

@@ -25,5 +25,6 @@ return [
     'Reads' => '阅读',
     'This topic has been mark as Excenllent Topic.' => '本帖已被设为精华帖！',
     'This is a Community Wiki.' => '本帖已被设为社区 Wiki！',
+    'New Topic' => '发 布 新 帖',
 
 ];

@@ -79,5 +79,7 @@
 
         </div>
     </div>
+
+    @include('layouts.partials.sidebar')
 @stop
 

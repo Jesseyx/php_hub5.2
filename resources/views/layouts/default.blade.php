@@ -21,7 +21,7 @@
             cdnDomain: '{{ getCdnDomain() }}',
             user_id: 1,
             routes: {
-                'notificationsCount' : '',
+                'notificationsCount' : '{{ route('notifications.count') }}',
                 'upload_image' : ''
             },
             token: '{{ csrf_token() }}',

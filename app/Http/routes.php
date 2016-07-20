@@ -25,7 +25,6 @@ Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 # ------------------ Topic ------------------------
 Route::get('/topics/{id}', 'TopicsController@show')->name('topics.show');
 
-
 # ------------------ User stuff ------------------------
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications/count', 'NotificationsController@count')->name('notifications.count');

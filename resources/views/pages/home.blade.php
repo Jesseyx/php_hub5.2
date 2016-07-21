@@ -5,6 +5,8 @@
         {!! lang('site_intro') !!}
     </div>
 
+    @include('layouts.partials.topbanner')
+
     <div class="panel panel-default list-panel">
         <div class="panel-heading">
             <h3 class="panel-title text-center">

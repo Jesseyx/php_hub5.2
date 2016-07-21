@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class PagesController extends Controller
     public function home(Topic $topic)
     {
         $topics =$topic->getTopicsWithFilter('excellent');
+        $banners = Banner::allByPosition();
 
-        return view('pages.home', compact('topics'));
+        return view('pages.home', compact('topics', 'banners'));
     }
 
     /*

@@ -26,5 +26,13 @@ return [
     'This topic has been mark as Excenllent Topic.' => '本帖已被设为精华帖！',
     'This is a Community Wiki.' => '本帖已被设为社区 Wiki！',
     'New Topic' => '发 布 新 帖',
+    'publish_typography' => '请注意单词拼写，以及中英文排版，<a href="https://github.com/sparanoid/chinese-copywriting-guidelines">参考此页</a>',
+    'publish_markdown' => '支持 Markdown 格式, <strong>**粗体**</strong>、~~删除线~~、<code>`单行代码`</code>, 更多语法请见这里 <a href="https://github.com/riku/Markdown-Syntax-CN/blob/master/syntax.md">Markdown 语法</a>',
+    'publish_emoji' => '支持表情，见 <a href="http://www.emoji-cheat-sheet.com" target="_blank" rel="nofollow">Emoji cheat sheet</a>',
+    'publish_at_user' => '@name 会链接到用户页面，并会通知他',
+    'publish_image' => '上传图片, 支持拖拽和剪切板黏贴上传, 格式限制 - jpg, png, gif',
+    'Please using markdown.' => '请使用 Markdown 格式书写 ;-)',
+    'User Login Required for commenting.' => '需要登录后才能发表评论.',
+    'Reply' => '回复',
 
 ];

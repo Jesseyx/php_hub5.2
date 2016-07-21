@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -54,7 +55,9 @@ class TopicsController extends Controller
         $categoryTopics = $topic->getSameCategoryTopics();
 
         $topic->increment('view_count', 1);
-        return view('topics.show', compact('topic', 'replies', 'category', 'categoryTopics'));
+
+        $banners = Banner::allByPosition();
+        return view('topics.show', compact('topic', 'replies', 'category', 'categoryTopics', 'banners'));
     }
 
     /**

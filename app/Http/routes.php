@@ -29,3 +29,6 @@ Route::get('/topics/{id}', 'TopicsController@show')->name('topics.show');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications/count', 'NotificationsController@count')->name('notifications.count');
 });
+
+# ------------------ Replies ------------------------
+Route::post('/replies', 'RepliesController@store')->name('replies.store');

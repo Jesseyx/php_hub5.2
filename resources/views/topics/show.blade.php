@@ -60,11 +60,11 @@
             <div class="panel-body">
                 @if (count($replies))
                     @include('topics.partials.replies')
-                    <div id="replies-empty-block" class="empty-block hide">{{ lang('No comments') }}~~</div>
                 @else
                     <ul class="list-group row"></ul>
-                    <div id="replies-empty-block" class="empty-block">{{ lang('No comments') }}~~</div>
                 @endif
+
+                <div id="replies-empty-block" class="empty-block{{ count($replies) ? '' : ' hide' }}">{{ lang('No comments') }}~~</div>
 
                 <!-- Pager -->
                 <div class="pull-right" style="padding-right: 20px;">
@@ -77,9 +77,30 @@
         <div class="reply-box form box-block">
             @include('layouts.partials.errors')
 
+            {{ Form::open(['url' => route('replies.store'), 'id' => 'reply-form', 'accept-charset' => 'UTF-8']) }}
+                {{ Form::hidden('topic_id', $topic->id) }}
+
+                @include('topics.partials.composing_help_block')
+
+                <div class="form-group">
+                    @if ($currentUser)
+                        {{ Form::textarea('body', null, ['id' => 'reply_content', 'class' => 'form-control', 'rows' => 5, 'cols' => 50, 'placeholder' => lang('Please using markdown.'), 'style' => 'overflow: hidden;']) }}
+                    @else
+                        {{ Form::textarea('body', null, ['id' => 'reply_content', 'class' => 'form-control', 'rows' => 5, 'cols' => 50, 'placeholder' => lang('User Login Required for commenting.'), 'disabled' => 'disabled']) }}
+                    @endif
+                </div>
+
+                <div class="form-group status-post-submit">
+                    {{ Form::submit(lang('Reply'), ['id' => 'reply-create-submit', 'class' => 'btn btn-primary' . ($currentUser ? '' : ' disabled')]) }}
+                    <span class="help-inline" title="Or Command + Enter">Ctrl+Enter</span>
+                </div>
+
+                <div id="preview-box" class="box preview markdown-reply" style="display: none;"></div>
+            {{ Form::close() }}
         </div>
     </div>
 
     @include('layouts.partials.sidebar')
+    @include('layouts.partials.bottombanner')
 @stop
 

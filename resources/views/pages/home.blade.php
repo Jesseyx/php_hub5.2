@@ -11,7 +11,7 @@
         <div class="panel-heading">
             <h3 class="panel-title text-center">
                 {{ lang('Excellent Topics') }} &nbsp;
-                <a href="#" style="color: #E5974E; font-size: 14px;" target="_blank">
+                <a href="#" target="_blank" style="color: #E5974E; font-size: 14px;">
                     <i class="fa fa-rss"></i>
                 </a>
             </h3>

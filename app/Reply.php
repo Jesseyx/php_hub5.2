@@ -3,9 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Reply extends Model
 {
+    use SoftDeletes;
+
+    protected $fillable = [
+        'body',
+        'user_id',
+        'topic_id',
+        'body_original',
+    ];
+
     /*
      * Define relationship
      */

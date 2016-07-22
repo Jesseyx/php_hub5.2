@@ -34,5 +34,7 @@ return [
     'Please using markdown.' => '请使用 Markdown 格式书写 ;-)',
     'User Login Required for commenting.' => '需要登录后才能发表评论.',
     'Reply' => '回复',
+    'Operation failed!' => '操作失败!',
+    'Operation succeeded!' => '操作成功!',
 
 ];

@@ -16,7 +16,7 @@ class RepliesController extends Controller implements CreatorListener
 
     public function store(Requests\StoreReplyRequest $request)
     {
-        dd('sdasda');
+        return app('App\Phphub\Creators\replyCreator')->create($this, $request->except('_token'));
     }
 
     /**
@@ -26,11 +26,21 @@ class RepliesController extends Controller implements CreatorListener
      */
     public function creatorFailed($errors)
     {
-        // TODO: Implement creatorFailed() method.
+        return response([
+            'status'  => 500,
+            'message' => lang('Operation failed!'),
+        ]);
     }
 
-    public function creatorSucceed($model)
+    public function creatorSucceed($reply)
     {
-        // TODO: Implement creatorSucceed() method.
+        $reply->user->image_url = $reply->user->present()->gravatar;
+
+        return response([
+            'status' => 200,
+            'message' => lang('Operation succeeded!'),
+            'reply' => $reply,
+            'manage_topics' => 'no',
+        ]);
     }
 }

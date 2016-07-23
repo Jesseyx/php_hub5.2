@@ -35,7 +35,7 @@ class Mention
         foreach ($this->users as $user) {
             $search = '@' . $user->name;
             // 替换为 markdown 格式
-            $place = '[' . $search .'](' . '#' .')';
+            $place = '[' . $search . '](' . route('users.show', $user->id) . ')';
             $this->body_parsed = str_replace($search, $place, $this->body_parsed);
         }
     }

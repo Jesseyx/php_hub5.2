@@ -32,3 +32,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 # ------------------ Replies ------------------------
 Route::post('/replies', 'RepliesController@store')->name('replies.store');
+
+# ------------------ Users ------------------------
+Route::get('/users/{id}', 'UsersController@show')->name('users.show');

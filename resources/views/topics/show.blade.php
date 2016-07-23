@@ -85,9 +85,9 @@
                 <div class="form-group">
                     @if ($currentUser)
                         {{ Form::textarea('body', null, ['id' => 'reply_content', 'class' => 'form-control', 'rows' => 5, 'cols' => 50, 'placeholder' => lang('Please using markdown.'), 'style' => 'overflow: hidden;']) }}
-                    @else
-                        {{ Form::textarea('body', null, ['id' => 'reply_content', 'class' => 'form-control', 'rows' => 5, 'cols' => 50, 'placeholder' => lang('User Login Required for commenting.'), 'disabled' => 'disabled']) }}
-                    @endif
+                        @else
+                            {{ Form::textarea('body', null, ['id' => 'reply_content', 'class' => 'form-control', 'rows' => 5, 'cols' => 50, 'placeholder' => lang('User Login Required for commenting.'), 'disabled' => 'disabled']) }}
+                        @endif
                 </div>
 
                 <div class="form-group status-post-submit">

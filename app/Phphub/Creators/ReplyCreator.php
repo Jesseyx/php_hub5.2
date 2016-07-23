@@ -4,6 +4,7 @@ namespace App\Phphub\Creators;
 
 use App\Phphub\Core\CreatorListener;
 use App\Phphub\Markdown\Markdown;
+use App\Phphub\Notification\Mention;
 use App\Reply;
 use App\Topic;
 use Auth;
@@ -11,16 +12,18 @@ use Carbon\Carbon;
 
 class ReplyCreator
 {
-    public function __construct()
-    {
+    protected $mentionParser;
 
+    public function __construct(Mention $mentionParser)
+    {
+        $this->mentionParser = $mentionParser;
     }
 
     public function create(CreatorListener $observer, $data)
     {
         $data['user_id'] = Auth::id();
         // 处理 @ 消息，后期处理
-        // $data['body'] =
+         $data['body'] = $this->mentionParser->parse($data['body']);
 
         $markdown = new Markdown();
 

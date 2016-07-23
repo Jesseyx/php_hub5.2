@@ -52,8 +52,8 @@ class Topic extends Model
         // Default display the latest reply
         $latest_page = is_null(request($pageName)) ? ceil($this->reply_count / $limit) : 1;
 
-        $this->replies()
-            ->orderBy('created_at', 'desc')
+        return $this->replies()
+            ->orderBy('created_at', 'asc')
             ->with('user')
             ->paginate($limit, ['*'], $pageName, $latest_page);
     }

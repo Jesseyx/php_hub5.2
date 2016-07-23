@@ -53,7 +53,7 @@
         <div class="replies panel panel-default list-panel replies-index">
             <div class="panel-heading">
                 <div class="total">
-                    {{ lang('Total Reply Count') }}: <b>{{ count($replies) }}</b>
+                    {{ lang('Total Reply Count') }}: <b>{{ $replies->total() }}</b>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
                     <ul class="list-group row"></ul>
                 @endif
 
-                <div id="replies-empty-block" class="empty-block{{ count($replies) ? '' : ' hide' }}">{{ lang('No comments') }}~~</div>
+                <div id="replies-empty-block" class="empty-block{{ count($replies) ? ' hide' : '' }}">{{ lang('No comments') }}~~</div>
 
                 <!-- Pager -->
                 <div class="pull-right" style="padding-right: 20px;">

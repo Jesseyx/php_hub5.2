@@ -24,6 +24,8 @@ Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 
 # ------------------ Topic ------------------------
 Route::get('/topics/{id}', 'TopicsController@show')->name('topics.show');
+Route::get('/topics/create', 'TopicsController@create')->name('topics.create');
+Route::post('/topics', 'TopicsController@store')->name('topics.store');
 
 # ------------------ User stuff ------------------------
 Route::group(['middleware' => 'auth'], function () {

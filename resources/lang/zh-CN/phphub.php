@@ -36,5 +36,13 @@ return [
     'Reply' => '回复',
     'Operation failed!' => '操作失败!',
     'Operation succeeded!' => '操作成功!',
+    'Create New Topic' => '创建新主题',
+    'be_nice' => '我们希望 PHPHub 能够成为技术氛围最好的 PHP 社区，而实现这个目标，需要我们所有人的共同努力：友善，公平，尊重知识和事实。',
+    'Pick a category' => '请选择分类',
+    'Please write down a topic' => '请填写标题',
+    'Publish' => '发 布',
+    'Current Category' => '当前分类',
+    'This kind of topic is not allowed.' => '以下类型的信息会污染我们的社区',
+    'We can benefit from it.' => '在高质量优秀社区的我们',
 
 ];

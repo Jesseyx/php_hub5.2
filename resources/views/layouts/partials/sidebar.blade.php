@@ -8,7 +8,7 @@
 
         <div class="panel-body text-center">
             <div class="btn-group">
-                <a class="btn btn-primary btn-lg" href="">
+                <a class="btn btn-primary btn-lg" href="{{ isset($category) ? route('topics.create', ['category_id' => $category->id]) : route('topics.create') }}">
                     <i class="glyphicon glyphicon-pencil"> </i> {{ lang('New Topic') }}
                 </a>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Banner;
+use App\Category;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -25,9 +26,12 @@ class TopicsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $category = Category::find($request->input('category_id'));
+        $categories = Category::all();
+
+        return view('topics.create_edit', compact('category', 'categories'));
     }
 
     /**

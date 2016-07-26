@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Banner;
 use App\Category;
+use App\Phphub\Core\CreatorListener;
 use App\Topic;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\StoreTopicRequest;
 
-class TopicsController extends Controller
+class TopicsController extends Controller implements CreatorListener
 {
     /**
      * Display a listing of the resource.
@@ -40,9 +42,9 @@ class TopicsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTopicRequest $request)
     {
-        //
+        return app('App\Phphub\Creators\TopicCreator')->create($this, $request->except('_token'));
     }
 
     /**
@@ -96,5 +98,20 @@ class TopicsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * ----------------------------------------
+     * CreatorListener Delegate
+     * ----------------------------------------
+     */
+    public function creatorFailed($errors)
+    {
+        return redirect('/');
+    }
+
+    public function creatorSucceed($topic)
+    {
+        return redirect(route('topics.show', array($topic->id)));
     }
 }

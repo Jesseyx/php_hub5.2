@@ -7,6 +7,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Topic extends Model
 {
+    // Don't forget to fill this array
+    protected $fillable = [
+        'title',
+        'body',
+        'excerpt',
+        'body_original',
+        'user_id',
+        'category_id',
+        'created_at',
+        'updated_at'
+    ];
+
     use SoftDeletes;
 
     /*
@@ -92,5 +104,15 @@ class Topic extends Model
     public function scopeRecent($query)
     {
         return $query->orderBy('created_at', 'desc');
+    }
+
+    // static
+    public static function makeExcerpt($body)
+    {
+        $html = $body;
+        // 去除 html 标记
+        $excerpt = trim(preg_replace('/\s\s+/', ' ', strip_tags($html)));
+
+        return str_limit($excerpt, 200);
     }
 }

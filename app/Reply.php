@@ -28,4 +28,17 @@ class Reply extends Model
     {
         return $this->belongsTo(Topic::class);
     }
+
+    /*
+     * Scope
+     */
+    public function scopeWhose($query, $user_id)
+    {
+        return $query->where('user_id', '=', $user_id)->with('topic');
+    }
+
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
 }

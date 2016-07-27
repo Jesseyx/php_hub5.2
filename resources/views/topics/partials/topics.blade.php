@@ -2,7 +2,7 @@
     <ul class="list-group row topic-list">
         @foreach ($topics as $topic)
             <li class="list-group-item media{{ $column ? ' col-sm-6' : '' }}" style="margin-top: 0px;">
-                <a class="reply_last_time hidden-xs" href="#">
+                <a class="reply_last_time hidden-xs" href="{{ route('topics.show', [$topic->id]) }}">
                     @if ($topic->reply_count > 0 && count($topic->lastReplyUser))
                         <img class="user_small_avatar" src="{{ $topic->lastReplyUser->present()->gravatar }}" title="{{ $topic->lastReplyUser->name }}">
                     @else
@@ -13,7 +13,7 @@
                 </a>
 
                 <div class="avatar pull-left">
-                    <a href="#">
+                    <a href="{{ route('users.show', [$topic->user_id]) }}">
                         <img class="media-object img-thumbnail avatar avatar-middle" src="{{ $topic->user->present()->gravatar }}" alt="{{ $topic->user->name }}" title="{{ $topic->user->name }}">
                     </a>
                 </div>

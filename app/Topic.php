@@ -106,6 +106,11 @@ class Topic extends Model
         return $query->orderBy('created_at', 'desc');
     }
 
+    public function scopeWhose($query, $user_id)
+    {
+        return $query->where('user_id', '=', $user_id)->with('category');
+    }
+
     // static
     public static function makeExcerpt($body)
     {

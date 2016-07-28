@@ -13,7 +13,8 @@
         "laracasts/presenter": "^0.2.1",
         "league/html-to-markdown": "^4.2",
         "erusev/parsedown": "^1.6",
-        "mews/purifier": "^2.0"
+        "mews/purifier": "^2.0",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

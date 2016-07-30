@@ -6,10 +6,20 @@ use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laracasts\Presenter\PresentableTrait;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use SoftDeletes;
+    // Role-base permission
+    use EntrustUserTrait {
+        restore as private restoreEntrust;
+        EntrustUserTrait::can as may;
+    }
+
+    // soft deletes, 解决 trait 冲突
+    use SoftDeletes {
+        restore as private restoreSoftDelete;
+    }
 
     // Using: $user->present()->anyMethodYourWant()
     use PresentableTrait;
@@ -21,6 +31,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = ['id', 'is_banned'];
+
+    /**
+     * For EntrustUserTrait and SoftDeletes conflict
+     */
+    public function restore()
+    {
+        $this->restoreEntrust();
+        $this->restoreSoftDelete();
+    }
 
     /*
      * Define relationship

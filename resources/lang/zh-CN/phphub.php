@@ -60,5 +60,9 @@ return [
     'Recent Topics' => '最近主题',
     'Dont have any comment yet' => '还未留下任何评论',
     'Data has been deleted.' => '信息已被删除',
+    'Are you sure want to block this User?' => '您确定要封停该用户吗？',
+    'Are you sure want to unblock this User?' => '您确定要解封该用户吗？',
+    'Unblock User' => '解封用户',
+    'Block User' => '封停用户',
 
 ];

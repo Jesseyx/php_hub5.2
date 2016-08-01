@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div class="user-show">
+    <div class="users-show">
 
         <div class="col-md-3 box" style="padding: 15px;">
             @include('users.partials.basicInfo')

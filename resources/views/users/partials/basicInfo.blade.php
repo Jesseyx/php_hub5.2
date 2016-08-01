@@ -68,7 +68,7 @@
 @endif
 
 @if ($currentUser && Entrust::can('manage_users') && ($currentUser->id != $user->id))
-    <a id="user-edit-button" class="btn btn-{{ $user->is_banned == 'yes' ? 'warning' : 'danger' }} btn-block" href="javascript:;" data-method="post" data-url="" onclick=" return confirm('{{ lang('Are you sure want to '. ($user->is_banned == 'yes' ? 'unblock' : 'block') . ' this User?') }}')">
+    <a id="user-edit-button" class="btn btn-{{ $user->is_banned == 'yes' ? 'warning' : 'danger' }} btn-block" href="javascript:;" data-method="post" data-url="" onclick="return confirm('{{ lang('Are you sure want to '. ($user->is_banned == 'yes' ? 'unblock' : 'block') . ' this User?') }}');">
         <i class="fa fa-times"></i> {{ $user->is_banned == 'yes' ? lang('Unblock User') : lang('Block User') }}
     </a>
 @endif

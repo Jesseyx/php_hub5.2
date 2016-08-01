@@ -2,6 +2,7 @@
 
 namespace App\Phphub\Presenters;
 
+use App\Role;
 use Laracasts\Presenter\Presenter;
 
 class UserPresenter extends Presenter
@@ -26,7 +27,11 @@ class UserPresenter extends Presenter
      */
     public function hasBadge()
     {
-        return true;
+        $relations = Role::relationArrayWithCache();
+        // array_pluck 方法从数组中返回给定键对应的键值对列表
+        $user_ids = array_pluck($relations, 'user_id');
+
+        return in_array($this->id, $user_ids);
     }
 
     /*
@@ -34,6 +39,22 @@ class UserPresenter extends Presenter
      */
     public function badgeName()
     {
-        return '将军';
+        $relations = Role::relationArrayWithCache();
+        // array_first 方法返回通过测试数组的第一个元素
+        $relation = array_first($relations, function ($key, $value) {
+            return $value->user_id == $this->id;
+        });
+
+        if (!$relation) {
+            return;
+        }
+
+        $roles = Role::rolesArrayWithCache();
+
+        $role = array_first($roles, function ($key, $value) use (&$relation) {
+            return $value->id == $relation->role_id;
+        });
+
+        return $role->name;
     }
 }

@@ -64,5 +64,6 @@ return [
     'Are you sure want to unblock this User?' => '您确定要解封该用户吗？',
     'Unblock User' => '解封用户',
     'Block User' => '封停用户',
+    'Up Vote' => ''
 
 ];

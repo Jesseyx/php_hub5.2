@@ -102,6 +102,27 @@ class TopicsController extends Controller implements CreatorListener
 
     /**
      * ----------------------------------------
+     * User Topic Vote function
+     * ----------------------------------------
+     */
+    public function upvote($id)
+    {
+        $topic = Topic::find($id);
+        app('App\Phphub\Vote\Voter')->topicUpVote($topic);
+
+        return response(['status' => 200]);
+    }
+
+    public function downvote($id)
+    {
+        $topic = Topic::find($id);
+        app('App\Phphub\Vote\Voter')->topicDownVote($topic);
+
+        return response(['status' => 200]);
+    }
+
+    /**
+     * ----------------------------------------
      * CreatorListener Delegate
      * ----------------------------------------
      */

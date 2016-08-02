@@ -44,6 +44,11 @@ class Topic extends Model
         return $this->belongsTo(User::class, 'last_reply_user_id');
     }
 
+    public function votes()
+    {
+        return $this->morphMany(Vote::class, 'votable');
+    }
+
     /*
      * getTopicsWithFilter
      */

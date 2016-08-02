@@ -14,20 +14,20 @@
         <div class="topic panel panel-default">
             <div class="infos panel-heading">
                 <div class="pull-right avatar_large">
-                    <a href="">
+                    <a href="{{ route('users.show', $topic->user->id) }}">
                         <img class="img-thumbnail avatar" src="{{ $topic->user->present()->gravatar }}" style="width: 65px; height: 65px;">
                     </a>
                 </div>
 
                 <h1 class="panel-title topic-title">{{ $topic->title }}</h1>
                 
-                <div class="votes">
-                    <a href="">
+                <div class="votes animated rubberBand">
+                    <a id="up-vote" class="vote{{ $currentUser && $topic->votes()-> byWhom(Auth::id())->withType('upvote')->count() ? ' active' : '' }}" href="javascript:;" title="Up Vote" data-ajax="post" data-url="{{ route('topics.upvote', $topic->id) }}">
                         <li class="fa fa-chevron-up"></li>
                         <span id="vote-count">{{ $topic->vote_count }}</span>
                     </a>
                      &nbsp;
-                    <a href="">
+                    <a id="down-vote" class="vote{{ $currentUser && $topic->votes()-> byWhom(Auth::id())->withType('downvote')->count() ? ' active' : '' }}" href="javascript:;" title="Down Vote" data-ajax="post" data-url="{{ route('topics.downvote', $topic->id) }}">
                         <li class="fa fa-chevron-down"></li>
                     </a>
                 </div>

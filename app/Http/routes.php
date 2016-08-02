@@ -38,3 +38,9 @@ Route::post('/replies', 'RepliesController@store')->name('replies.store');
 # ------------------ Users ------------------------
 Route::get('/users/{id}', 'UsersController@show')->name('users.show');
 Route::get('/users/create', 'UsersController@create')->name('users.create');
+
+# ------------------ Votes ------------------------
+Route::group(['before' => 'auth'], function () {
+    Route::post('/topics/{id}/upvote', 'TopicsController@upvote')->name('topics.upvote');
+    Route::post('/topics/{id}/downvote', 'TopicsController@downvote')->name('topics.downvote');
+});

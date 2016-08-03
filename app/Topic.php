@@ -2,11 +2,17 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laracasts\Presenter\PresentableTrait;
 
 class Topic extends Model
 {
+
+    use PresentableTrait;
+    protected $presenter = 'App\Phphub\Presenters\TopicPresenter';
+
     // Don't forget to fill this array
     protected $fillable = [
         'title',
@@ -63,6 +69,14 @@ class Topic extends Model
     }
 
     /*
+     * getCategoryTopicsWithFilter
+     */
+    public function getCategoryTopicsWithFilter($filter, $category_id, $limit = 20)
+    {
+        return $this->applyFilter($filter == 'default' ? 'category' : $filter);
+    }
+
+    /*
      * getRepliesWithLimit
      */
     public function getRepliesWithLimit($limit = 30)
@@ -94,10 +108,24 @@ class Topic extends Model
      */
     public function applyFilter($filter)
     {
-        switch ($filter)
-        {
+        switch ($filter) {
+            case 'noreply':
+                return $this->orderBy('reply_count', 'asc')->recent();
+
+            case 'vote':
+                return $this->orderBy('vote_count', 'desc')->recent();
+
             case 'excellent':
                 return $this->excellent()->recent();
+
+            case 'recent':
+                return $this->recent();
+
+            case 'category':
+                return $this->recentReply();
+
+            default:
+                return $this->pinAndRecentReply();
         }
     }
 
@@ -117,6 +145,19 @@ class Topic extends Model
     public function scopeWhose($query, $user_id)
     {
         return $query->where('user_id', '=', $user_id)->with('category');
+    }
+
+    public function scopeRecentReply($query)
+    {
+        return $query->orderBy('order', 'desc')
+                     ->orderBy('updated_at', 'desc');
+    }
+
+    public function scopePinAndRecentReply($query)
+    {
+        return $query->whereRaw("(`created_at` > '" . Carbon::today()->subMonth()->toDateString() . "' or (`order` > 0))")
+                     ->orderBy('order', 'desc')
+                     ->orderBy('updated_at', 'desc');
     }
 
     // static

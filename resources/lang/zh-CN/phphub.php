@@ -64,6 +64,12 @@ return [
     'Are you sure want to unblock this User?' => '您确定要解封该用户吗？',
     'Unblock User' => '解封用户',
     'Block User' => '封停用户',
-    'Up Vote' => ''
+    'Up Vote' => '',
+    'Reply List' => '主题列表',
+    'Topic List' => '主题列表',
+    'Recent' => '最近发表',
+    'Excellent' => '精华主题',
+    'Vote' => '最多投票',
+    'Noreply' => '无人问津',
 
 ];

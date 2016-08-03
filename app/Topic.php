@@ -19,6 +19,9 @@ class Topic extends Model
         'updated_at'
     ];
 
+    // manually maintian 手动维护
+    public $timestamps = false;
+
     use SoftDeletes;
 
     /*

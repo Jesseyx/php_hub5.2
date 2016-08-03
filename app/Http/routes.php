@@ -44,3 +44,6 @@ Route::group(['before' => 'auth'], function () {
     Route::post('/topics/{id}/upvote', 'TopicsController@upvote')->name('topics.upvote');
     Route::post('/topics/{id}/downvote', 'TopicsController@downvote')->name('topics.downvote');
 });
+
+# ------------------ Categories ------------------------
+Route::get('/categories/{id}', 'CategoriesController@show')->name('categories.show');

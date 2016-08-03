@@ -1,9 +1,9 @@
 <div class="meta inline-block">
-    <a href="">
+    <a class="remove-padding-left" href="{{ route('categories.show', $topic->category->id) }}">
         {{ $topic->category->name }}
     </a>
     •
-    <a href="">
+    <a href="{{ route('users.show', $topic->user->id) }}">
         {{ $topic->user->name }}
     </a>
 
@@ -18,7 +18,7 @@
 
     @if (count($topic->lastReplyUser))
         {{ lang('Last Reply by') }}
-        <a href="">
+        <a href="{{ route('users.show', $topic->lastReplyUser->id) }}">
             {{ $topic->lastReplyUser->name }}
         </a>
         {{ lang('at') }} <abbr class="timeago" title="{{ $topic->updated_at }}">{{ $topic->updated_at }}</abbr>

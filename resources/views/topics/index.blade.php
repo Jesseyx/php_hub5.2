@@ -22,13 +22,14 @@
                 <div class="clearfix"></div>
             </div>
 
-            @if (!$topic->isEmpty())
+            @if (!$topics->isEmpty())
                 <div class="panel-body remove-padding-horizontal">
                     @include('topics.partials.topics', ['column' => false]);
                 </div>
                 
                 <div class="panel-footer text-right remove-padding-horizontal pager-footer">
                     <!-- Pager -->
+                    {!! $topics->appends(request()->except('page', '_pjax'))->render() !!}
                 </div>
 
             @else

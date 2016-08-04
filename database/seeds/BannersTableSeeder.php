@@ -43,7 +43,7 @@ class BannersTableSeeder extends Seeder
                 'order' => 2,
                 'image_url' => 'https://dn-phphub.qbox.me/uploads/banners/0wgbAVabZB9GA2yaU8AY.png',
                 'title' => '酷工作',
-                'link' => 'categories/1',
+                'link' => '/categories/1',
                 'target' => '_self',
                 'description' => '',
                 'created_at' => '2016-07-20 22:29:00',

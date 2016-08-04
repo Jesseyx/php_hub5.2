@@ -72,4 +72,8 @@ return [
     'Vote' => '最多投票',
     'Noreply' => '无人问津',
 
+    'Append' => '附言',
+    'Append Content' => '添加附言',
+    'append_notice' => '附加内容, 使用此功能的话, 会给所有参加过讨论的人发送提醒.',
+
 ];

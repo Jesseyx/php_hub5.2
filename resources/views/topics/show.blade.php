@@ -43,10 +43,12 @@
                 </div>
             </div>
 
-            <div class="appends-container">
-
+            <div class="appends-container" data-lang-append="{{ lang('Append') }}">
+                <!-- 附言 -->
             </div>
-            
+
+            <!-- 主题操作 -->
+            @include('topics.partials.topic_operate')
         </div>
 
         <!-- Reply List -->

@@ -30,6 +30,11 @@ Route::post('/topics', 'TopicsController@store')->name('topics.store');
 # ------------------ User stuff ------------------------
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications/count', 'NotificationsController@count')->name('notifications.count');
+
+    // 关注
+    Route::post('/attentions/{id}', 'AttentionsController@createOrDelete')->name('attentions.createOrDelete');
+    // 收藏
+    Route::post('/favorites/{id}', 'FavoritesController@createOrDelete')->name('favorites.createOrDelete');
 });
 
 # ------------------ Replies ------------------------

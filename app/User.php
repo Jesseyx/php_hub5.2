@@ -54,6 +54,17 @@ class User extends Authenticatable
         return $this->hasMany(Reply::class);
     }
 
+    // 多对多关系
+    public function attentTopics()
+    {
+        return $this->belongsToMany(Topic::class, 'attentions')->withTimestamps();
+    }
+
+    public function favoriteTopics()
+    {
+        return $this->belongsToMany(Topic::class, 'favorites')->withTimestamps();
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

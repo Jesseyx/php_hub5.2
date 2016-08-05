@@ -15,7 +15,7 @@
                 @include('layouts.partials.errors')
 
                 @if (isset($topic))
-
+                    {{ Form::model($topic, ['url' => route('topics.store'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
                 @else
                 {{ Form::open(['url' => route('topics.store'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
                 @endif
@@ -33,7 +33,6 @@
                         </select>
                     </div>
 
-
                     <div class="form-group">
                         {{ Form::text('title', null, ['id' => 'topic-title', 'class' => 'form-control', 'placeholder' => lang('Please write down a topic')]) }}
                     </div>
@@ -41,7 +40,7 @@
                     @include('topics.partials.composing_help_block')
 
                     <div class="form-group">
-                        {{ Form::textarea('body', (isset($topic) ? $topic->body_original : ''), ['id' => 'reply_content', 'class' => 'form-control', 'rows' => 20, 'cols' => 50, 'placeholder' => lang('Please using markdown.'), 'style' => 'overflow: hidden']) }}
+                        {{ Form::textarea('body', null, ['id' => 'reply_content', 'class' => 'form-control', 'rows' => 20, 'cols' => 50, 'placeholder' => lang('Please using markdown.'), 'style' => 'overflow: hidden']) }}
                     </div>
 
                     <div class="form-group status-post-submit">

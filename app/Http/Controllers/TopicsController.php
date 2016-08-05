@@ -13,21 +13,15 @@ use App\Http\Requests\StoreTopicRequest;
 
 class TopicsController extends Controller implements CreatorListener
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Topic $topic)
     {
-        //
+        $filter = $topic->present()->getTopicFilter();
+        $topics = $topic->getTopicsWithFilter($filter, 40);
+        $banners = Banner::allByPosition();
+
+        return view('topics.index', compact('topics', 'banners'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Request $request)
     {
         $category = Category::find($request->input('category_id'));
@@ -36,23 +30,11 @@ class TopicsController extends Controller implements CreatorListener
         return view('topics.create_edit', compact('category', 'categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreTopicRequest $request)
     {
         return app('App\Phphub\Creators\TopicCreator')->create($this, $request->except('_token'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $topic = Topic::findOrFail($id);
@@ -66,38 +48,34 @@ class TopicsController extends Controller implements CreatorListener
         return view('topics.show', compact('topic', 'replies', 'category', 'categoryTopics', 'banners'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $topic = Topic::findOrFail($id);
+        $this->authorize('update', $topic);
+
+        $categories = Category::all();
+        $category = $topic->category;
+
+        if ($topic->body_original) {
+            $topic->body = $topic->body_original;
+        }
+
+        return view('topics.create_edit', compact('topic', 'categories', 'category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $topic = Topic::findOrFail($id);
+        $this->authorize('delete', $topic);
+
+        $topic->delete();
+
+        return redirect(route('topics.index'));
     }
 
     /**
@@ -119,6 +97,39 @@ class TopicsController extends Controller implements CreatorListener
         app('App\Phphub\Vote\Voter')->topicDownVote($topic);
 
         return response(['status' => 200]);
+    }
+    // 加精
+    public function recommend($id)
+    {
+        $topic = Topic::findOrFail($id);
+        $this->authorize('recommend', $topic);
+
+        $topic->is_excellent = $topic->is_excellent == 'yes' ? 'no' : 'yes';
+        $topic->save();
+
+        return response(['status' => 200, 'message' => lang('Operation succeeded.')]);
+    }
+    // 置顶
+    public function pin($id)
+    {
+        $topic = Topic::findOrFail($id);
+        $this->authorize('pin', $topic);
+        
+        $topic->order = $topic->order > 0 ? 0 : 999;
+        $topic->save();
+
+        return response(['status' => 200, 'message' => lang('Operation succeeded.')]);
+    }
+    // 沉掉主题，就是不再显示了，和置顶不置顶还有区别
+    public function sink($id)
+    {
+        $topic = Topic::findOrFail($id);
+        $this->authorize('sink', $topic);
+
+        $topic->order = $topic->order >= 0 ? -1 : 0;
+        $topic->save();
+
+        return response(['status' => 200, 'message' => lang('Operation succeeded.')]);
     }
 
     /**

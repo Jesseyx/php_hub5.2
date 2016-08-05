@@ -71,9 +71,32 @@ return [
     'Excellent' => '精华主题',
     'Vote' => '最多投票',
     'Noreply' => '无人问津',
+    'Share on Weibo' => '分享到微博',
+    'Share on Twitter' => '分享到 Twitter',
+    'Share on Facebook' => '分享到 Facebook',
+    'Share on Google Plus' => '分享到 Google Plus',
+
+    'Cancel' => '取消',
+    'Attent' => '关注',
+    'Favorite' => '收藏',
+    'Mark as Excellent' => '设为推荐主题',
+    'Mark as Community Wiki' => '加入到社区 Wiki',
+    'Pin it on Top' => '置顶此主题',
+    'Sink This Topic' => '沉掉此主题',
+    'Delete' => '删除',
+    'Edit' => '编辑',
+    'Preview' => '预览',
+    'No content.' => '没有内容',
 
     'Append' => '附言',
     'Append Content' => '添加附言',
     'append_notice' => '附加内容, 使用此功能的话, 会给所有参加过讨论的人发送提醒.',
+
+    'Successfully remove attention.' => '成功取消关注',
+    'Successfully_attention' => '成功关注主题, 系统会通知你关于此主题最新的讨论.',
+
+    'Successfully remove favorite.' => '成功取消收藏',
+    'Successfully_favorite' => '成功收藏主题, 系统会通知你关于此主题最新的讨论.',
+    'Operation succeeded.' => '操作成功!',
 
 ];

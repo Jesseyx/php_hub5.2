@@ -12,11 +12,11 @@
                 <li class="{{ request()->is('categories/1') ? 'active' : '' }}">
                     <a href="{{ route('categories.show', 1) }}" target="_blank">{{ lang('Jobs') }}</a>
                 </li>
-                <li class="{{ request()->is('categories/3') ? 'active' : '' }}">
-                    <a href="{{ route('categories.show', 3) }}" target="_blank">{{ lang('Share') }}</a>
-                </li>
                 <li class="{{ request()->is('categories/4') ? 'active' : '' }}">
-                    <a href="{{ route('categories.show', 4) }}" target="_blank">{{ lang('Q&A') }}</a>
+                    <a href="{{ route('categories.show', 4) }}" target="_blank">{{ lang('Share') }}</a>
+                </li>
+                <li class="{{ request()->is('categories/3') ? 'active' : '' }}">
+                    <a href="{{ route('categories.show', 3) }}" target="_blank">{{ lang('Q&A') }}</a>
                 </li>
             </ul>
 

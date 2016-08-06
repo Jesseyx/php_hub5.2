@@ -7,6 +7,7 @@ use App\Topic;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Purifier;
 
 class PagesController extends Controller
 {
@@ -26,6 +27,7 @@ class PagesController extends Controller
      */
     public function search(Request $request)
     {
-        dd($request->input('q'));
+        $query = Purifier::clean($request->input('q'), 'search_q');
+        return redirect()->away('https://www.bing.com/search?q=site:localhost:8000 ' . $query, 301);
     }
 }

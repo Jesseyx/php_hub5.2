@@ -6,7 +6,7 @@
 
 @section('content')
     @if (!request('filter') && !isset($category))
-        @include('layouts.partials.topbanner');
+        @include('layouts.partials.topbanner')
     @endif
 
     <div class="col-md-9 topics-index main-col">

@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 # ------------------ Replies ------------------------
 Route::post('/replies', 'RepliesController@store')->name('replies.store');
+Route::delete('/replies/delete/{id}', 'RepliesController@destroy')->name('replies.destroy')->middleware('auth');
 
 # ------------------ Users ------------------------
 Route::get('/users/{id}', 'UsersController@show')->name('users.show');
@@ -51,6 +52,7 @@ Route::get('/users/create', 'UsersController@create')->name('users.create');
 Route::group(['before' => 'auth'], function () {
     Route::post('/topics/{id}/upvote', 'TopicsController@upvote')->name('topics.upvote');
     Route::post('/topics/{id}/downvote', 'TopicsController@downvote')->name('topics.downvote');
+    Route::post('/replies/{id}/vote', 'RepliesController@vote')->name('replies.vote');
 });
 
 # ------------------ Admin Route ------------------------

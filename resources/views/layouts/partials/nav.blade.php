@@ -6,17 +6,17 @@
 
         <duv id="top-navbar-collapse" class="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="#" target="_blank">{{ lang('Topics') }}</a>
+                <li class="{{ request()->is('topics*') ? 'active' : '' }}">
+                    <a href="{{ route('topics.index') }}" target="_blank">{{ lang('Topics') }}</a>
                 </li>
-                <li>
-                    <a href="#" target="_blank">{{ lang('Jobs') }}</a>
+                <li class="{{ request()->is('categories/1') ? 'active' : '' }}">
+                    <a href="{{ route('categories.show', 1) }}" target="_blank">{{ lang('Jobs') }}</a>
                 </li>
-                <li>
-                    <a href="#" target="_blank">{{ lang('Share') }}</a>
+                <li class="{{ request()->is('categories/3') ? 'active' : '' }}">
+                    <a href="{{ route('categories.show', 3) }}" target="_blank">{{ lang('Share') }}</a>
                 </li>
-                <li>
-                    <a href="#" target="_blank">{{ lang('Q&A') }}</a>
+                <li class="{{ request()->is('categories/4') ? 'active' : '' }}">
+                    <a href="{{ route('categories.show', 4) }}" target="_blank">{{ lang('Q&A') }}</a>
                 </li>
             </ul>
 
@@ -34,7 +34,7 @@
 
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{ route('users.show', $currentUser->id) }}">
                                 <i class="fa fa-user"></i> {{ $currentUser->name }}
                             </a>
                         </li>

@@ -65,7 +65,7 @@
         @endif
 
 
-        @if ($currentUser && $currentUser->can('manage_topics') || $currentUser->id == $topic->user_id)
+        @if ($currentUser && ($currentUser->can('manage_topics') || $currentUser->id == $topic->user_id))
             <a id="topic-append-button" class="admin" href="#" title="{{ lang('Append') }}" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i>
             </a>

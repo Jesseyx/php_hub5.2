@@ -102,4 +102,6 @@ return [
     'Submit' => '提交',
     'Close' => '关闭',
 
+    'Can not vote your feedback' => '不允许给自己点赞',
+
 ];

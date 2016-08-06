@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Append;
 use App\Banner;
 use App\Category;
 use App\Phphub\Core\CreatorListener;
+use App\Phphub\Markdown\Markdown;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -13,6 +15,11 @@ use App\Http\Requests\StoreTopicRequest;
 
 class TopicsController extends Controller implements CreatorListener
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     public function index(Topic $topic)
     {
         $filter = $topic->present()->getTopicFilter();
@@ -76,6 +83,23 @@ class TopicsController extends Controller implements CreatorListener
         $topic->delete();
 
         return redirect(route('topics.index'));
+    }
+
+    public function append($id, Request $request)
+    {
+        $topic = Topic::findOrFail($id);
+        $this->authorize('append', $topic);
+
+        $markdown = new Markdown;
+        $content = $markdown->convertMarkdownToHtml($request->input('content'));
+
+        $append = Append::create(['topic_id' => $topic->id, 'content' => $content]);
+
+        return response([
+            'status' => 200,
+            'message' => lang('Operation succeeded.'),
+            'append' => $append,
+        ]);
     }
 
     /**

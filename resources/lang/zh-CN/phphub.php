@@ -99,4 +99,7 @@ return [
     'Successfully_favorite' => '成功收藏主题, 系统会通知你关于此主题最新的讨论.',
     'Operation succeeded.' => '操作成功!',
 
+    'Submit' => '提交',
+    'Close' => '关闭',
+
 ];

@@ -66,7 +66,7 @@
 
 
         @if ($currentUser && $currentUser->can('manage_topics') || $currentUser->id == $topic->user_id)
-            <a id="topic-append-button" class="admin" href="javascript:;" title="{{ lang('Append') }}" data-toggle="modal" data-target="#exampleModal">
+            <a id="topic-append-button" class="admin" href="#" title="{{ lang('Append') }}" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i>
             </a>
 
@@ -77,4 +77,35 @@
     </div>
 
     <div class="clearfix"></div>
+</div>
+
+<div id="exampleModal" class="modal fade" tabindex="-1" role="" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 id="exampleModalLabel" class="modal-title">{{ lang('Append Content') }}</h4>
+            </div>
+
+            {{ Form::open(['url' => route('topics.append', $topic->id), 'accept-charset' => 'UTF-8']) }}
+                <div class="modal-body">
+
+                    <div class="alert alert-warning">
+                        {{ lang('append_notice') }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ Form::textarea('content', null, ['class' => 'form-control', 'cols' => 50, 'rows' => 10, 'placeholder' => lang('Please using markdown.'), 'style' => 'min-height: 20px;' ]) }}
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    {{ Form::button(lang('Close'), ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) }}
+                    {{ Form::button(lang('Submit'), ['class' => 'btn btn-primary', 'type' => 'submit']) }}
+                </div>
+            {{ Form::close() }}
+        </div>
+    </div>
 </div>

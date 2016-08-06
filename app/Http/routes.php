@@ -28,6 +28,7 @@ Route::get('/topics/{id}', 'TopicsController@show')->name('topics.show');
 Route::get('/topics/create', 'TopicsController@create')->name('topics.create');
 Route::post('/topics', 'TopicsController@store')->name('topics.store');
 Route::get('/topics/{id}/edit', 'TopicsController@edit')->name('topics.edit');
+Route::post('/topics/{id}/append', 'TopicsController@append')->name('topics.append');
 
 # ------------------ User stuff ------------------------
 Route::group(['middleware' => 'auth'], function () {
@@ -53,6 +54,7 @@ Route::group(['before' => 'auth'], function () {
 });
 
 # ------------------ Admin Route ------------------------
+// 这里的 before 应该没什么作用了
 Route::group(['before' => 'manage_topics'], function () {
     Route::post('topics/recommend/{id}', 'TopicsController@recommend')->name('topics.recommend');
     Route::post('topics/pin/{id}', 'TopicsController@pin')->name('topics.pin');

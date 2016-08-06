@@ -29,6 +29,11 @@ class Reply extends Model
         return $this->belongsTo(Topic::class);
     }
 
+    public function votes()
+    {
+        return $this->morphMany(Vote::class, 'votable');
+    }
+
     /*
      * Scope
      */

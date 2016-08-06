@@ -58,6 +58,11 @@ class Topic extends Model
         return $this->morphMany(Vote::class, 'votable');
     }
 
+    public function appends()
+    {
+        $this->hasMany(Append::class);
+    }
+
     /*
      * getTopicsWithFilter
      */
@@ -130,6 +135,17 @@ class Topic extends Model
             default:
                 return $this->pinAndRecentReply();
         }
+    }
+
+    // 删除评论时，重新生成最后回复
+    public function generateLastReplyUserInfo($user_id)
+    {
+        $lastReply = $this->replies()->recent()->first();
+
+        if ($this->last_reply_user_id != $user_id) return;
+        
+        $this->last_reply_user_id = $lastReply ? $lastReply->user_id : 0;
+        $this->save();
     }
 
     /*

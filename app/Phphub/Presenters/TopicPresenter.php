@@ -38,4 +38,12 @@ class TopicPresenter extends Presenter
 
         return 'href="' . $link . '"' . $selected;
     }
+
+    public function replyFloorFromIndex($index)
+    {
+        $index += 1;
+        $current_page = request('page') ?: 1;
+
+        return ($current_page - 1) * config('phphub.replies_perpage') + $index;
+    }
 }

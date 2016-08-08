@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Phphub\Github\GithubUserDataReader;
 use App\Reply;
 use App\Topic;
 use App\User;
@@ -57,6 +58,14 @@ class UsersController extends Controller
     public function refreshCache($id)
     {
         $user = User::findOrFail($id);
-        
+
+        $user_info = (new GithubUserDataReader())->getDataFromUserName($user->github_name);
+
+        // Refresh the avatar cache.
+        $user->image_url = $user_info['avatar_url'];
+        // 缓存头像并保存
+        $user->cacheAvatar();
+
+        return redirect(route('users.edit', $id));
     }
 }

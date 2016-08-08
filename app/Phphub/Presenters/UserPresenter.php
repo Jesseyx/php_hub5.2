@@ -4,6 +4,7 @@ namespace App\Phphub\Presenters;
 
 use App\Role;
 use Laracasts\Presenter\Presenter;
+use Route;
 
 class UserPresenter extends Presenter
 {
@@ -56,5 +57,10 @@ class UserPresenter extends Presenter
         });
 
         return $role->name;
+    }
+
+    public function userInfoNavActive($anchor)
+    {
+        return Route::currentRouteName() == $anchor ? 'active' : '';
     }
 }

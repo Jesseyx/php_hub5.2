@@ -32,6 +32,12 @@ Route::post('/topics/{id}/append', 'TopicsController@append')->name('topics.appe
 
 # ------------------ User stuff ------------------------
 Route::get('/users/{id}/refresh_cache', 'UsersController@refreshCache')->name('users.refresh_cache');
+Route::get('/users/{id}/replies', 'UsersController@replies')->name('users.replies');
+Route::get('/users/{id}/topics', 'UsersController@topics')->name('users.topics');
+Route::get('/users/{id}/favorites', 'UsersController@favorites')->name('users.favorites');
+
+Route::get('/github-card', 'UsersController@githubCard')->name('users.github-card');
+Route::get('/github-api-proxy/users/{username}', 'UsersController@githubApiProxy')->name('users.github-api-proxy');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications/count', 'NotificationsController@count')->name('notifications.count');

@@ -6,6 +6,7 @@ use App\Phphub\Github\GithubUserDataReader;
 use App\Reply;
 use App\Topic;
 use App\User;
+use Cache;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -53,6 +54,20 @@ class UsersController extends Controller
         $user->save();
 
         return redirect(route('users.show', $id));
+    }
+
+    public function githubCard()
+    {
+        return view('users.github-card');
+    }
+
+    public function githubApiProxy($username)
+    {
+        $cache_name = 'github_api_proxy_user_' . $username;
+        return Cache::remember($cache_name, 1440, function () use ($username) {
+            $result = (new GithubUserDataReader())->getDataFromUserName($username);
+            return response()->json($result);
+        });
     }
 
     public function refreshCache($id)

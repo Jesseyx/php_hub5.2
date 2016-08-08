@@ -24,6 +24,7 @@
             <div class="panel panel-default">
                 @include('users.partials.infoNav', ['current' => 'basicInfo'])
 
+                <iframe src="{{ route('users.github-card') }}?user={{ $user->github_name }}&client_id={{ getenv('GITHUB_CARD_CLIENT_ID') }}&client_secret={{ getenv('GITHUB_CARD_CLIENT_SECRET') }}&target=blank" frameborder="0" scrolling="0" width="100%" height="146px" allowtransparency></iframe>
             </div>
 
             <div class="panel panel-default">

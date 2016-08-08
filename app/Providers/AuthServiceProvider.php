@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Policies\ReplyPolicy;
 use App\Policies\TopicPolicy;
+use App\Policies\UserPolicy;
 use App\Reply;
 use App\Topic;
+use App\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
         Topic::class => TopicPolicy::class,
         Reply::class => ReplyPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**

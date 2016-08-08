@@ -31,6 +31,8 @@ Route::get('/topics/{id}/edit', 'TopicsController@edit')->name('topics.edit');
 Route::post('/topics/{id}/append', 'TopicsController@append')->name('topics.append');
 
 # ------------------ User stuff ------------------------
+Route::get('/users/{id}/refresh_cache', 'UsersController@refreshCache')->name('users.refresh_cache');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications/count', 'NotificationsController@count')->name('notifications.count');
 
@@ -47,6 +49,8 @@ Route::delete('/replies/delete/{id}', 'RepliesController@destroy')->name('replie
 # ------------------ Users ------------------------
 Route::get('/users/{id}', 'UsersController@show')->name('users.show');
 Route::get('/users/create', 'UsersController@create')->name('users.create');
+Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');
+Route::patch('/users/{id}', 'UsersController@update')->name('users.update');
 
 # ------------------ Votes ------------------------
 Route::group(['before' => 'auth'], function () {
@@ -62,6 +66,10 @@ Route::group(['before' => 'manage_topics'], function () {
     Route::post('topics/pin/{id}', 'TopicsController@pin')->name('topics.pin');
     Route::post('topics/sink/{id}', 'TopicsController@sink')->name('topics.sink');
     Route::delete('topics/delete/{id}', 'TopicsController@destroy')->name('topics.destroy');
+});
+
+Route::group(['before' => 'manage_users'], function () {
+    Route::post('/users/blocking/{id}', 'UsersController@blocking')->name('users.blocking');
 });
 
 # ------------------ Categories ------------------------

@@ -11,6 +11,11 @@ use App\Http\Requests;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['edit', 'update', 'destroy']]);
+    }
+
     public function show($id)
     {
         $user    = User::findOrFail($id);
@@ -18,5 +23,40 @@ class UsersController extends Controller
         $replies = Reply::whose($user->id)->recent()->limit(10)->get();
 
         return view('users.show', compact('user', 'topics', 'replies'));
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
+        return view('users.edit', compact('user', 'topics', 'replies'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
+        $data = $request->only('github_name', 'real_name', 'city', 'company', 'twitter_account', 'personal_website', 'introduction');
+
+        $user->update($data);
+
+        return redirect(route('users.show', $id));
+    }
+
+    public function blocking($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_banned = $user->is_banned == 'yes' ? 'no' : 'yes';
+        $user->save();
+
+        return redirect(route('users.show', $id));
+    }
+
+    public function refreshCache($id)
+    {
+        $user = User::findOrFail($id);
+        
     }
 }

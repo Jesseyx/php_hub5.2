@@ -18,6 +18,13 @@ class UsersController extends Controller
         $this->middleware('auth', ['only' => ['edit', 'update', 'destroy']]);
     }
 
+    public function index()
+    {
+        $users = User::recent()->take(48)->get();
+
+        return view('users.index', compact('users'));
+    }
+
     public function show($id)
     {
         $user    = User::findOrFail($id);

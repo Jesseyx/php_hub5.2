@@ -53,6 +53,7 @@ Route::post('/replies', 'RepliesController@store')->name('replies.store');
 Route::delete('/replies/delete/{id}', 'RepliesController@destroy')->name('replies.destroy')->middleware('auth');
 
 # ------------------ Users ------------------------
+Route::get('/users', 'UsersController@index')->name('users.index');
 Route::get('/users/{id}', 'UsersController@show')->name('users.show');
 Route::get('/users/create', 'UsersController@create')->name('users.create');
 Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');

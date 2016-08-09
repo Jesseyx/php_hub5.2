@@ -111,5 +111,7 @@ return [
     'signature_placeholder' => '签名/座右铭',
     'introduction_placeholder' => '个人简介',
     'Dont have any favorites yet' => '还未收藏任何主题',
+    'Newly Registered User List' => '新加入的会员列表',
+    'Total User' => '社区会员',
 
 ];

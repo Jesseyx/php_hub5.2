@@ -65,6 +65,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Topic::class, 'favorites')->withTimestamps();
     }
 
+    // scope
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

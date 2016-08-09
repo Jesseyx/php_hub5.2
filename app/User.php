@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(Reply::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class)->recent()->with('topic', 'fromUser')->paginate(20);
+    }
+
     // 多对多关系
     public function attentTopics()
     {

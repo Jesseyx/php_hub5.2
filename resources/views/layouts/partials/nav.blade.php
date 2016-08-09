@@ -31,7 +31,11 @@
                 <ul class="nav navbar-nav github-login">
                     @if (Auth::check())
                         <li>
-
+                            <a class="text-warning" href="{{ route('notifications.index') }}">
+                                <span id="notification-count" class="badge badge-{{ $currentUser->notification_count > 0 ? 'important' : 'fade' }}">
+                                    {{ $currentUser->notification_count }}
+                                </span>
+                            </a>
                         </li>
                         <li>
                             <a href="{{ route('users.show', $currentUser->id) }}">

@@ -40,6 +40,7 @@ Route::get('/github-card', 'UsersController@githubCard')->name('users.github-car
 Route::get('/github-api-proxy/users/{username}', 'UsersController@githubApiProxy')->name('users.github-api-proxy');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/notifications', 'NotificationsController@index')->name('notifications.index');
     Route::get('/notifications/count', 'NotificationsController@count')->name('notifications.count');
 
     // 关注

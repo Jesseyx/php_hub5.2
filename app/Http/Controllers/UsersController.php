@@ -70,6 +70,30 @@ class UsersController extends Controller
         });
     }
 
+    public function replies($id)
+    {
+        $user = User::findOrFail($id);
+        $replies = Reply::whose($user->id)->recent()->paginate(15);
+
+        return view('users.replies', compact('user', 'replies'));
+    }
+
+    public function topics($id)
+    {
+        $user = User::findOrFail($id);
+        $topics = Topic::whose($user->id)->recent()->paginate(15);
+
+        return view('users.topics', compact('user', 'topics'));
+    }
+
+    public function favorites($id)
+    {
+        $user = User::findOrFail($id);
+        $topics = $user->favoriteTopics()->paginate(15);
+
+        return view('users.favorites', compact('user', 'topics'));
+    }
+
     public function refreshCache($id)
     {
         $user = User::findOrFail($id);

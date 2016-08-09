@@ -110,5 +110,6 @@ return [
     'personal_website_placebolder' => '你的个人网站, 不需要加前缀 http://',
     'signature_placeholder' => '签名/座右铭',
     'introduction_placeholder' => '个人简介',
+    'Dont have any favorites yet' => '还未收藏任何主题',
 
 ];

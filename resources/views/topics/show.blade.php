@@ -45,6 +45,15 @@
 
             <div class="appends-container" data-lang-append="{{ lang('Append') }}">
                 <!-- 附言 -->
+                @foreach($topic->appends as $index => $append)
+                    <div class="appends">
+                        <span class="meta">{{ lang('Append') }} {{ $index }} &nbsp;·&nbsp; <abbr class="timeago" title="{{ $append->created_at }}">{{ $append->created_at }}</abbr></span>
+                        <div class="sep5"></div>
+                        <div class="markdown-reply append-content">
+                            {!! $append->content !!}
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
             <!-- 主题操作 -->

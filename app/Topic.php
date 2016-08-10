@@ -60,7 +60,7 @@ class Topic extends Model
 
     public function appends()
     {
-        $this->hasMany(Append::class);
+        return $this->hasMany(Append::class);
     }
 
     /*

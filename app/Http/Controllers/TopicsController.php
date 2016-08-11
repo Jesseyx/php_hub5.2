@@ -7,11 +7,14 @@ use App\Banner;
 use App\Category;
 use App\Phphub\Core\CreatorListener;
 use App\Phphub\Markdown\Markdown;
+use App\Phphub\Notification\Notifier;
 use App\Topic;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\StoreTopicRequest;
+
+use Auth;
 
 class TopicsController extends Controller implements CreatorListener
 {
@@ -94,6 +97,9 @@ class TopicsController extends Controller implements CreatorListener
         $content = $markdown->convertMarkdownToHtml($request->input('content'));
 
         $append = Append::create(['topic_id' => $topic->id, 'content' => $content]);
+
+        // 生成通知
+        app(Notifier::class)->newAppendNotify(Auth::user(), $topic, $append);
 
         return response([
             'status' => 200,

@@ -120,4 +120,7 @@ return [
     'Data has been deleted.' => '信息已被删除.',
     'You dont have any notice yet!' => '还未收到提醒!',
 
+    'Attented topic has new update:' => '关注的话题有新附言',
+    'Commented topic has new update:' => '留言的话题有新附言',
+
 ];

@@ -63,6 +63,11 @@ class Topic extends Model
         return $this->hasMany(Append::class);
     }
 
+    public function attentedBy()
+    {
+        return $this->belongsToMany(User::class, 'attentions');
+    }
+
     /*
      * getTopicsWithFilter
      */

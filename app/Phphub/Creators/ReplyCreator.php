@@ -5,6 +5,7 @@ namespace App\Phphub\Creators;
 use App\Phphub\Core\CreatorListener;
 use App\Phphub\Markdown\Markdown;
 use App\Phphub\Notification\Mention;
+use App\Phphub\Notification\Notifier;
 use App\Reply;
 use App\Topic;
 use Auth;
@@ -44,6 +45,8 @@ class ReplyCreator
         $topic->save();
 
         Auth::user()->increment('reply_count', 1);
+
+        app(Notifier::class)->newReplyNotify(Auth::user(), $this->mentionParser, $topic, $reply);
 
         return $observer->creatorSucceed($reply);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Favorite;
+use App\Notification;
 use App\Topic;
 use Auth;
 use Illuminate\Http\Request;
@@ -22,6 +23,9 @@ class FavoritesController extends Controller
         } else {
             $message = lang('Successfully_favorite');
             Auth::user()->favoriteTopics()->attach($topic->id);
+
+            // 发送提醒
+            Notification::notify('topic_favorite', Auth::user(), $topic->user, $topic);
         }
 
         return response(['status' => 200, 'message' => $message]);

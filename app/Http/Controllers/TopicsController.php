@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Append;
 use App\Banner;
 use App\Category;
+use App\Notification;
 use App\Phphub\Core\CreatorListener;
 use App\Phphub\Markdown\Markdown;
 use App\Phphub\Notification\Notifier;
@@ -147,6 +148,9 @@ class TopicsController extends Controller implements CreatorListener
         
         $topic->order = $topic->order > 0 ? 0 : 999;
         $topic->save();
+
+        // 发送提醒
+        Notification::notify('topic_mark_excellent', Auth::user(), $topic->user, $topic);
 
         return response(['status' => 200, 'message' => lang('Operation succeeded.')]);
     }

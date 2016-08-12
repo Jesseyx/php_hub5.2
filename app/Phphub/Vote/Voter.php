@@ -2,6 +2,7 @@
 
 namespace App\Phphub\Vote;
 
+use App\Notification;
 use App\Reply;
 use App\Topic;
 use Auth;
@@ -23,6 +24,8 @@ class Voter
             // first time click
             $topic->votes()->create(['user_id' => Auth::id(), 'is' => 'upvote']);
             $topic->increment('vote_count', 1);
+
+            Notification::notify('topic_upvote', Auth::user(), $topic->user, $topic);
         }
     }
 
@@ -67,6 +70,8 @@ class Voter
             $reply->votes()->create(['user_id' => Auth::id(), 'is' => 'upvote']);
             $reply->increment('vote_count', 1);
             $return['action_type'] = 'add';
+
+            Notification::notify('reply_upvote', Auth::user(), $reply->user, $reply->topic, $reply);
         }
 
         return $return;

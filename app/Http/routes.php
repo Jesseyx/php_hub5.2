@@ -28,6 +28,7 @@ Route::get('/topics/{id}', 'TopicsController@show')->name('topics.show');
 Route::get('/topics/create', 'TopicsController@create')->name('topics.create');
 Route::post('/topics', 'TopicsController@store')->name('topics.store');
 Route::get('/topics/{id}/edit', 'TopicsController@edit')->name('topics.edit');
+Route::patch('/topics/{id}', 'TopicsController@update')->name('topics.update');
 Route::post('/topics/{id}/append', 'TopicsController@append')->name('topics.append');
 
 # ------------------ User stuff ------------------------

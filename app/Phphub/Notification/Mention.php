@@ -8,7 +8,7 @@ class Mention
 {
     protected $body_original;
     protected $userNames;
-    protected $users = [];
+    public $users = [];
     protected $body_parsed;
 
     protected function getMentionedUserNames()

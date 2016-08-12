@@ -4,12 +4,43 @@ namespace App\Phphub\Notification;
 
 use App\Append;
 use App\Notification;
+use App\Reply;
 use App\Topic;
 use App\User;
 
 class Notifier
 {
     private $notifiedUsers = [];
+
+    public function newReplyNotify(User $fromUser, Mention $mentionParser, Topic $topic, Reply $reply)
+    {
+        // Notify the author, 向作者发送提醒
+        Notification::batchNotify(
+            'new_reply',
+            $fromUser,
+            $this->removeDuplication([$topic->user]),
+            $topic,
+            $reply
+        );
+
+        // Notify attented users，向关注的人发送提醒
+        Notification::batchNotify(
+            'attention',
+            $fromUser,
+            $this->removeDuplication($topic->attentedBy),
+            $topic,
+            $reply
+        );
+
+        // Notify mentioned users, 想 @ 的用户发送提醒
+        Notification::batchNotify(
+            'at',
+            $fromUser,
+            $this->removeDuplication($mentionParser->users),
+            $topic,
+            $reply
+        );
+    }
 
     public function newAppendNotify(User $fromUser, Topic $topic, Append $append)
     {

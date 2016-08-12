@@ -47,6 +47,26 @@ class Notification extends Model
         return $query->orderBy('created_at', 'desc');
     }
 
+    public function scopeFromWhom($query, $from_user_id)
+    {
+        return $query->where('from_user_id', '=', $from_user_id);
+    }
+
+    public function scopeToWhom($query, $user_id)
+    {
+        return $query->where('user_id', '=', $user_id);
+    }
+
+    public function scopeAtTopic($query, $topic_id)
+    {
+        return $query->where('topic_id', '=', $topic_id);
+    }
+
+    public function scopeWithType($query, $type)
+    {
+        return $query->where('type', '=', $type);
+    }
+
     /*
      * Other
      */
@@ -90,6 +110,47 @@ class Notification extends Model
         foreach ($data as $value) {
             self::pushNotification($value);
         }
+    }
+
+    public static function notify($type, User $fromUser, User $toUser, Topic $topic, Reply $reply = null)
+    {
+        if ($fromUser->id == $toUser->id) {
+            return;
+        }
+
+        if (Notification::isNotified($fromUser->id, $toUser->id, $topic->id, $type)) {
+            return;
+        }
+
+        $nowTimestamp = Carbon::now()->toDateTimeString();
+
+        $data = [
+            'from_user_id' => $fromUser->id,
+            'user_id'      => $toUser->id,
+            'topic_id'     => $topic->id,
+            'reply_id'     => $reply ? $reply->id : 0,
+            'body'         => $reply ? $reply->body : '',
+            'type'         => $type,
+            'created_at'   => $nowTimestamp,
+            'updated_at'   => $nowTimestamp,
+        ];
+
+        $toUser->increment('notification_count', 1);
+
+        Notification::insert([$data]);
+
+        self::pushNotification($data);
+    }
+
+    public static function isNotified($from_user_id, $user_id, $topic_id, $type)
+    {
+        $notifies = Notification::fromWhom($from_user_id)
+                    ->toWhom($user_id)
+                    ->atTopic($topic_id)
+                    ->withType($type)
+                    ->get();
+
+        return $notifies->count();
     }
 
     public static function pushNotification($data) {

@@ -36,6 +36,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
         //
-        app('auth')->loginUsingId(53);
+        // app('auth')->loginUsingId(1);
     }
 }

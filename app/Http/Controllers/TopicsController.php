@@ -74,9 +74,21 @@ class TopicsController extends Controller implements CreatorListener
         return view('topics.create_edit', compact('topic', 'categories', 'category'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreTopicRequest $request, $id)
     {
-        //
+        $topic = Topic::findOrFail($id);
+        $this->authorize('update', $topic);
+
+        $data = $request->only('title', 'body', 'category_id');
+
+        $markdown = new Markdown;
+        $data['body_original'] = $data['body'];
+        $data['body'] = $markdown->convertMarkdownToHtml($data['body']);
+        $data['excerpt'] = Topic::makeExcerpt($data['body']);
+
+        $topic->update($data);
+
+        return redirect(route('topics.show', $topic->id));
     }
 
     public function destroy($id)

@@ -15,9 +15,9 @@
                 @include('layouts.partials.errors')
 
                 @if (isset($topic))
-                    {{ Form::model($topic, ['url' => route('topics.store'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
+                    {{ Form::model($topic, ['url' => route('topics.update'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
                 @else
-                {{ Form::open(['url' => route('topics.store'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
+                    {{ Form::open(['url' => route('topics.store'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
                 @endif
                     <div class="form-group">
                         <select class="selectpicker form-control" name="category_id" >

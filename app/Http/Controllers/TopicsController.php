@@ -88,6 +88,9 @@ class TopicsController extends Controller implements CreatorListener
 
         $topic->update($data);
 
+        // 发送通知
+        flash(lang('Operation succeeded.'), 'success');
+
         return redirect(route('topics.show', $topic->id));
     }
 
@@ -97,6 +100,9 @@ class TopicsController extends Controller implements CreatorListener
         $this->authorize('delete', $topic);
 
         $topic->delete();
+
+        // 发送通知
+        flash(lang('Operation succeeded.'), 'success');
 
         return redirect(route('topics.index'));
     }
@@ -190,6 +196,9 @@ class TopicsController extends Controller implements CreatorListener
 
     public function creatorSucceed($topic)
     {
+        // 发送通知
+        flash(lang('Operation succeeded.'), 'success');
+
         return redirect(route('topics.show', array($topic->id)));
     }
 }

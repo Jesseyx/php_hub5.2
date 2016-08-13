@@ -15,7 +15,7 @@
                 @include('layouts.partials.errors')
 
                 @if (isset($topic))
-                    {{ Form::model($topic, ['url' => route('topics.update'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
+                    {{ Form::model($topic, ['url' => route('topics.update', $topic->id), 'method' => 'PATCH', 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
                 @else
                     {{ Form::open(['url' => route('topics.store'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
                 @endif

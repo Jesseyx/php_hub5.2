@@ -28,6 +28,9 @@ class AttentionsController extends Controller
             Notification::notify('topic_attent', Auth::user(), $topic->user, $topic);
         }
 
+        // 发送通知
+        flash($message, 'success');
+
         return response(['status' => 200, 'message' => $message]);
     }
 }

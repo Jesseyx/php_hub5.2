@@ -51,6 +51,9 @@ class UsersController extends Controller
 
         $user->update($data);
 
+        // 发送通知
+        flash(lang('Operation succeeded.'), 'success');
+
         return redirect(route('users.show', $id));
     }
 

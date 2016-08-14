@@ -83,3 +83,6 @@ Route::group(['before' => 'manage_users'], function () {
 
 # ------------------ Categories ------------------------
 Route::get('/categories/{id}', 'CategoriesController@show')->name('categories.show');
+
+# ------------------ Upload image ------------------------
+Route::post('/upload_image', 'TopicsController@uploadImage')->name('upload_image')->middleware('auth');

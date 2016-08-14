@@ -22,7 +22,7 @@
             user_id: 1,
             routes: {
                 'notificationsCount' : '{{ route('notifications.count') }}',
-                'upload_image' : ''
+                'upload_image' : '{{ route('upload_image') }}'
             },
             token: '{{ csrf_token() }}',
         };

@@ -15,7 +15,8 @@
         "erusev/parsedown": "^1.6",
         "mews/purifier": "^2.0",
         "zizaco/entrust": "5.2.x-dev",
-        "laracasts/flash": "^2.0"
+        "laracasts/flash": "^2.0",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

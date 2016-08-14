@@ -152,6 +152,7 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -213,6 +214,7 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Flash' => Laracasts\Flash\Flash::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

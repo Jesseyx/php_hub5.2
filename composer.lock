@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3130a3ef05df7bd13bc720080cfd870a",
-    "content-hash": "2b9db943c13edc793b9e8fcae28fd4de",
+    "hash": "4ef15aa20afe119e24cab8ed103d7df9",
+    "content-hash": "60d6d16f623060d3c52d8700eb2a0800",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2768,6 +2768,48 @@
                 "dump"
             ],
             "time": "2016-06-29 05:40:00"
+        },
+        {
+            "name": "thujohn/rss",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thujohn/rss-l4.git",
+                "reference": "b65908ca63101b0f6bf53972b0245b0d0454d5ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/thujohn/rss-l4/b65908ca63101b0f6bf53972b0245b0d0454d5ca.zip",
+                "reference": "b65908ca63101b0f6bf53972b0245b0d0454d5ca",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.*|5.*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thujohn\\Rss\\": "src/Thujohn/Rss/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "thujohn",
+                    "email": "jonathan.thuau@gmail.com"
+                }
+            ],
+            "description": "RSS builder for Laravel 4",
+            "keywords": [
+                "laravel",
+                "laravel4",
+                "rss"
+            ],
+            "time": "2014-12-22 21:07:19"
         },
         {
             "name": "vlucas/phpdotenv",

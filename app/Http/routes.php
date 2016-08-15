@@ -15,6 +15,7 @@
 Route::get('/', 'PagesController@home')->name('home');
 Route::get('/search', 'PagesController@search')->name('search');
 Route::get('/about', 'PagesController@about')->name('about');
+Route::get('/feed', 'PagesController@feed')->name('feed');
 
 # ------------------ Authentication ------------------------
 Route::get('login', 'Auth\AuthController@login')->name('login');

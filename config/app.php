@@ -155,6 +155,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Thujohn\Rss\RssServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
 
         /*
          * Application Service Providers...

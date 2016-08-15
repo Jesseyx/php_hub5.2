@@ -19,7 +19,8 @@
         "intervention/image": "^2.3",
         "barryvdh/laravel-debugbar": "^2.2",
         "naux/auto-correct": "^1.0",
-        "thujohn/rss": "^1.0"
+        "thujohn/rss": "^1.0",
+        "roumen/sitemap": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -68,4 +68,12 @@ class PagesController extends Controller
 
         return response($feed, 200, array('Content-Type' => 'text/xml'));
     }
+
+    /**
+     * Sitemap function
+     */
+    public function sitemap()
+    {
+        return app('App\Phphub\Sitemap\Builder')->render();
+    }
 }

@@ -30,4 +30,12 @@ class PagesController extends Controller
         $query = Purifier::clean($request->input('q'), 'search_q');
         return redirect()->away('https://www.bing.com/search?q=site:localhost:8000 ' . $query, 301);
     }
+
+    /**
+     * About us page
+     */
+    public function about()
+    {
+        return view('pages.about');
+    }
 }

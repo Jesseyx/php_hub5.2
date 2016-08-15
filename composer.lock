@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7164aacbc5a707f7ebc0a6a395a152e0",
-    "content-hash": "07cec86d7b49da1123643ea617834f0d",
+    "hash": "3130a3ef05df7bd13bc720080cfd870a",
+    "content-hash": "2b9db943c13edc793b9e8fcae28fd4de",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1549,6 +1549,38 @@
                 "schedule"
             ],
             "time": "2016-01-26 21:23:30"
+        },
+        {
+            "name": "naux/auto-correct",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/NauxLiu/auto-correct.git",
+                "reference": "eb05777b4bc4019c776bf81983ae46c35e597929"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/NauxLiu/auto-correct/eb05777b4bc4019c776bf81983ae46c35e597929.zip",
+                "reference": "eb05777b4bc4019c776bf81983ae46c35e597929",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Naux\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "NauxLiu",
+                    "email": "nauxliu@gmail.com"
+                }
+            ],
+            "time": "2015-11-27 03:39:36"
         },
         {
             "name": "nesbot/carbon",

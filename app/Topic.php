@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laracasts\Presenter\PresentableTrait;
+use Naux\AutoCorrect;
 
 class Topic extends Model
 {
@@ -191,6 +192,14 @@ class Topic extends Model
         return $query->whereRaw("(`created_at` > '" . Carbon::today()->subMonth()->toDateString() . "' or (`order` > 0))")
                      ->orderBy('order', 'desc')
                      ->orderBy('updated_at', 'desc');
+    }
+
+    /*
+     * Attribute
+     */
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = (new AutoCorrect)->convert($value);
     }
 
     // static

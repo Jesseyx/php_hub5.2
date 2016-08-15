@@ -147,6 +147,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
         Laravel\Socialite\SocialiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
@@ -156,6 +157,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Thujohn\Rss\RssServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         /*
          * Application Service Providers...

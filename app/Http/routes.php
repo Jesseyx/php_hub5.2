@@ -89,3 +89,8 @@ Route::get('/categories/{id}', 'CategoriesController@show')->name('categories.sh
 
 # ------------------ Upload image ------------------------
 Route::post('/upload_image', 'TopicsController@uploadImage')->name('upload_image')->middleware('auth');
+
+# ------------------ Logs ------------------------
+Route::group(['middleware' => ['auth', 'admin_auth']], function () {
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+});

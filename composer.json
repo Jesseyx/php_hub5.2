@@ -20,7 +20,8 @@
         "barryvdh/laravel-debugbar": "^2.2",
         "naux/auto-correct": "^1.0",
         "thujohn/rss": "^1.0",
-        "roumen/sitemap": "^2.6"
+        "roumen/sitemap": "^2.6",
+        "rap2hpoutre/laravel-log-viewer": "^0.7.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

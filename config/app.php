@@ -158,6 +158,7 @@ return [
         Thujohn\Rss\RssServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
 
         /*
          * Application Service Providers...

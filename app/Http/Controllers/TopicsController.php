@@ -158,6 +158,8 @@ class TopicsController extends Controller implements CreatorListener
         $topic->is_excellent = $topic->is_excellent == 'yes' ? 'no' : 'yes';
         $topic->save();
 
+        Notification::notify('topic_mark_excellent', Auth::user(), $topic->user, $topic);
+
         return response(['status' => 200, 'message' => lang('Operation succeeded.')]);
     }
     // 置顶

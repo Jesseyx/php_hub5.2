@@ -12,7 +12,7 @@ class TopicCreator
     public function create(CreatorListener $observer, $data)
     {
         $data['user_id'] = Auth::id();
-        $data['create_at'] = Carbon::now()->toDateTimeString();
+        $data['created_at'] = Carbon::now()->toDateTimeString();
         $data['updated_at'] = Carbon::now()->toDateTimeString();
 
         $markdown = new Markdown;

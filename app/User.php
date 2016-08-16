@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laracasts\Presenter\PresentableTrait;
+use Venturecraft\Revisionable\RevisionableTrait;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
@@ -20,10 +21,17 @@ class User extends Authenticatable
     use SoftDeletes {
         restore as private restoreSoftDelete;
     }
+    protected $dates = ['deleted_at'];
 
     // Using: $user->present()->anyMethodYourWant()
     use PresentableTrait;
     protected $presenter = 'App\Phphub\Presenters\UserPresenter';
+
+    // For admin log
+    use RevisionableTrait;
+    protected $keepRevisionOf = [
+        'is_banned',
+    ];
 
     /**
      * The attributes that are mass assignable.

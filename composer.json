@@ -22,7 +22,8 @@
         "thujohn/rss": "^1.0",
         "roumen/sitemap": "^2.6",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
-        "orangehill/iseed": "^2.1"
+        "orangehill/iseed": "^2.1",
+        "venturecraft/revisionable": "^1.28"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -7,12 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laracasts\Presenter\PresentableTrait;
 use Naux\AutoCorrect;
+use Venturecraft\Revisionable\RevisionableTrait;
 
 class Topic extends Model
 {
 
     use PresentableTrait;
     protected $presenter = 'App\Phphub\Presenters\TopicPresenter';
+
+    // For admin log
+    use RevisionableTrait;
+    protected $keepRevisionOf = [
+        'deleted_at',
+        'is_excellent',
+        'is_blocked',
+        'order',
+    ];
 
     // Don't forget to fill this array
     protected $fillable = [
@@ -30,6 +40,7 @@ class Topic extends Model
     public $timestamps = false;
 
     use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     public static function boot()
     {

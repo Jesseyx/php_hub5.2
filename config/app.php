@@ -159,6 +159,7 @@ return [
         Roumen\Sitemap\SitemapServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
         /*
          * Application Service Providers...

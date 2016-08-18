@@ -24,7 +24,8 @@
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
         "orangehill/iseed": "^2.1",
         "venturecraft/revisionable": "^1.28",
-        "spatie/laravel-backup": "^3.10"
+        "spatie/laravel-backup": "^3.10",
+        "frozennode/administrator": "^5.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

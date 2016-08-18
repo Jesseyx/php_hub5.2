@@ -160,6 +160,7 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        Frozennode\Administrator\AdministratorServiceProvider::class,
 
         /*
          * Application Service Providers...

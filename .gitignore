@@ -8,3 +8,5 @@ Homestead.json
 /public/assets
 /public/build
 /public/uploads
+/public/packages
+/public/vendor

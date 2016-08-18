@@ -24,3 +24,13 @@ function getUserStaticDomain()
 {
     return config('phphub.user_static') ?: config('phphub.url');
 }
+
+function admin_link($title, $path, $id = '')
+{
+    return '<a href="' . admin_url($path, $id) . '" target="_blank">' . $title . '</a>';
+}
+
+function admin_url($path, $id = '')
+{
+    return env('APP_URL') . "admin/$path" . ($id ? '/' . $id : '');
+}

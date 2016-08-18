@@ -200,6 +200,7 @@ class Topic extends Model
 
     public function scopePinAndRecentReply($query)
     {
+        // 当前时间一个月内，或者排序大于 0 的
         return $query->whereRaw("(`created_at` > '" . Carbon::today()->subMonth()->toDateString() . "' or (`order` > 0))")
                      ->orderBy('order', 'desc')
                      ->orderBy('updated_at', 'desc');

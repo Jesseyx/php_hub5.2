@@ -18,7 +18,6 @@ return [
     'More Excellent Topics' => '查看更多精华帖',
     'Dont have any data Yet' => '还未有主题',
     'Are you sure want to logout?' => '你确定要退出吗?',
-    'Total Reply Count' => '回复数量',
     'No comments' => '暂无评论',
     'at' => '于',
     'Last Reply by' => '最后由',
@@ -112,7 +111,6 @@ return [
     'introduction_placeholder' => '个人简介',
     'Dont have any favorites yet' => '还未收藏任何主题',
     'Newly Registered User List' => '新加入的会员列表',
-    'Total User' => '社区会员',
     'My Notifications' => '我的提醒',
     'Your topic have new reply:' => '回复了你的主题:',
     'Attented topic has new reply:' => '回复了你关注的主题:',
@@ -131,5 +129,14 @@ return [
     'has recomended your topic:' => '推荐了你的主题',
 
     'About Us' => '关于我们',
+
+    'App Download' => 'App 下载',
+    'Links' => '友情社区',
+    'Same Category Topics' => '分类下其他主题',
+    'Tips and Tricks' => '小贴士',
+    'Site Status' => '统计信息',
+    'Total User' => '社区会员',
+    'Total Topic' => '主题数',
+    'Total Reply' => '评论数',
 
 ];

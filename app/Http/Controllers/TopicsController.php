@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Append;
 use App\Banner;
 use App\Category;
+use App\Link;
 use App\Notification;
 use App\Phphub\Core\CreatorListener;
 use App\Phphub\Markdown\Markdown;
@@ -31,8 +32,9 @@ class TopicsController extends Controller implements CreatorListener
         $filter = $topic->present()->getTopicFilter();
         $topics = $topic->getTopicsWithFilter($filter, 40);
         $banners = Banner::allByPosition();
+        $links = Link::allFromCache();
 
-        return view('topics.index', compact('topics', 'banners'));
+        return view('topics.index', compact('topics', 'banners', 'links'));
     }
 
     public function create(Request $request)

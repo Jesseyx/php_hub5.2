@@ -16,6 +16,8 @@ class ComposerServiceProvider extends ServiceProvider
         //
         view()->composer('*', function ($view) {
             $view->with('currentUser', \Auth::user());
+            $view->with('siteTip', \App\Tip::getRandomTip());
+            $view->with('siteStat', app(\App\Phphub\Stat\Stat::class)->getSiteStat());
         });
     }
 

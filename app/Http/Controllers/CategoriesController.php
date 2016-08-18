@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Banner;
 use App\Category;
+use App\Link;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class CategoriesController extends Controller
         $filter = $topic->present()->getTopicFilter();
         $topics = $topic->getCategoryTopicsWithFilter($filter, $id);
         $banners = Banner::allByPosition();
+        $links = Link::allFromCache();
 
-        return view('topics.index', compact('topics', 'category', 'banners'));
+        return view('topics.index', compact('topics', 'category', 'banners', 'links'));
     }
 }

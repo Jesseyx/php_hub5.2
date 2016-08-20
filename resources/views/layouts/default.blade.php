@@ -27,7 +27,8 @@
             token: '{{ csrf_token() }}',
         };
 
-        var ShowCrxHint = 'no';
+        // 是否显示：提醒用户安装 crx 谷歌插件
+        var ShowCrxHint = '{{ isset($show_crx_hint) ? $show_crx_hint : 'no' }}';
     </script>
 
     @yield('styles')

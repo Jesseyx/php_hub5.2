@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        insanity_check();
+
         // 注意顺序
         $this->call(CategoriesTableSeeder::class);
         $this->call(UsersTableSeeder::class);

@@ -24,7 +24,7 @@
 
             @if (!$topics->isEmpty())
                 <div class="panel-body remove-padding-horizontal">
-                    @include('topics.partials.topics', ['column' => false]);
+                    @include('topics.partials.topics', ['column' => false])
                 </div>
                 
                 <div class="panel-footer text-right remove-padding-horizontal pager-footer">

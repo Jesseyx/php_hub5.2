@@ -15,7 +15,6 @@
         </div>
     </div>
 
-
     @if (Route::currentRouteName() == 'topics.index')
         <div class="panel panel-default corner-radius">
             <div class="panel-heading text-center">

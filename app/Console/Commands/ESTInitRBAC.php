@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 
-class ESTInitRBAC extends Command
+class ESTInitRBAC extends BaseCommand
 {
     // Entrust is an RBAC library... RBAC = "Role Based Access Control"
 

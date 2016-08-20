@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fa14aed3ff801b1c54414daa750bccb9",
-    "content-hash": "818d510e4ef8db9321e33abf966ea757",
+    "hash": "230c65e67216c176a6f6d82c50a968b9",
+    "content-hash": "137c0406e7a992b2bc3cd2d4888aa757",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -155,6 +155,51 @@
                 "preload"
             ],
             "time": "2015-11-09 22:51:51"
+        },
+        {
+            "name": "devster/ubench",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/devster/ubench.git",
+                "reference": "4b5c8217b6067b0156fef2cf268523ed0720be95"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/devster/ubench/4b5c8217b6067b0156fef2cf268523ed0720be95.zip",
+                "reference": "4b5c8217b6067b0156fef2cf268523ed0720be95",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ubench": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Perret",
+                    "email": "jeremy@devster.org"
+                }
+            ],
+            "description": "Micro PHP library for benchmarking",
+            "homepage": "https://github.com/devster/ubench",
+            "keywords": [
+                "bench",
+                "benchmark",
+                "library",
+                "micro"
+            ],
+            "time": "2015-06-02 08:26:32"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

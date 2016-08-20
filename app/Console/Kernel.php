@@ -16,6 +16,10 @@ class Kernel extends ConsoleKernel
         // Commands\Inspire::class,
 
         Commands\ESTInitRBAC::class,
+        Commands\ESTDatabaseNukeCommand::class,
+        Commands\ESTDatabaseResetCommand::class,
+        Commands\ESTInstallCommand::class,
+        Commands\ESTReinstallCommand::class,
     ];
 
     /**
@@ -28,5 +32,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        // 定时任务, 数据库定时备份和清除
+        $schedule->command('backup:run --only-db')->cron('0 */4 * * * *');
+        $schedule->command('backup:clean')->daily()->at('00:10');
     }
 }

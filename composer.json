@@ -25,7 +25,8 @@
         "orangehill/iseed": "^2.1",
         "venturecraft/revisionable": "^1.28",
         "spatie/laravel-backup": "^3.10",
-        "frozennode/administrator": "^5.0"
+        "frozennode/administrator": "^5.0",
+        "devster/ubench": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

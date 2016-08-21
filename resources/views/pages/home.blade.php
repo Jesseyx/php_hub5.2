@@ -22,7 +22,7 @@
         </div>
 
         <div class="panel-footer text-right">
-            <a href="#">
+            <a href="topics?filter=excellent">
                 {{ lang('More Excellent Topics') }}...
             </a>
         </div>

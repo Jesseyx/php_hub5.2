@@ -19,7 +19,7 @@
     <script>
         var Config = {
             cdnDomain: '{{ getCdnDomain() }}',
-            user_id: 1,
+            user_id: {{ $currentUser ? $currentUser->id : 0 }},
             routes: {
                 'notificationsCount' : '{{ route('notifications.count') }}',
                 'upload_image' : '{{ route('upload_image') }}'

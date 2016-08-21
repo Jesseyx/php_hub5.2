@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="button" href="{{ route('logout') }}" data-lang-loginout="{{ lang('Are you sure want to logout?') }}">
+                            <a id="login-out" class="button" href="{{ route('logout') }}" data-lang-loginout="{{ lang('Are you sure want to logout?') }}">
                                 <i class="fa fa-sign-out"></i> {{ lang('Logout') }}
                             </a>
                         </li>

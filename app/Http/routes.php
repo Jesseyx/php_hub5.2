@@ -72,7 +72,7 @@ Route::group(['before' => 'auth'], function () {
 });
 
 # ------------------ Admin Route ------------------------
-// 这里的 before 应该没什么作用了
+// 这里的 before 没什么作用了, before 是 4.2 的过滤器，5.2 已经被 middleware 替换了
 Route::group(['before' => 'manage_topics'], function () {
     Route::post('topics/recommend/{id}', 'TopicsController@recommend')->name('topics.recommend');
     Route::post('topics/pin/{id}', 'TopicsController@pin')->name('topics.pin');

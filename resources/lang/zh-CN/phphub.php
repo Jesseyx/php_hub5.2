@@ -139,4 +139,8 @@ return [
     'Total Topic' => '主题数',
     'Total Reply' => '评论数',
 
+    'Operation Deny' => '操作被禁止',
+    'Notice' => '提 示',
+    'Sorry, You account is banned.' => '对不起，您的账号已被禁用',
+
 ];

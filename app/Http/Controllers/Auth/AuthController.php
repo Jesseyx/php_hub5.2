@@ -59,13 +59,25 @@ class AuthController extends Controller implements UserCreatorListener
         return $this->userFound($user);
     }
 
+    public function userBanned()
+    {
+        if (Auth::check() && Auth::user()->is_banned == 'no') {
+            return redirect(route('home'));
+        }
+
+        // force logout
+        Auth::logout();
+
+        return view('auth.userBanned');
+    }
+
     /**
      * ----------------------------------------
      * GithubAuthenticatorListener Delegate
      * ----------------------------------------
      */
 
-    // 数据库找不到用户, 执行新用户注册
+    // 数据库找不到用户, 执行新用户注册fv
     private function userNotFound($githubData)
     {
         $githubUserData = $githubData->user;

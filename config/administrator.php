@@ -28,7 +28,7 @@ return array(
 	 *
 	 * @type string
 	 */
-	'title' => 'PHPHub Admin',
+	'title' => 'PhpAdmin',
 
 	/**
 	 * The path to your model config directory
@@ -93,7 +93,19 @@ return array(
 	 */
 	'permission'=> function()
 	{
-//		return Auth::check();
+		if (app()->environment('local')) {
+			if (!Auth::check()) {
+				$user = \App\User::first();
+				$user && Auth::login($user);
+			} else {
+				return true;
+			}
+		}
+
+		if (!Auth::check() || !Auth::user()->can('visit_admin')) {
+			return false;
+		}
+
 		return true;
 	},
 
@@ -117,7 +129,7 @@ return array(
 	 *
 	 * @type string
 	 */
-	'home_page' => 'users',
+	'home_page' => 'site_statuses',
 
 	/**
 	 * The route to which the user will be taken when they click the "back to site" button

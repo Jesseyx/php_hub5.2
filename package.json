@@ -7,6 +7,13 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "laravel-elixir": "^5.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "laravel-elixir-compress": "^1.0.2",
+    "laravel-elixir-livereload": "^1.1.6"
+  },
+  "dependencies": {
+    "bootstrap-sass": "^3.0.0",
+    "font-awesome": "^4.6.3",
+    "social-share.js": "^1.0.15",
+    "sweetalert": "^1.1.3"
   }
 }

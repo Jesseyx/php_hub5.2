@@ -37,7 +37,7 @@ class ESTInstallCommand extends BaseCommand
      */
     public function handle()
     {
-        $this->execShellWithPrettyPrint('php artisan key:generate');
+        // $this->execShellWithPrettyPrint('php artisan key:generate');
         $this->execShellWithPrettyPrint('php artisan migrate --seed');
         $this->execShellWithPrettyPrint('php artisan est:init-rbac');
     }

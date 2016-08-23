@@ -15,8 +15,6 @@ class RepliesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('replies')->truncate();
-
         $users = User::lists('id')->toArray();
         $topics = Topic::lists('id')->toArray();
 

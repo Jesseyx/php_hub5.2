@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLinksTable extends Migration
+class CreateSitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,15 @@ class CreateLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('links', function (Blueprint $table) {
+        Schema::create('sites', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->index();
+            $table->string('description')->nullable();
+            $table->string('type')->index()->default('site');
             $table->string('link')->index();
-            $table->text('cover')->nullable();
-            $table->enum('is_enabled', ['yes',  'no'])->default('yes')->index();
+            $table->string('favicon')->nullable();
             
-            $table->softDeletes();
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateLinksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('links');
+        Schema::drop('sites');
     }
 }

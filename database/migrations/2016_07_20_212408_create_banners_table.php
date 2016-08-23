@@ -15,12 +15,14 @@ class CreateBannersTable extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('position')->index();
-            $table->integer('order')->unsigned()->default(0)->index();
-            $table->string('image_url');
             $table->string('title')->index();
             $table->string('link')->nullable();
             $table->enum('target', ['_blank', '_self'])->default('_blank')->index();
+            $table->string('image_url');
             $table->text('description')->nullable();
+
+            $table->integer('order')->unsigned()->default(0)->index();
+
             $table->softDeletes();
             $table->timestamps();
         });

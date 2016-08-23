@@ -15,8 +15,6 @@ class TopicsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('topics')->truncate();
-
         // 避免在 ModelFactory 中获取 id 列表
         $users = User::lists('id')->toArray();
         $categories = Category::lists('id')->toArray();

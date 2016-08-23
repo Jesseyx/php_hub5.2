@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RepliesTableSeeder::class);
         $this->call(BannersTableSeeder::class);
         $this->call(LinksTableSeeder::class);
-        $this->call(TipsTableSeeder::class);
+        $this->call(FollowersTableSeeder::class);
+        $this->call(SitesTableSeeder::class);
     }
 }

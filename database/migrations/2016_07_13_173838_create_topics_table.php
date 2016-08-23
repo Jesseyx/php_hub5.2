@@ -16,27 +16,23 @@ class CreateTopicsTable extends Migration
             $table->increments('id');
             $table->string('title')->index();
             $table->text('body');
-            $table->tinyInteger('user_id')->unsigned()->default(0)->index();
-            // 所属大栏目
-            $table->integer('category_id')->unsigned()->default(0)->index();
+            $table->text('body_original')->nullable();                                  // 源
+            $table->text('excerpt')->nullable();                                        // 摘录
+
+            $table->integer('user_id')->unsigned()->default(0)->index();
+            $table->integer('category_id')->unsigned()->default(0)->index();            // 所属大栏目
+            $table->integer('last_reply_user_id')->unsigned()->default(0)->index();
+
             $table->integer('reply_count')->default(0)->index();
             $table->integer('view_count')->unsigned()->default(0)->index();
-            $table->integer('favorite_count')->default(0)->index();
-            // 票数
-            $table->integer('vote_count')->default(0)->index();
-            $table->integer('last_reply_user_id')->unsigned()->default(0)->index();
-            $table->integer('order')->default(0)->index();
-            // 是否杰出的
-            $table->enum('is_excellent', ['yes',  'no'])->default('no')->index();
-            // 是否锁定
-            $table->enum('is_blocked', ['yes',  'no'])->default('no')->index();
+            $table->integer('vote_count')->default(0)->index();                         // 票数
 
-            // 源
-            $table->text('body_original')->nullable();
-            // 摘录
-            $table->text('excerpt')->nullable();
-            // 是否标记
-            $table->enum('is_tagged', ['yes',  'no'])->default('no')->index();
+            $table->enum('is_excellent', ['yes',  'no'])->default('no')->index();       // 加精
+            $table->enum('is_blocked', ['yes',  'no'])->default('no')->index();         // 锁定
+            $table->enum('is_tagged', ['yes',  'no'])->default('no')->index();          // 标记
+
+            $table->integer('order')->default(0)->index();
+            $table->string('source')->index();                                          // 来源跟踪：iOS，Android
 
             $table->softDeletes();
             $table->timestamps();

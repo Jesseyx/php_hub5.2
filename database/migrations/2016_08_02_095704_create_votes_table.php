@@ -15,8 +15,7 @@ class CreateVotesTable extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->default(0);
-            // 能投票的，有投票权的
-            $table->integer('votable_id')->unsigned()->default(0);
+            $table->integer('votable_id')->unsigned()->default(0);      // 能投票的，有投票权的
             $table->string('votable_type')->index();
             $table->string('is')->index();
             $table->timestamps();

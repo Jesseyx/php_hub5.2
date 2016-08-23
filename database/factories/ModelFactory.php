@@ -17,16 +17,19 @@ use Faker\Generator;
 // User
 $factory->define(App\Models\User::class, function (Generator $faker) {
     return [
-        'name'              => $faker->userName,
         'email'             => $faker->safeEmail,
+        'name'              => $faker->userName,
         'image_url'         => $faker->url,
         'city'              => $faker->city,
         'company'           => $faker->userName,
         'introduction'      => $faker->sentence,
         'personal_website'  => $faker->url,
         'twitter_account'   => $faker->userName,
+        'certification'     => $faker->sentence,
         'github_url'        => $faker->url,
         'github_name'       => $faker->userName,
+        'verified'          => true,
+        'login_token'       => 'uDFDJys7iwM0fTXuLNNH',
         'created_at'        => Carbon::now()->toDateTimeString(),
         'updated_at'        => Carbon::now()->toDateTimeString(),
     ];
@@ -48,6 +51,19 @@ $factory->define(App\Models\Reply::class, function (Generator $faker) {
     return [
         'body'              => $body,
         'body_original'     => $body,
+        'created_at'        => Carbon::now()->toDateTimeString(),
+        'updated_at'        => Carbon::now()->toDateTimeString(),
+    ];
+});
+
+// Site
+$factory->define(App\Models\Site::class, function (Generator $faker) {
+    return [
+        'title'             => $faker->userName,
+        'description'       => $faker->sentence,
+        'type'              => $faker->randomElement(['site', 'blog', 'weibo', 'dev_service']),
+        'link'              => $faker->url,
+        'favicon'           => '/assets/images/favicon.png',
         'created_at'        => Carbon::now()->toDateTimeString(),
         'updated_at'        => Carbon::now()->toDateTimeString(),
     ];

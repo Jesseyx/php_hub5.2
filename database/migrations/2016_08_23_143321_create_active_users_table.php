@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLinksTable extends Migration
+class CreateActiveUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,12 @@ class CreateLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('links', function (Blueprint $table) {
+        Schema::create('active_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->index();
-            $table->string('link')->index();
-            $table->text('cover')->nullable();
-            $table->enum('is_enabled', ['yes',  'no'])->default('yes')->index();
-            
-            $table->softDeletes();
+            $table->integer('user_id')->default(0)->index();
+            $table->integer('topic_count')->default(0);
+            $table->integer('reply_count')->default(0);
+            $table->integer('weight')->default(0)->index();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateLinksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('links');
+        Schema::drop('active_users');
     }
 }

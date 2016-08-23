@@ -60,16 +60,20 @@ class ESTInitRBAC extends BaseCommand
         $visit_admin   = Permission::addPermission('visit_admin', 'Visit Admin');
         $manage_users  = Permission::addPermission('manage_users', 'Manage Users');
         $manage_topics = Permission::addPermission('manage_topics', 'Manage Topics');
+        // 撰写公告
+        $compose_announcement = Permission::addPermission('compose_announcement', 'Composing Announcement');
 
         $this->attachPermissions($founder, [
             $visit_admin,
             $manage_users,
             $manage_topics,
+            $compose_announcement,
         ]);
 
         $this->attachPermissions($maintainer, [
             $visit_admin,
             $manage_topics,
+            $compose_announcement,
         ]);
 
         if (!$user->hasRole($founder->name)) {

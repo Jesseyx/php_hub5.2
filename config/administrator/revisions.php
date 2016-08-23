@@ -1,6 +1,6 @@
 <?php
 
-use App\Revision;
+use App\Models\Revision;
 
 return [
     'title'   => '操作记录',

@@ -2,12 +2,12 @@
 
 namespace App\Phphub\Creators;
 
+use App\Models\Reply;
+use App\Models\Topic;
 use App\Phphub\Core\CreatorListener;
 use App\Phphub\Markdown\Markdown;
 use App\Phphub\Notification\Mention;
 use App\Phphub\Notification\Notifier;
-use App\Reply;
-use App\Topic;
 use Auth;
 use Carbon\Carbon;
 

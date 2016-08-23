@@ -1,6 +1,6 @@
 <?php
 
-use App\SiteStatus;
+use App\Models\SiteStatus;
 
 return [
     'title'   => '数据统计',

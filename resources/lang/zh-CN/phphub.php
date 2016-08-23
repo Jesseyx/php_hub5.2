@@ -2,7 +2,7 @@
 
 return [
     'Topics' => '社区',
-    'Jobs' => '酷工作',
+    'Jobs' => '招聘',
     'Share' => '分享',
     'Q&A' => '问答',
     'Search' => '搜索',
@@ -142,5 +142,6 @@ return [
     'Operation Deny' => '操作被禁止',
     'Notice' => '提 示',
     'Sorry, You account is banned.' => '对不起，您的账号已被禁用',
+    'Sites' => '酷站',
 
 ];

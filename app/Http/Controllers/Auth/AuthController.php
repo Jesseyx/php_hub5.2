@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Traits\SocialiteHelper;
 use App\Http\Requests\StoreUserRequest;
+use App\Models\User;
 use App\Phphub\Listeners\UserCreatorListener;
-use App\User;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
@@ -13,6 +14,8 @@ use Session;
 
 class AuthController extends Controller implements UserCreatorListener
 {
+    use SocialiteHelper;
+
     /**
      * Create a new authentication controller instance.
      *

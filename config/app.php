@@ -148,7 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        Laravel\Socialite\SocialiteServiceProvider::class,
+        // Laravel\Socialite\SocialiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
@@ -161,6 +161,8 @@ return [
         Orangehill\Iseed\IseedServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Frozennode\Administrator\AdministratorServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
 
         /*
          * Application Service Providers...

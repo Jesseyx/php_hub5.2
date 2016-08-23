@@ -95,7 +95,7 @@ return array(
 	{
 		if (app()->environment('local')) {
 			if (!Auth::check()) {
-				$user = \App\User::first();
+				$user = \App\Models\User::first();
 				$user && Auth::login($user);
 			} else {
 				return true;

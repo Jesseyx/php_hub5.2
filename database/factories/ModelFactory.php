@@ -15,7 +15,7 @@ use Faker\Generator;
 */
 
 // User
-$factory->define(App\User::class, function (Generator $faker) {
+$factory->define(App\Models\User::class, function (Generator $faker) {
     return [
         'name'              => $faker->userName,
         'email'             => $faker->safeEmail,
@@ -33,7 +33,7 @@ $factory->define(App\User::class, function (Generator $faker) {
 });
 
 // Topic
-$factory->define(App\Topic::class, function (Generator $faker) {
+$factory->define(App\Models\Topic::class, function (Generator $faker) {
     return [
         'title'             => $faker->sentence,
         'body'              => $faker->text,
@@ -43,7 +43,7 @@ $factory->define(App\Topic::class, function (Generator $faker) {
 });
 
 // Reply
-$factory->define(\App\Reply::class, function (Generator $faker) {
+$factory->define(App\Models\Reply::class, function (Generator $faker) {
     $body = $faker->text();
     return [
         'body'              => $body,

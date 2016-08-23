@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
 use App\Phphub\Core\CreatorListener;
-use App\Reply;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

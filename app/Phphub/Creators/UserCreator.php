@@ -2,8 +2,8 @@
 
 namespace App\Phphub\Creators;
 
+use App\Models\User;
 use App\Phphub\Listeners\UserCreatorListener;
-use App\User;
 
 class UserCreator
 {

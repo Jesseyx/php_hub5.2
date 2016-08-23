@@ -26,7 +26,10 @@
         "venturecraft/revisionable": "^1.28",
         "spatie/laravel-backup": "^3.10",
         "frozennode/administrator": "^5.0",
-        "devster/ubench": "^1.2"
+        "devster/ubench": "^1.2",
+        "phpdocumentor/reflection":"3.x@dev",
+        "dingo/api": "1.0.x@dev",
+        "socialiteproviders/weixin": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

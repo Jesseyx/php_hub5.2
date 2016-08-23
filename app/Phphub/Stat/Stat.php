@@ -2,9 +2,9 @@
 
 namespace App\Phphub\Stat;
 
-use App\Reply;
-use App\Topic;
-use App\User;
+use App\Models\Reply;
+use App\Models\Topic;
+use App\Models\User;
 use Cache;
 
 class Stat

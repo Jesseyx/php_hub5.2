@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Favorite;
-use App\Notification;
-use App\Topic;
+use App\Models\Favorite;
+use App\Models\Notification;
+use App\Models\Topic;
 use Auth;
 use Illuminate\Http\Request;
 

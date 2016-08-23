@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Append;
-use App\Banner;
-use App\Category;
-use App\Link;
-use App\Notification;
+use App\Models\Append;
+use App\Models\Banner;
+use App\Models\Category;
+use App\Models\Link;
+use App\Models\Notification;
+use App\Models\SiteStatus;
+use App\Models\Topic;
 use App\Phphub\Core\CreatorListener;
 use App\Phphub\Markdown\Markdown;
 use App\Phphub\Notification\Notifier;
-use App\SiteStatus;
-use App\Topic;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

@@ -1,8 +1,8 @@
 <?php
 
-use App\Category;
-use App\Topic;
-use App\User;
+use App\Models\Category;
+use App\Models\Topic;
+use App\Models\User;
 
 use Illuminate\Database\Seeder;
 

@@ -2,8 +2,8 @@
 
 namespace App\Phphub\Sitemap;
 
-use App\Category;
-use App\Topic;
+use App\Models\Category;
+use App\Models\Topic;
 use Illuminate\Routing\UrlGenerator;
 
 class DataProvider

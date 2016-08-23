@@ -21,7 +21,7 @@
 
     <div class="pull-right">
         <!-- 关注 -->
-        @if ($currentUser && \App\Attention::isUserAttentedTopic($currentUser, $topic))
+        @if ($currentUser && \App\Models\Attention::isUserAttentedTopic($currentUser, $topic))
             <a id="topic-attent-cancel-button" class="active" href="javascript:;" data-ajax="post" data-url="{{ route('attentions.createOrDelete', $topic->id) }}" data-lang-cancel={{ lang('Cancel') }} data-lang-attent={{ lang('Attent') }}>
                 <i class="glyphicon glyphicon-eye-open"></i> <span>{{ lang('Cancel') }}</span>
             </a>
@@ -31,7 +31,7 @@
             </a>
         @endif
         <!-- 收藏 -->
-        @if ($currentUser && \App\Favorite::isUserFavoritedTopic($currentUser, $topic))
+        @if ($currentUser && \App\Models\Favorite::isUserFavoritedTopic($currentUser, $topic))
             <a id="topic-favorite-cancel-button" href="javascript:;" data-ajax="post" data-url="{{ route('favorites.createOrDelete', $topic->id) }}" data-lang-cancel={{ lang('Cancel') }} data-lang-attent={{ lang('Favorite') }}>
                 <i class="glyphicon glyphicon-bookmark"></i> <span>{{ lang('Cancel') }}</span>
             </a>

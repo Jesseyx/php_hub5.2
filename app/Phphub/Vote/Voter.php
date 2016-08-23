@@ -2,9 +2,9 @@
 
 namespace App\Phphub\Vote;
 
-use App\Notification;
-use App\Reply;
-use App\Topic;
+use App\Models\Notification;
+use App\Models\Reply;
+use App\Models\Topic;
 use Auth;
 
 class Voter

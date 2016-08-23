@@ -1,6 +1,6 @@
 <?php
 
-use App\Topic;
+use App\Models\Topic;
 
 return [
     'title'   => '话题',

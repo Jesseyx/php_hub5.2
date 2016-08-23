@@ -1,8 +1,8 @@
 <?php
 
-use App\User;
-use App\Topic;
-use App\Reply;
+use App\Models\User;
+use App\Models\Topic;
+use App\Models\Reply;
 
 use Illuminate\Database\Seeder;
 

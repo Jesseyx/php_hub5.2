@@ -1,6 +1,6 @@
 <?php
 
-use App\Banner;
+use App\Models\Banner;
 
 return [
     'title'   => 'Banner',

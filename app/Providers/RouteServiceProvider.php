@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+    protected $api_namespace = 'App\Http\ApiControllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -38,9 +39,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
+        // See: https://phphub.org/topics/2484#reply2
         $this->mapWebRoutes($router);
-
-        //
+        $this->mapApiRoutes();
     }
 
     /**
@@ -56,7 +57,17 @@ class RouteServiceProvider extends ServiceProvider
         $router->group([
             'namespace' => $this->namespace, 'middleware' => 'web',
         ], function ($router) {
-            require app_path('Http/routes.php');
+            require app_path('Http/Routes/web.php');
+        });
+    }
+
+    protected function mapApiRoutes() {
+        $api_router = app('Dingo\Api\Routing\Router');
+        $api_router->group([
+            'version'   => env('API_PREFIX'),
+            'namespace' => $this->api_namespace,
+        ], function ($router) {
+            require app_path('Http/Routes/api.php');
         });
     }
 }

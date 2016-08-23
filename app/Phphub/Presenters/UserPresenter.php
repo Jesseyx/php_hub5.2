@@ -2,7 +2,7 @@
 
 namespace App\Phphub\Presenters;
 
-use App\Role;
+use App\Models\Role;
 use Laracasts\Presenter\Presenter;
 use Route;
 

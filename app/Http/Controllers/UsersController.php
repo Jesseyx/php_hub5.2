@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
+use App\Models\Topic;
+use App\Models\User;
 use App\Phphub\Github\GithubUserDataReader;
-use App\Reply;
-use App\Topic;
-use App\User;
 use Cache;
 use Illuminate\Http\Request;
 

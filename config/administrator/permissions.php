@@ -1,6 +1,6 @@
 <?php
 
-use App\Permission;
+use App\Models\Permission;
 
 return [
     'title'   => '用户组权限',

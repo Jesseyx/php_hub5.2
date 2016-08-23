@@ -1,6 +1,6 @@
 <?php
 
-use App\Role;
+use App\Models\Role;
 
 return [
     'title'   => '用户组',

@@ -1,9 +1,9 @@
 <?php
 namespace App\Phphub\Creators;
 
+use App\Models\Topic;
 use App\Phphub\Core\CreatorListener;
 use App\Phphub\Markdown\Markdown;
-use App\Topic;
 use Auth;
 use Carbon\Carbon;
 

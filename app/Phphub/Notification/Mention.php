@@ -2,7 +2,7 @@
 
 namespace App\Phphub\Notification;
 
-use App\User;
+use App\Models\User;
 
 class Mention
 {

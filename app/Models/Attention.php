@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Favorite extends Model
+class Attention extends Model
 {
     protected $fillable = [
 
@@ -15,9 +15,9 @@ class Favorite extends Model
         $this->belongsTo(User::class);
     }
 
-    public static function isUserFavoritedTopic(User $user, Topic $topic)
+    public static function isUserAttentedTopic(User $user, Topic $topic)
     {
-        return Favorite::where('user_id', $user->id)
+        return Attention::where('user_id', $user->id)
                         ->where('topic_id', $topic->id)
                         ->first();
     }

@@ -2,11 +2,11 @@
 
 namespace App\Phphub\Notification;
 
-use App\Append;
-use App\Notification;
-use App\Reply;
-use App\Topic;
-use App\User;
+use App\Models\Append;
+use App\Models\Notification;
+use App\Models\Reply;
+use App\Models\Topic;
+use App\Models\User;
 
 class Notifier
 {

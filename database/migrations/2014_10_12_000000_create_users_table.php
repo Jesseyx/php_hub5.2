@@ -44,11 +44,11 @@ class CreateUsersTable extends Migration
             $table->string('weibo_link')->nullable();
             // 状态控制
             $table->enum('is_banned', ['yes', 'no'])->default('no')->index();   // 是否禁止
-            $table->boolean('verified')->default(false)->index();               // 是否认证
+            $table->boolean('verified')->default(false)->index();               // 是否认证, for laravel-user-verification
             // token
             $table->string('login_token')->nullable();
             $table->string('remember_token')->nullable();
-            $table->string('verification_token')->nullable();
+            $table->string('verification_token')->nullable();                   // for laravel-user-verification
             // qr 信息
             $table->string('login_qr')->nullable();
             $table->string('payment_qrcode')->nullable();

@@ -144,4 +144,11 @@ return [
     'Sorry, You account is banned.' => '对不起，您的账号已被禁用',
     'Sites' => '酷站',
 
+    'Congratulations and Welcome!' => '恭喜，您已经成功加入 PHPHub，Chrome 用户可使用 <a target="_blank" href="https://chrome.google.com/webstore/detail/fcopfkdgikhodlcjkjdppdfkbhmehdon">PHPHub 插件</a> 实时接收消息提醒。',
+    'Sorry, this socialite account has been registered.' => '绑定失败：你的 :driver 账号已被其他用户使用. T_T',
+    'Bind Successfully!' => '绑定成功！以后可以使用你的 :driver 账号登录 PHPHub 了 ^_^',
+    'Please verify your email address' => '请激活你的邮箱',
+
+    'Actived' => '最近访问',
+
 ];

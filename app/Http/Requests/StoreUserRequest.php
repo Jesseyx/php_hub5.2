@@ -24,12 +24,14 @@ class StoreUserRequest extends Request
     public function rules()
     {
         return [
-            'github_id'         => 'required|unique:users',
-            'github_name'       => 'required',
-            'name'              => 'required|alpha_num|unique:users',
-            'email'             => 'email',
-            'github_url'        => 'active_url',
-            'image_url'         => 'active_url',
+            'github_id'       => 'unique:users',
+            'github_name'     => 'string',
+            'wechat_openid'   => 'string',
+            'wechat_unionid'  => 'string',
+            'name'            => 'alpha_num|required|unique:users',
+            'email'           => 'email|required|unique:users',
+            'github_url'      => 'url',
+            'image_url'       => 'url',
         ];
     }
 }

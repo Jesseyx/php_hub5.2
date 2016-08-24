@@ -18,7 +18,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'SocialiteProviders\Manager\SocialiteWasCalled' => [
             // add your listeners (aka providers) here
-            'SocialiteProviders\Weixin\WeixinExtendSocialite@handle',
+            'SocialiteProviders\WeixinWeb\WeixinWebExtendSocialite@handle',
         ],
     ];
 

@@ -21,7 +21,7 @@ Route::get('/sitemap.xml', 'PagesController@sitemap');
 Route::get('/hall_of_fames', 'PagesController@hallOfFames')->name('hall_of_fames');
 
 # ------------------ Authentication ------------------------
-// Route::get('login', 'Auth\AuthController@login')->name('login');
+Route::get('login', 'Auth\AuthController@oauth')->name('login');
 Route::get('/auth/oauth', 'Auth\AuthController@oauth')->name('auth.oauth');
 Route::get('/auth/callback', 'Auth\AuthController@callback')->name('auth.callback');
 

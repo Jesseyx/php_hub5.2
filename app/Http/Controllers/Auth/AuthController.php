@@ -16,50 +16,43 @@ class AuthController extends Controller implements UserCreatorListener
 {
     use SocialiteHelper;
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    /*
-     * Login
-     */
-    public function login(Request $request)
+    public function create()
     {
-        if ($request->has('code')) {
-            // 返回了
-            // windows 系统会因为 ssl 证书报错，请参考下面的解决办法
-            // https://laracasts.com/discuss/channels/laravel/how-to-solve-curl-error-60-ssl-certificate-in-laravel-5-while-facebook-authentication
-            // lalitesh       If someone is still looking for a solution, there is an easy fix   ...
-            // App::make 从容器中解析对象，已通过 composer.json psr-4 自动加载
-
-            $githubUser = Socialite::driver('github')->user();
-            $user = User::getByGithubId($githubUser->id);
-
-            if ($user) {
-                return $this->loginUser($user);
-            }
-
-            return $this->userNotFound($githubUser);
+        if (!Session::has('oauthData')) {
+            return redirect(route('login'));
         }
 
-        // 将用户重定向到 GitHub 认证页面
-        return Socialite::driver('github')->redirect();
+        $oauthData = array_merge(Session::get('oauthData'), Session::get('_old_input', []));
+        return view('auth.signupconfirm', compact('oauthData'));
     }
 
-    // 数据库中有，登录用户
-    private function loginUser($user)
+    public function store(StoreUserRequest $request)
     {
-        if ($user->is_banned == 'yes') {
-            return $this->userIsBanned($user);
+        if (!Session::has('oauthData')) {
+            return redirect(route('login'));
         }
 
-        return $this->userFound($user);
+        $oauthUser = array_merge(Session::get('oauthData'), $request->only('name', 'email'));
+        $userData = array_only($oauthUser, array_keys($request->rules()));
+        $userData['register_source'] = $oauthUser['driver'];
+
+        // 自 PHP 5.5 起，关键词 class 也可用于类名的解析。
+        // 使用 ClassName::class 你可以获取一个字符串，包含了类 ClassName 的完全限定名称。
+        // 这对使用了 命名空间 的类尤其有用。
+        return app(\App\Phphub\Creators\UserCreator::class)->create($this, $userData);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        flash(lang('Operation succeeded.'), 'success');
+        return redirect(route('home'));
     }
 
     public function userBanned()
@@ -76,79 +69,56 @@ class AuthController extends Controller implements UserCreatorListener
 
     /**
      * ----------------------------------------
-     * GithubAuthenticatorListener Delegate
+     * Login Delegate
      * ----------------------------------------
      */
-
-    // 数据库找不到用户, 执行新用户注册fv
-    private function userNotFound($githubData)
+    // 数据库找不到用户, 执行新用户注册
+    private function userNotFound($registerUserData, $driver)
     {
-        $githubUserData = $githubData->user;
-        $githubUserData['image_url'] = $githubData->user['avatar_url'];
-        $githubUserData['github_id'] = $githubData->user['id'];
-        $githubUserData['github_url'] = $githubData->user['url'];
-        $githubUserData['github_name'] = $githubData->nickname;
+        if ($driver == 'github') {
+            $oauthData['image_url'] = $registerUserData->user['avatar_url'];
+            $oauthData['github_id'] = $registerUserData->user['id'];
+            $oauthData['github_url'] = $registerUserData->user['url'];          // html_url
+            $oauthData['github_name'] = $registerUserData->nickname;
+            $oauthData['name'] = $registerUserData->user['name'];
+            $oauthData['email'] = $registerUserData->user['email'];
+        } else if ($driver == 'wechat') {
+            $oauthData['image_url'] = $registerUserData->avatar;
+            $oauthData['wechat_openid'] = $registerUserData->id;
+            $oauthData['name'] = $registerUserData->nickname;
+            $oauthData['email'] = $registerUserData->email;
+            $oauthData['wechat_unionid'] = $registerUserData->user['unionid'];
+        }
 
-        Session::put('githubUserData', $githubUserData);
+        $oauthData['driver'] = $driver;
+        Session::put('oauthData', $oauthData);
 
         return redirect(route('signup'));
     }
 
-    private function userIsBanned($user)
+    // 数据库中有，登录用户
+    private function loginUser($user)
     {
-        return redirect(route('user-banned'));
+        if ($user->is_banned == 'yes') {
+            return $this->userIsBanned($user);
+        }
+
+        return $this->userFound($user);
     }
 
     private function userFound($user)
     {
         Auth::login($user, true);
-        Session::forget('githubUserData');
+        Session::forget('oauthData');
 
         flash(lang('Login Successfully.'), 'success');
-        show_crx_hint();
 
-        return redirect()->intended();
+        return redirect(route('users.edit', $user->id));
     }
 
-    /**
-     * Shows a user what their new account will look like.
-     */
-    public function create()
+    private function userIsBanned($user)
     {
-        if (! Session::has('githubUserData')) {
-            return redirect(route('login'));
-        }
-
-        $githubUser = array_merge(Session::get('githubUserData'), Session::get('_old_input', []));
-        return view('auth.signupconfirm', compact('githubUser'));
-    }
-
-    /**
-     * Actually creates the new user account
-     */
-    public function store(StoreUserRequest $request)
-    {
-        if (! Session::has('githubUserData')) {
-            return redirect(route('login'));
-        }
-
-        $githubUser = array_merge(Session::get('githubUserData'), $request->only('github_id', 'name', 'github_name', 'email'));
-        $githubUser = array_only($githubUser, array_keys($request->rules()));
-
-        // 自 PHP 5.5 起，关键词 class 也可用于类名的解析。
-        // 使用 ClassName::class 你可以获取一个字符串，包含了类 ClassName 的完全限定名称。
-        // 这对使用了 命名空间 的类尤其有用。
-        return app(\App\Phphub\Creators\UserCreator::class)->create($this, $githubUser);
-    }
-
-    /*
-     * Logout
-     */
-    public function logout()
-    {
-        Auth::logout();
-
-        return redirect(route('home'));
+        return redirect(route('user-banned'));
     }
 
     /**
@@ -164,9 +134,11 @@ class AuthController extends Controller implements UserCreatorListener
     public function userCreated($user)
     {
         Auth::login($user, true);
-        Session::forget('githubUserData');
+        Session::forget('oauthData');
+
+        flash(lang('Congratulations and Welcome!'), 'success');
 
         // 返回首页
-        return redirect()->intended();
+        return redirect(route('users.edit', Auth::user()->id));
     }
 }

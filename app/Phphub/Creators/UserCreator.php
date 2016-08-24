@@ -20,7 +20,7 @@ class UserCreator
         $user = User::create($data);
 
         if (!$user) {
-            return $observer->userValidationError();
+            return $observer->userValidationError($user->getErrors());
         }
 
         $user->cacheAvatar();

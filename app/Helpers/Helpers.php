@@ -21,10 +21,10 @@ function getCdnDomain()
     return config('phphub.url_static') ?:  config('phphub.url');
 }
 
-function lang($text)
+function lang($text, $parameters = [])
 {
     // trans 函数使用本地文件翻译给定语言行
-    return str_replace('phphub.', '', trans('phphub.' . $text));
+    return str_replace('phphub.', '', trans('phphub.' . $text, $parameters));
 }
 
 function getUserStaticDomain()

@@ -163,6 +163,8 @@ return [
         Frozennode\Administrator\AdministratorServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        Jrean\UserVerification\UserVerificationServiceProvider::class,
+        Naux\Mail\SendCloudServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -226,6 +228,7 @@ return [
         'Flash' => Laracasts\Flash\Flash::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Rss' => Thujohn\Rss\RssFacade::class,
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
 
     ],
 

@@ -29,7 +29,9 @@
         "devster/ubench": "^1.2",
         "phpdocumentor/reflection":"3.x@dev",
         "dingo/api": "1.0.x@dev",
-        "socialiteproviders/weixin": "^2.1"
+        "socialiteproviders/weixin-web": "^2.0",
+        "jrean/laravel-user-verification": "2.*",
+        "naux/sendcloud": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

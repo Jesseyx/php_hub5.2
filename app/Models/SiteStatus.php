@@ -7,9 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class SiteStatus extends Model
 {
-    public static function newUser()
+    public static function newUser($driver)
     {
         self::collect('new_user');
+        switch ($driver) {
+            case 'github':
+                self::collect('new_user_from_github');
+                break;
+            case 'wechat':
+                self::collect('new_user_from_wechat');
+                break;
+        }
     }
 
     public static function newTopic()
@@ -54,6 +62,12 @@ class SiteStatus extends Model
                 break;
             case 'new_image':
                 $todayStatus->image_count += 1;
+                break;
+            case 'new_user_from_github':
+                $todayStatus->github_regitster_count += 1;
+                break;
+            case 'new_user_from_wechat':
+                $todayStatus->wechat_registered_count += 1;
                 break;
         }
 

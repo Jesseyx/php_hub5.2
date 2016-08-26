@@ -24,6 +24,7 @@ Route::get('/hall_of_fames', 'PagesController@hallOfFames')->name('hall_of_fames
 Route::get('login', 'Auth\AuthController@oauth')->name('login');
 Route::get('/auth/oauth', 'Auth\AuthController@oauth')->name('auth.oauth');
 Route::get('/auth/callback', 'Auth\AuthController@callback')->name('auth.callback');
+Route::get('/verification/{token}', 'Auth\AuthController@getVerification')->name('verification');
 
 Route::get('signup', 'Auth\AuthController@create')->name('signup');
 Route::post('signup', 'Auth\AuthController@store');
@@ -40,13 +41,16 @@ Route::patch('/topics/{id}', 'TopicsController@update')->name('topics.update');
 Route::post('/topics/{id}/append', 'TopicsController@append')->name('topics.append');
 
 # ------------------ User stuff ------------------------
-Route::get('/users/{id}/refresh_cache', 'UsersController@refreshCache')->name('users.refresh_cache');
+// Route::get('/users/{id}/refresh_cache', 'UsersController@refreshCache')->name('users.refresh_cache');
 Route::get('/users/{id}/replies', 'UsersController@replies')->name('users.replies');
 Route::get('/users/{id}/topics', 'UsersController@topics')->name('users.topics');
-Route::get('/users/{id}/favorites', 'UsersController@favorites')->name('users.favorites');
+// Route::get('/users/{id}/favorites', 'UsersController@favorites')->name('users.favorites');
+Route::get('/users/{id}/following', 'UsersController@following')->name('users.following');
+Route::get('/users/{id}/followers', 'UsersController@followers')->name('users.followers');
+Route::get('/users/{id}/votes', 'UsersController@votes')->name('users.votes');
 
-Route::get('/github-card', 'UsersController@githubCard')->name('users.github-card');
-Route::get('/github-api-proxy/users/{username}', 'UsersController@githubApiProxy')->name('users.github-api-proxy');
+// Route::get('/github-card', 'UsersController@githubCard')->name('users.github-card');
+// Route::get('/github-api-proxy/users/{username}', 'UsersController@githubApiProxy')->name('users.github-api-proxy');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications', 'NotificationsController@index')->name('notifications.index');
@@ -68,6 +72,11 @@ Route::get('/users/{id}', 'UsersController@show')->name('users.show');
 Route::get('/users/create', 'UsersController@create')->name('users.create');
 Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');
 Route::patch('/users/{id}', 'UsersController@update')->name('users.update');
+Route::get('/users/{id}/edit_avatar', 'UsersController@editAvatar')->name('users.edit_avatar');
+Route::patch('/users/{id}/update_avatar', 'UsersController@updateAvatar')->name('users.update_avatar');
+Route::get('/users/{id}/edit_email_notify', 'UsersController@editEmailNotify')->name('users.edit_email_notify');
+Route::post('/users/{id}/update_email_notify', 'UsersController@updateEmailNotify')->name('users.update_email_notify');
+Route::get('/users/{id}/edit_social_binding', 'UsersController@editSocialBinding')->name('users.edit_social_binding');
 
 # ------------------ Votes ------------------------
 Route::group(['before' => 'auth'], function () {

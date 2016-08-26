@@ -57,7 +57,7 @@ class CreateUsersTable extends Migration
             $table->enum('email_notify_enabled', ['yes',  'no'])->default('yes')->index();
             // 注册及登录记录
             $table->string('register_source')->index();
-            $table->timestamp('last_actived_at')->nullable();
+            $table->timestamp('last_actived_at')->nullable();                   // 活跃于
 
             $table->softDeletes();
             $table->timestamps();

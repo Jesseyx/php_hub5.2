@@ -9,21 +9,21 @@
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v2.2.2",
+            "version": "V2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "c291e58d0a13953e0f68d99182ee77ebc693edc0"
+                "reference": "ecd1ce5c4a827e2f6a8fb41bcf67713beb1c1cbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/barryvdh/laravel-debugbar/c291e58d0a13953e0f68d99182ee77ebc693edc0.zip",
-                "reference": "c291e58d0a13953e0f68d99182ee77ebc693edc0",
+                "url": "https://packagist.phpcomposer.com/files/barryvdh/laravel-debugbar/ecd1ce5c4a827e2f6a8fb41bcf67713beb1c1cbd.zip",
+                "reference": "ecd1ce5c4a827e2f6a8fb41bcf67713beb1c1cbd",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.1.*|5.2.*",
-                "maximebf/debugbar": "~1.11.0",
+                "illuminate/support": "5.1.*|5.2.*|5.3.*",
+                "maximebf/debugbar": "~1.11.0|~1.12.0",
                 "php": ">=5.5.9",
                 "symfony/finder": "~2.7|~3.0"
             },
@@ -59,7 +59,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2016-05-11 13:54:43"
+            "time": "2016-07-29 15:00:36"
         },
         {
             "name": "ckeditor/ckeditor",
@@ -1205,16 +1205,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.43",
+            "version": "v5.2.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "5490b8f00564bb60839002f86828e27edd1e5610"
+                "reference": "f24b7acfb494437ef00bdd062bed61eb21535546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/laravel/framework/5490b8f00564bb60839002f86828e27edd1e5610.zip",
-                "reference": "5490b8f00564bb60839002f86828e27edd1e5610",
+                "url": "https://packagist.phpcomposer.com/files/laravel/framework/f24b7acfb494437ef00bdd062bed61eb21535546.zip",
+                "reference": "f24b7acfb494437ef00bdd062bed61eb21535546",
                 "shasum": ""
             },
             "require": {
@@ -1295,7 +1295,7 @@
                 "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
                 "symfony/css-selector": "Required to use some of the crawler integration testing tools (2.8.*|3.0.*).",
                 "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (2.8.*|3.0.*).",
-                "symfony/psr-http-message-bridge": "Required to psr7 bridging features (0.2.*)."
+                "symfony/psr-http-message-bridge": "Required to use psr7 bridging features (0.2.*)."
             },
             "type": "library",
             "extra": {
@@ -1331,7 +1331,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-08-10 12:23:59"
+            "time": "2016-08-23 13:03:29"
         },
         {
             "name": "laravel/socialite",
@@ -1716,16 +1716,16 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.11.1",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "d9302891c1f0a0ac5a4f66725163a00537c6359f"
+                "reference": "e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/maximebf/php-debugbar/d9302891c1f0a0ac5a4f66725163a00537c6359f.zip",
-                "reference": "d9302891c1f0a0ac5a4f66725163a00537c6359f",
+                "url": "https://packagist.phpcomposer.com/files/maximebf/php-debugbar/e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988.zip",
+                "reference": "e634fbd32cd6bc3fa0e8c972b52d4bf49bab3988",
                 "shasum": ""
             },
             "require": {
@@ -1744,7 +1744,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.12-dev"
                 }
             },
             "autoload": {
@@ -1773,7 +1773,7 @@
                 "debug",
                 "debugbar"
             ],
-            "time": "2016-01-22 12:22:23"
+            "time": "2016-05-15 13:11:34"
         },
         {
             "name": "mews/purifier",
@@ -2759,22 +2759,22 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "3.10.1",
+            "version": "3.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "e17bed15f5b3f5e52421aa83d3608dc2d4d4d63b"
+                "reference": "1f9f0c55d7643aba7257aef2b2b867f2716ddfaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/spatie/laravel-backup/e17bed15f5b3f5e52421aa83d3608dc2d4d4d63b.zip",
-                "reference": "e17bed15f5b3f5e52421aa83d3608dc2d4d4d63b",
+                "url": "https://packagist.phpcomposer.com/files/spatie/laravel-backup/1f9f0c55d7643aba7257aef2b2b867f2716ddfaf.zip",
+                "reference": "1f9f0c55d7643aba7257aef2b2b867f2716ddfaf",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^5.1",
-                "illuminate/filesystem": "^5.1.20",
-                "illuminate/support": "^5.1",
+                "illuminate/console": "~5.1.0|~5.2.0|~5.3.0",
+                "illuminate/filesystem": "~5.1.20|~5.2.0|~5.3.0",
+                "illuminate/support": "~5.1.0|~5.2.0|~5.3.0",
                 "league/flysystem": "^1.0.8",
                 "php": "^5.5|^7.0",
                 "spatie/db-dumper": "^1.3",
@@ -2818,7 +2818,7 @@
                 "laravel-backup",
                 "spatie"
             ],
-            "time": "2016-08-16 07:43:54"
+            "time": "2016-08-24 12:02:50"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4878,43 +4878,6 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2015-06-21 13:59:46"
-        },
-        {
-            "name": "socialiteproviders/weixin",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SocialiteProviders/Weixin.git",
-                "reference": "8ac480f9c88522bd4d110dedb5deb1982e7d3aae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/SocialiteProviders/Weixin/8ac480f9c88522bd4d110dedb5deb1982e7d3aae.zip",
-                "reference": "8ac480f9c88522bd4d110dedb5deb1982e7d3aae",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "socialiteproviders/manager": "~2.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SocialiteProviders\\Weixin\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "xyxu",
-                    "email": "techxu@gmail.com"
-                }
-            ],
-            "description": "Weixin OAuth2 Provider for Laravel Socialite",
-            "time": "2016-06-14 13:04:39"
         },
         {
             "name": "symfony/css-selector",

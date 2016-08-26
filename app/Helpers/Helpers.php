@@ -52,3 +52,18 @@ function check_show_crx_hint()
 {
     return session('show_crx_hint') ? true : false;
 }
+
+function navViewActive($anchor)
+{
+    return Route::currentRouteName() == $anchor ? ' active' : '';
+}
+
+function is_request_from_api()
+{
+    return $_SERVER['SERVER_NAME'] == env('API_DOMAIN');
+}
+
+function get_user_static_domain()
+{
+    return config('phphub.user_static') ?: config('phphub.url');
+}

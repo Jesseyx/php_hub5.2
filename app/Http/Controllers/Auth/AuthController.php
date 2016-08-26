@@ -9,16 +9,21 @@ use App\Phphub\Listeners\UserCreatorListener;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
+use Jrean\UserVerification\Exceptions\TokenMismatchException;
+use Jrean\UserVerification\Exceptions\UserIsVerifiedException;
+use Jrean\UserVerification\Exceptions\UserNotFoundException;
+use Jrean\UserVerification\Traits\VerifiesUsers;
 use Socialite;
 use Session;
+use UserVerification;
 
 class AuthController extends Controller implements UserCreatorListener
 {
-    use SocialiteHelper;
+    use SocialiteHelper, VerifiesUsers;
 
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['logout', 'oauth', 'callback', 'getVerification', 'userBanned']]);
     }
 
     public function create()
@@ -140,5 +145,31 @@ class AuthController extends Controller implements UserCreatorListener
 
         // 返回首页
         return redirect(route('users.edit', Auth::user()->id));
+    }
+
+    /**
+     * ----------------------------------------
+     * Email Validation
+     * ----------------------------------------
+     */
+    public function getVerification(Request $request, $token)
+    {
+        $this->validateRequest($request);
+        try {
+            UserVerification::process($request->input('email'), $token, 'users');
+            flash(lang('Email validation successed.'), 'success');
+            return redirect('/');
+        } catch (UserNotFoundException $e) {
+            flash(lang('Email not found'), 'error');
+            return redirect('/');
+        } catch (UserIsVerifiedException $e) {
+            flash(lang('Email validation successed.'), 'success');
+            return redirect('/');
+        } catch (TokenMismatchException $e) {
+            flash(lang('Token mismatch'), 'error');
+            return redirect('/');
+        }
+
+        return redirect('/');
     }
 }

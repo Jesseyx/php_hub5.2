@@ -12,6 +12,7 @@ class EmailHandler
 {
     public function sendActivateMail(User $user)
     {
+        echo date('H:i:s') . PHP_EOL;
         UserVerification::generate($user);
 
         $token = $user->verification_token;
@@ -21,10 +22,10 @@ class EmailHandler
         Mail::send('emails.fake', [], function (Message $message) use ($user, $token) {
             $message->subject(lang('Please verify your email address'));
 
-            $message->getSwiftMessage()->setBody(new SendCloudTemplate('template_active'), [
+            $message->getSwiftMessage()->setBody(new SendCloudTemplate('template_active', [
                 'name' => $user->name,
                 'url'  => url('verification', $token) . '?email=' . urlencode($user->email),
-            ]);
+            ]));
 
             $message->to($user->email);
         });

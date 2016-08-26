@@ -5,16 +5,16 @@
 @stop
 
 @section('content')
-    <div class="users-show">
+    <div class="users-show row">
 
         <div class="col-md-3 box" style="padding: 15px;">
-            @include('users.partials.basicInfo')
+            @include('users.partials.basicinfo')
         </div>
 
         <div class="main-col col-md-9 left-col">
 
             @if ($user->introduction)
-                <div class="box text-center">{!! $user->introduction !!}</div>
+                <div class="box text-center">{{{ $user->introduction }}}</div>
             @endif
 
             @if ($user->is_banned == 'yes')
@@ -22,36 +22,30 @@
             @endif
 
             <div class="panel panel-default">
-                @include('users.partials.infoNav', ['current' => 'basicInfo'])
+                <div class="panel-heading">
+                    {{ lang('Recent Topics') }}
+                </div>
 
-                <iframe src="{{ route('users.github-card') }}?user={{ $user->github_name }}&client_id={{ getenv('GITHUB_CARD_CLIENT_ID') }}&client_secret={{ getenv('GITHUB_CARD_CLIENT_SECRET') }}&target=blank" frameborder="0" scrolling="0" width="100%" height="146px" allowtransparency></iframe>
+                <div class="panel-body">
+                    @if (count($topics))
+                        @include('users.partials.topics')
+                    @else
+                        <div class="empty-block">{{ lang('Dont have any data Yet') }}~~</div>
+                    @endif
+                </div>
             </div>
 
             <div class="panel panel-default">
-                <ul class="nav nav-tabs user-info-nav" role="tablist">
-                    <li class="active"><a href="#recent_replies" role="tab" data-toggle="tab">{{ lang('Recent Replies') }}</a></li>
-                    <li><a href="#recent_topics" role="tab" data-toggle="tab">{{ lang('Recent Topics') }}</a></li>
-                </ul>
+                <div class="panel-heading">
+                    {{ lang('Recent Replies') }}
+                </div>
 
-                <div class="panel-body remove-padding-vertically remove-padding-horizontal">
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div id="recent_replies" class="tab-pane active">
-                            @if (count($replies))
-                                @include('users.partials.replies')
-                            @else
-                                <div class="empty-block">{{ lang('Dont have any comment yet') }}~~</div>
-                            @endif
-                        </div>
-
-                        <div id="recent_topics" class="tab-pane">
-                            @if (count($topics))
-                                @include('users.partials.topics')
-                            @else
-                                <div class="empty-block">{{ lang('Dont have any data Yet') }}~~</div>
-                            @endif
-                        </div>
-                    </div>
+                <div class="panel-body">
+                    @if (count($replies))
+                        @include('users.partials.replies')
+                    @else
+                        <div class="empty-block">{{ lang('Dont have any comment yet') }}~~</div>
+                    @endif
                 </div>
             </div>
 

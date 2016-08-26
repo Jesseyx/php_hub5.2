@@ -7,9 +7,11 @@
             </a>
 
             <span class="meta">
-                <a href="" title="{{ $topic->category->name }}">
+                <a href="{{ route('categories.show', [$topic->category->id]) }}" title="{{ $topic->category->name }}">
                     {{ $topic->category->name }}
                 </a>
+                <span> • </span>
+                {{ $topic->vote_count }} {{ lang('Up Votes') }}
                 <span> • </span>
                 {{ $topic->reply_count }} {{ lang('Replies') }}
                 <span> • </span>

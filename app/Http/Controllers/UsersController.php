@@ -6,6 +6,7 @@ use App\Models\Reply;
 use App\Models\Topic;
 use App\Models\User;
 use App\Phphub\Github\GithubUserDataReader;
+use App\Phphub\Handler\Exception\ImageUploadException;
 use Cache;
 use Illuminate\Http\Request;
 
@@ -42,19 +43,20 @@ class UsersController extends Controller
         return view('users.edit', compact('user', 'topics', 'replies'));
     }
 
-    public function update($id, Request $request)
+    public function update($id, Requests\UpdateUserRequest $request)
     {
         $user = User::findOrFail($id);
         $this->authorize('update', $user);
 
-        $data = $request->only('github_name', 'real_name', 'city', 'company', 'twitter_account', 'personal_website', 'introduction');
+        try {
+            $request->performUpdate($user);
+            // 发送通知
+            flash(lang('Operation succeeded.'), 'success');
+        } catch (ImageUploadException $e) {
+            flash(lang($e->getMessage()), 'error');
+        }
 
-        $user->update($data);
-
-        // 发送通知
-        flash(lang('Operation succeeded.'), 'success');
-
-        return redirect(route('users.show', $id));
+        return redirect(route('users.edit', $id));
     }
 
     public function blocking($id)
@@ -96,6 +98,22 @@ class UsersController extends Controller
         return view('users.topics', compact('user', 'topics'));
     }
 
+    public function following($id)
+    {
+        $user = User::findOrFail($id);
+        $users = $user->followings()->orderBy('id', 'desc')->paginate(15);
+
+        return view('users.following', compact('user', 'users'));
+    }
+
+    public function votes($id)
+    {
+        $user = User::findOrFail($id);
+        $topics = $user->votedTopics()->orderBy('pivot_created_at', 'desc')->paginate(15);
+
+        return view('users.votes', compact('user', 'topics'));
+    }
+
     public function favorites($id)
     {
         $user = User::findOrFail($id);
@@ -116,5 +134,60 @@ class UsersController extends Controller
         $user->cacheAvatar();
 
         return redirect(route('users.edit', $id));
+    }
+
+    public function editAvatar($id)
+    {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
+        return view('users.edit_avatar', compact('user'));
+    }
+
+    public function updateAvatar($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
+        if ($file = $request->file('avatar')) {
+            try {
+                $user->updateAvatar($file);
+                flash(lang('Update Avatar Success'), 'success');
+            } catch (ImageUploadException $e) {
+                flash($e->getMessage(), 'error');
+            }
+        } else {
+            flash(lang('Update Avatar Failed'), 'error');
+        }
+
+        return redirect(route('users.edit_avatar', $id));
+    }
+
+    public function editEmailNotify($id)
+    {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
+        return view('users.edit_email_notify', compact('user'));
+    }
+
+    public function updateEmailNotify($id, Request $request)
+    {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
+        $user->email_notify_enabled = $request->email_notify_enabled == 'on' ? 'yes' : 'no';
+        $user->save();
+
+        flash(lang('Operation succeeded.'), 'success');
+        return redirect(route('users.edit_email_notify', $id));
+    }
+
+    public function editSocialBinding($id)
+    {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
+        return view('users.edit_social_binding', compact('user'));
     }
 }

@@ -1,13 +1,14 @@
 @extends('layouts.default')
 
 @section('content')
-    <div class="box text-center">
+
+    <div class="box text-center site-intro rm-link-color">
         {!! lang('site_intro') !!}
     </div>
 
     @include('layouts.partials.topbanner')
 
-    <div class="panel panel-default list-panel">
+    <div class="panel panel-default list-panel home-topic-list">
         <div class="panel-heading">
             <h3 class="panel-title text-center">
                 {{ lang('Excellent Topics') }} &nbsp;
@@ -17,14 +18,16 @@
             </h3>
         </div>
 
-        <div class="panel-body">
-            @include('topics.partials.topics', ['column' => true])
+        <div class="panel-body ">
+            @include('pages.partials.topics')
         </div>
 
         <div class="panel-footer text-right">
-            <a href="topics?filter=excellent">
-                {{ lang('More Excellent Topics') }}...
+
+            <a class="more-excellent-topic-link" href="topics?filter=excellent">
+                {{ lang('More Excellent Topics') }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </a>
         </div>
     </div>
+
 @stop

@@ -5,7 +5,7 @@
                 <div class="item">
                     <a href="{{ $banner->link ?: 'javascript:;' }}" target="{{ $banner->target }}">
                         <p class="img">
-                            <span style="background-image: url({{ $banner->image_url }});"></span>
+                            <span style="background-image: url({{ $banner->image_url }}?imageView2/1/w/424/h/212);"></span>
                         </p>
                         <p class="caption">{{ $banner->title }}</p>
                     </a>

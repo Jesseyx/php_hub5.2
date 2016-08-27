@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Venturecraft\Revisionable\RevisionableTrait;
@@ -19,15 +20,19 @@ class Banner extends Model
 
     public static function allByPosition()
     {
-        $return = [];
-        $data = Banner::orderBy('position', 'desc')
-                        ->orderBy('order', 'asc')
-                        ->get();
+        $data = Cache::remember('puphub_banner', 60, function () {
+            $return = [];
+            $data = Banner::orderBy('position', 'desc')
+                ->orderBy('order', 'asc')
+                ->get();
 
-        foreach ($data as $banner) {
-            $return[$banner->position][] = $banner;
-        }
+            foreach ($data as $banner) {
+                $return[$banner->position][] = $banner;
+            }
 
-        return $return;
+            return $return;
+        });
+
+        return $data;
     }
 }

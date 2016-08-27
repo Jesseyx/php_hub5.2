@@ -109,6 +109,7 @@ class UsersController extends Controller
     public function votes($id)
     {
         $user = User::findOrFail($id);
+        // dd($user->votedTopics());
         $topics = $user->votedTopics()->orderBy('pivot_created_at', 'desc')->paginate(15);
 
         return view('users.votes', compact('user', 'topics'));

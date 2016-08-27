@@ -1,5 +1,5 @@
 {
-    "name": "laravel/laravel",
+    "name": "laravel/phphub5.2",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
@@ -31,7 +31,8 @@
         "dingo/api": "1.0.x@dev",
         "socialiteproviders/weixin-web": "^2.0",
         "jrean/laravel-user-verification": "2.*",
-        "naux/sendcloud": "^1.1"
+        "naux/sendcloud": "^1.1",
+        "smartisan/follow": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

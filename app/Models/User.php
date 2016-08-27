@@ -9,6 +9,7 @@ use App\Models\Traits\UserSocialiteHelper;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laracasts\Presenter\PresentableTrait;
+use Smartisan\Follow\FollowTrait;
 use Venturecraft\Revisionable\RevisionableTrait;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
@@ -46,6 +47,7 @@ class User extends Authenticatable
     protected $guarded = ['id', 'is_banned'];
 
     // for following
+    use FollowTrait;
 
     public static function boot()
     {
@@ -104,7 +106,7 @@ class User extends Authenticatable
     // 多态关联
     public function votedTopics()
     {
-        return $this->morphedByMany(Topic::class, 'votable', 'votes');
+        return $this->morphedByMany(Topic::class, 'votable', 'votes')->withPivot('created_at');
     }
 
     // scope

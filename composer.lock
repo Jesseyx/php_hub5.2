@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8a6212c2fba55e9a68883bbe73e48394",
-    "content-hash": "843da35688c7b5ab1557e2ddc455221f",
+    "hash": "9b83ba514eca008ac1a9023b486bc36a",
+    "content-hash": "9af75506f370c3da9b782d7330d49074",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1334,6 +1334,51 @@
             "time": "2016-08-23 13:03:29"
         },
         {
+            "name": "laravel/laravel",
+            "version": "v5.2.31",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/laravel.git",
+                "reference": "76b8ef720400b0c0bf4cdab39c354e8addef7dd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/laravel/laravel/76b8ef720400b0c0bf4cdab39c354e8addef7dd9.zip",
+                "reference": "76b8ef720400b0c0bf4cdab39c354e8addef7dd9",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.2.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0",
+                "symfony/css-selector": "2.8.*|3.0.*",
+                "symfony/dom-crawler": "2.8.*|3.0.*"
+            },
+            "type": "project",
+            "autoload": {
+                "classmap": [
+                    "database"
+                ],
+                "psr-4": {
+                    "App\\": "app/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The Laravel Framework.",
+            "keywords": [
+                "framework",
+                "laravel"
+            ],
+            "time": "2016-04-27 13:01:12"
+        },
+        {
             "name": "laravel/socialite",
             "version": "v2.0.18",
             "source": {
@@ -2627,6 +2672,47 @@
                 "laravel"
             ],
             "time": "2016-04-27 17:02:46"
+        },
+        {
+            "name": "smartisan/follow",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mohd-isa/follow.git",
+                "reference": "ea6e27d294262e5817fa8d23aa5724a92a96921f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/mohd-isa/follow/ea6e27d294262e5817fa8d23aa5724a92a96921f.zip",
+                "reference": "ea6e27d294262e5817fa8d23aa5724a92a96921f",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/laravel": ">= 5.1",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "laravel/laravel": "dev-develop",
+                "phpunit/phpunit": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Smartisan\\Follow\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohammed Isa",
+                    "email": "mohd.itcs@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 User Based System",
+            "time": "2016-05-06 20:42:21"
         },
         {
             "name": "socialiteproviders/manager",

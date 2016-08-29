@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActiveUser;
 use App\Models\Append;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\HotTopic;
 use App\Models\Link;
 use App\Models\Notification;
 use App\Models\SiteStatus;
 use App\Models\Topic;
 use App\Phphub\Core\CreatorListener;
+use App\Phphub\Handler\Exception\ImageUploadException;
 use App\Phphub\Markdown\Markdown;
 use App\Phphub\Notification\Notifier;
 use Illuminate\Http\Request;
@@ -27,14 +30,16 @@ class TopicsController extends Controller implements CreatorListener
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index(Topic $topic)
+    public function index(Request $request, Topic $topic)
     {
-        $filter = $topic->present()->getTopicFilter();
-        $topics = $topic->getTopicsWithFilter($filter, 40);
+        $topics = $topic->getTopicsWithFilter($request->get('filter'), 40);
         $banners = Banner::allByPosition();
         $links = Link::allFromCache();
 
-        return view('topics.index', compact('topics', 'banners', 'links'));
+        $active_users = ActiveUser::fetchAll();
+        $hot_topics = HotTopic::fetchAll();
+
+        return view('topics.index', compact('topics', 'banners', 'links', 'active_users', 'hot_topics'));
     }
 
     public function create(Request $request)
@@ -52,15 +57,23 @@ class TopicsController extends Controller implements CreatorListener
 
     public function show($id)
     {
-        $topic = Topic::findOrFail($id);
+        $topic = Topic::where('id', $id)->with('user', 'lastReplyUser')->first();
+
+        if ($topic->user->is_banned == 'yes') {
+            flash('你访问的文章已被屏蔽，有疑问请加微信：summer_charlie', 'error');
+            return redirect(route('topics.index'));
+        }
+
+        $randomExcellentTopics = $topic->getRandomExcellent();
         $replies = $topic->getRepliesWithLimit(config('phphub.replies_perpage'));
-        $category = $topic->category;
         $categoryTopics = $topic->getSameCategoryTopics();
+        $userTopics = $topic->byWhom($topic->user_id)->with('user')->recent()->limit(8)->get();
+        $votedUsers = $topic->votes()->orderBy('id', 'desc')->with('user')->get()->pluck('user');
 
         $topic->increment('view_count', 1);
 
         $banners = Banner::allByPosition();
-        return view('topics.show', compact('topic', 'replies', 'category', 'categoryTopics', 'banners'));
+        return view('topics.show', compact('topic', 'randomExcellentTopics', 'replies', 'categoryTopics', 'userTopics', 'votedUsers', 'banners'));
     }
 
     public function edit($id)
@@ -160,6 +173,7 @@ class TopicsController extends Controller implements CreatorListener
         $topic->is_excellent = $topic->is_excellent == 'yes' ? 'no' : 'yes';
         $topic->save();
 
+        // 发送提醒
         Notification::notify('topic_mark_excellent', Auth::user(), $topic->user, $topic);
 
         return response(['status' => 200, 'message' => lang('Operation succeeded.')]);
@@ -172,9 +186,6 @@ class TopicsController extends Controller implements CreatorListener
         
         $topic->order = $topic->order > 0 ? 0 : 999;
         $topic->save();
-
-        // 发送提醒
-        Notification::notify('topic_mark_excellent', Auth::user(), $topic->user, $topic);
 
         return response(['status' => 200, 'message' => lang('Operation succeeded.')]);
     }
@@ -194,36 +205,13 @@ class TopicsController extends Controller implements CreatorListener
     public function uploadImage(Request $request)
     {
         if ($file = $request->file('file')) {
-            $allowed_extensions = ['png', 'jpg', 'gif'];
-
-            if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
-                return ['error' => 'You may only upload png, jpg or gif.'];
+            try {
+                $upload_status = app('App\Phphub\Handler\ImageUploadHandler')->uploadImage($file);
+            } catch (ImageUploadException $exception) {
+                return ['error' => $exception->getMessage()];
             }
 
-            $fileName = $file->getClientOriginalName();
-            $extension  = $file->getClientOriginalExtension() ?: 'png';
-            $folderName = 'uploads/images/' . date('Ym', time()) . '/' . date('d', time()) . '/' . Auth::user()->id;
-            $destinationPath = public_path() . '/' . $folderName;
-
-            $safeName = str_random(10) . '.' . $extension;
-
-            $file->move($destinationPath, $safeName);
-
-            // If is not gif file, we will try to reduse the file size
-            if ($file->getClientOriginalExtension() != 'gif') {
-                // open an image file
-                $img = Image::make($destinationPath . '/' .$safeName);
-                // prevent possible upsizing
-                $img->resize(1440, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-
-                // finally we save the image as a new file
-                $img->save();
-            }
-
-            $data['filename'] = getUserStaticDomain() . $folderName .'/'. $safeName;
+            $data['filename'] = $upload_status['filename'];
 
             SiteStatus::newImage();
         } else {
@@ -247,7 +235,6 @@ class TopicsController extends Controller implements CreatorListener
     {
         // 发送通知
         flash(lang('Operation succeeded.'), 'success');
-        show_crx_hint();
 
         return redirect(route('topics.show', array($topic->id)));
     }

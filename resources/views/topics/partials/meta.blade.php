@@ -1,29 +1,35 @@
-<div class="meta inline-block">
+<div class="meta inline-block" >
+
     <a class="remove-padding-left" href="{{ route('categories.show', $topic->category->id) }}">
-        {{ $topic->category->name }}
+        <i class="fa fa-folder text-md" aria-hidden="true"></i> {{ $topic->category->name }}
     </a>
-    •
+    ⋅
     <a href="{{ route('users.show', $topic->user->id) }}">
         {{ $topic->user->name }}
     </a>
 
-    @if ($topic->user->present()->hasBadge())
-        <span class="label label-warning" style="position: relative;">
-            {{ $topic->user->present()->badgeName() }}
-        </span>
-    @endif
-    •
-    {{ lang('at') }} <abbr class="timeago" title="{{ $topic->created_at }}">{{ $topic->created_at }}</abbr>
-    •
+    ⋅
+    {{ lang('at') }} <abbr title="{{ $topic->created_at }}" class="timeago">{{ $topic->created_at }}</abbr>
+    ⋅
 
     @if (count($topic->lastReplyUser))
         {{ lang('Last Reply by') }}
-        <a href="{{ route('users.show', $topic->lastReplyUser->id) }}">
+        <a href="{{ route('users.show', [$topic->lastReplyUser->id]) }}">
             {{ $topic->lastReplyUser->name }}
         </a>
-        {{ lang('at') }} <abbr class="timeago" title="{{ $topic->updated_at }}">{{ $topic->updated_at }}</abbr>
+        {{ lang('at') }} <abbr title="{{ $topic->updated_at }}" class="timeago">{{ $topic->updated_at }}</abbr>
+        ⋅
     @endif
 
     {{ $topic->view_count }} {{ lang('Reads') }}
+
+    @if ($topic->source && in_array($topic->source, ['iOS', 'Android']))
+        ⋅
+        via
+        <a class="popover-with-html" href="https://phphub.org/topics/1531" target="_blank" data-content="来自手机客户端">
+            <i class="text-md fa fa-{{ $topic->source == 'iOS' ? 'apple' : 'android' }}" aria-hidden="true"></i> {{ $topic->source == 'iOS' ? 'iOS 客户端' : '安卓客户端' }}
+        </a>
+
+    @endif
 </div>
 <div class="clearfix"></div>

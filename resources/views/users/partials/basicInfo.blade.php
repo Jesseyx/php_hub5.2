@@ -1,4 +1,5 @@
 <div class="box">
+
     <div class="padding-sm user-basic-info">
         <div>
             <div class="media">
@@ -40,8 +41,8 @@
                             活跃于 <span class="timeago">{{ $user->last_actived_at }}</span>
                         </div>
                     @endif
-
                 </div>
+
             </div>
         </div>
 
@@ -73,29 +74,34 @@
                         </a>
                     </li>
                 @endif
+
                 @if ($user->weibo_link)
                     <li class="popover-with-html" data-content="{{ $user->weibo_name }}">
                         <a class="weibo" href="{{ $user->weibo_link }}" rel="nofollow" target="_blank"><i class="fa fa-weibo"></i> Weibo
                         </a>
                     </li>
                 @endif
+
                 @if ($user->wechat_qrcode)
                     <li class="popover-with-html" data-content="<img src='{{ $user->wechat_qrcode }}' style='width:100%'>">
                         <i class="fa fa-wechat"></i> WeChat
                     </li>
                 @endif
+
                 @if ($user->twitter_account)
                     <li class="popover-with-html" data-content="{{ $user->twitter_account }}">
                         <a class="twitter" href="https://twitter.com/{{ $user->twitter_account }}" rel="nofollow" target="_blank"><i class="fa fa-twitter"></i> Twitter
                         </a>
                     </li>
                 @endif
+
                 @if ($user->linkedin)
                     <li class="popover-with-html" data-content="点击查看 LinkedIn 个人资料">
                         <a class="linkedin" href="{{ $user->linkedin }}" rel="nofollow" target="_blank"><i class="fa fa-linkedin"></i> LinkedIn
                         </a>
                     </li>
                 @endif
+
                 @if ($user->personal_website)
                     <li class="popover-with-html" data-content="{{ $user->personal_website }}">
                         <a class="url" href="http://{{ $user->personal_website }}" rel="nofollow" target="_blank">
@@ -103,6 +109,7 @@
                         </a>
                     </li>
                 @endif
+
                 @if ($user->company)
                     <li class="popover-with-html" data-content="{{ $user->company }}"><i class="fa fa-users"></i> {{ lang('Company') }}</li>
                 @endif
@@ -141,6 +148,7 @@
           @include('users.partials.login_QR')
         @endif --}}
     </div>
+
 </div>
 
 <div class="box text-center">

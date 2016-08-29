@@ -12,14 +12,13 @@ use App\Http\Requests;
 
 class CategoriesController extends Controller
 {
-    public function show($id, Topic $topic)
+    public function show(Request $request, $id, Topic $topic)
     {
         $category = Category::findOrFail($id);
-        $filter = $topic->present()->getTopicFilter();
-        $topics = $topic->getCategoryTopicsWithFilter($filter, $id);
+        $topics = $topic->getCategoryTopicsWithFilter($request->get('filter'), $id);
         $banners = Banner::allByPosition();
         $links = Link::allFromCache();
 
-        return view('topics.index', compact('topics', 'category', 'banners', 'links'));
+        return view('topics.index', compact('topics', 'category', 'links', 'banners'));
     }
 }

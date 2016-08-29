@@ -48,6 +48,7 @@ Route::get('/users/{id}/topics', 'UsersController@topics')->name('users.topics')
 Route::get('/users/{id}/following', 'UsersController@following')->name('users.following');
 Route::get('/users/{id}/followers', 'UsersController@followers')->name('users.followers');
 Route::get('/users/{id}/votes', 'UsersController@votes')->name('users.votes');
+Route::post('/users/follow/{id}', 'UsersController@doFollow')->name('users.doFollow');
 
 // Route::get('/github-card', 'UsersController@githubCard')->name('users.github-card');
 // Route::get('/github-api-proxy/users/{username}', 'UsersController@githubApiProxy')->name('users.github-api-proxy');
@@ -84,6 +85,9 @@ Route::group(['before' => 'auth'], function () {
     Route::post('/topics/{id}/downvote', 'TopicsController@downvote')->name('topics.downvote');
     Route::post('/replies/{id}/vote', 'RepliesController@vote')->name('replies.vote');
 });
+
+# ------------------ Site ------------------------
+Route::get('/sites', 'SitesController@index')->name('sites.index');
 
 # ------------------ Admin Route ------------------------
 // 这里的 before 没什么作用了, before 是 4.2 的过滤器，5.2 已经被 middleware 替换了

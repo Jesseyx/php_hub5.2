@@ -20,6 +20,9 @@ class Kernel extends ConsoleKernel
         Commands\ESTDatabaseResetCommand::class,
         Commands\ESTInstallCommand::class,
         Commands\ESTReinstallCommand::class,
+
+        Commands\CalculateActiveUser::class,
+        Commands\CalculateHotTopic::class,
     ];
 
     /**

@@ -7,7 +7,9 @@
 @section('content')
     <div class="topic_create">
         <div class="col-md-8 main-col">
+
             <div class="reply-box form box-block">
+
                 <div class="alert alert-warning">
                     {{ lang('be_nice') }}
                 </div>
@@ -20,18 +22,26 @@
                     {{ Form::open(['url' => route('topics.store'), 'id' => 'topic-create-form', 'accept-charset' => 'UTF-8']) }}
                 @endif
                     <div class="form-group">
-                        <select class="selectpicker form-control" name="category_id" >
-                            <option value="" disabled{{ count($category) !== 0 ? ' selected' : ''}}>
+                        <select id="category-select" class="selectpicker form-control" name="category_id" >
+                            <option value="" disabled{{ count($category) == 0 ? ' selected' : ''}}>
                                 {{ lang('Pick a category') }}
                             </option>
 
                             @foreach($categories as $value)
-                                <option value="{{ $value->id }}"{{ (count($category) != 0 && $category->id == $value->id) ? ' selected' : '' }}>
-                                    {{ $value->name }}
-                                </option>
+                                @if($value->id != 2 || Auth::user()->can('compose_announcement'))
+                                    <option value="{{ $value->id }}"{{ (count($category) != 0 && $category->id == $value->id) ? ' selected' : '' }}>
+                                        {{ $value->name }}
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
+
+                    @foreach($categories as $cat)
+                        <div class="category-hint alert alert-warning category-{{ $cat->id }}{{ count($category) && $cat->id == $category->id ? ' animated rubberBand ' : ''}}" style="{{ (count($category) && $cat->id == $category->id) ? '' : 'display: none;' }}">
+                            {!! $cat->description !!}
+                        </div>
+                    @endforeach
 
                     <div class="form-group">
                         {{ Form::text('title', null, ['id' => 'topic-title', 'class' => 'form-control', 'placeholder' => lang('Please write down a topic')]) }}
@@ -47,24 +57,13 @@
                         {{ Form::submit(lang('Publish'), ['id' => 'topic-create-submit', 'class' => 'btn btn-primary']) }}
                     </div>
 
-                    <div class="box preview markdown-body" id="preview-box" style="display: none;"></div>
+                    <div id="preview-box" class="box preview markdown-body" style="display: none;"></div>
                 {{ Form::close() }}
             </div>
+
         </div>
 
         <div class="col-md-4 side-bar">
-            @if ($category)
-                <div class="panel panel default corner-radius help-box">
-                    <div class="panel-heading text-center">
-                        <h3 class="panel-title">
-                            {{ lang('Current Category') }} : {{ $category->name }}
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        {{ $category->description }}
-                    </div>
-                </div>
-            @endif
 
             <div class="panel panel-default corner-radius help-box">
                 <div class="panel-heading text-center">
@@ -94,6 +93,22 @@
                     </ul>
                 </div>
             </div>
+
         </div>
     </div>
+@stop
+
+@section('scripts')
+    <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            $('#category-select').on('change', function() {
+                var current_cid = $(this).val();
+                $('.category-hint').hide();
+                $('.category-'+current_cid).fadeIn();
+            });
+        });
+
+    </script>
 @stop

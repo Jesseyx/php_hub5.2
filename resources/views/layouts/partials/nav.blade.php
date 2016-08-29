@@ -9,8 +9,8 @@
                 <li class="{{ request()->is('topics*') && !request()->is('categories*') ? 'active' : '' }}">
                     <a href="{{ route('topics.index') }}" target="_blank">{{ lang('Topics') }}</a>
                 </li>
-                <li class="{{ request()->is('categories/6') ? 'active' : '' }}">
-                    <a href="{{ route('categories.show', [6, 'filter' => 'recent']) }}">教程</a>
+                <li class="{{ request()->is('categories/5') ? 'active' : '' }}">
+                    <a href="{{ route('categories.show', [5, 'filter' => 'recent']) }}">教程</a>
                 </li>
                 <li class="{{ request()->is('categories/1') ? 'active' : '' }}">
                     <a href="{{ route('categories.show', 1) }}">{{ lang('Jobs') }}</a>
@@ -19,7 +19,7 @@
                     <a href="{{ route('categories.show', 3) }}">{{ lang('Q&A') }}</a>
                 </li>
                 <li class="{{ request()->is('sites') ? 'active' : '' }}">
-                    <a href="{{ route('categories.show', 4) }}">{{ lang('Sites') }}</a>
+                    <a href="{{ route('sites.index') }}">{{ lang('Sites') }}</a>
                 </li>
                 <li class="{{ request()->is('topics/2541') ? ' active' : '' }}">
                     <a href="https://phphub.org/topics/2541">Wiki</a>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\SendNotifyMail;
 use App\Phphub\Presenters\NotificationPresenter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,12 @@ class Notification extends Model
     }
 
     public function fromUser()
+    {
+        return $this->belongsTo(User::class, 'from_user_id');
+    }
+
+    // for api
+    public function from_user()
     {
         return $this->belongsTo(User::class, 'from_user_id');
     }
@@ -74,9 +81,10 @@ class Notification extends Model
      * Create a notification
      * @param  [type] $type     currently have 'at', 'new_reply', 'attention', 'append'
      * @param  User   $fromUser come from who
-     * @param  array   $users   to who, array of users
+     * @param  array  $users   to who, array of users
      * @param  Topic  $topic    cuurent context
      * @param  Reply  $reply    the content
+     * @param  Reply  $content  the content
      * @return [type]           none
      */
     public static function batchNotify($type, User $fromUser, $users, Topic $topic, Reply $reply = null, $content = null)
@@ -105,6 +113,10 @@ class Notification extends Model
 
         if (count($data)) {
             Notification::insert($data);
+
+            foreach ($users as $toUser) {
+                dispatch(new SendNotifyMail($type, $fromUser, $toUser, $topic, $reply, $content));
+            }
         }
 
         foreach ($data as $value) {
@@ -112,13 +124,13 @@ class Notification extends Model
         }
     }
 
-    public static function notify($type, User $fromUser, User $toUser, Topic $topic, Reply $reply = null)
+    public static function notify($type, User $fromUser, User $toUser, Topic $topic = null, Reply $reply = null)
     {
         if ($fromUser->id == $toUser->id) {
             return;
         }
 
-        if (Notification::isNotified($fromUser->id, $toUser->id, $topic->id, $type)) {
+        if ($topic && Notification::isNotified($fromUser->id, $toUser->id, $topic->id, $type)) {
             return;
         }
 
@@ -127,7 +139,7 @@ class Notification extends Model
         $data = [
             'from_user_id' => $fromUser->id,
             'user_id'      => $toUser->id,
-            'topic_id'     => $topic->id,
+            'topic_id'     => $topic ? $topic->id : 0,
             'reply_id'     => $reply ? $reply->id : 0,
             'body'         => $reply ? $reply->body : '',
             'type'         => $type,
@@ -138,6 +150,8 @@ class Notification extends Model
         $toUser->increment('notification_count', 1);
 
         Notification::insert([$data]);
+
+        dispatch(new SendNotifyMail($type, $fromUser, $toUser, $topic, $reply));
 
         self::pushNotification($data);
     }
@@ -164,7 +178,7 @@ class Notification extends Model
         }
 
         $from_user_name = $notification->fromUser->name;
-        $topic_title    = $notification->topic->title;
+        $topic_title    = $notification->topic ? $notification->topic->title : '关注了你';
 
         $msg = $from_user_name
                 . ' • ' . $notification->present()->lableUp()

@@ -14,7 +14,7 @@
         <div class="main-col col-md-9 left-col">
 
             @if ($user->introduction)
-                <div class="box text-center">{{{ $user->introduction }}}</div>
+                <div class="box text-center">{{ $user->introduction }}</div>
             @endif
 
             @if ($user->is_banned == 'yes')

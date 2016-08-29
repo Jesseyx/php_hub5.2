@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LinksTableSeeder::class);
         $this->call(FollowersTableSeeder::class);
         $this->call(SitesTableSeeder::class);
+        $this->call(ActiveUsersTableSeeder::class);
+        $this->call(HotTopicsTableSeeder::class);
     }
 }

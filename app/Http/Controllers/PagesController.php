@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -75,5 +76,12 @@ class PagesController extends Controller
     public function sitemap()
     {
         return app('App\Phphub\Sitemap\Builder')->render();
+    }
+
+    public function hallOfFames()
+    {
+        $users = User::hallOfFamesUsers();
+
+        return view('pages.hall_of_fame', compact('users'));
     }
 }

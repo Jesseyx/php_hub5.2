@@ -27,7 +27,7 @@ class Notifier
         Notification::batchNotify(
             'attention',
             $fromUser,
-            $this->removeDuplication($topic->attentedBy),
+            $this->removeDuplication($topic->votedBy()),
             $topic,
             $reply
         );
@@ -59,13 +59,24 @@ class Notifier
 
         // Notify attented users，向关注的人发送提醒
         Notification::batchNotify(
-            'attention_append',
+            'vote_append',
             $fromUser,
-            $this->removeDuplication($topic->attentedBy),
+            $this->removeDuplication($topic->votedBy()),
             $topic,
             null,
             $append->content
         );
+    }
+
+    public function newFollowNotify(User $fromUser, User $toUser)
+    {
+        Notification::notify(
+            'follow',
+            $fromUser,
+            $toUser,
+            null,
+            null,
+            null);
     }
 
     // in case of a user get a lot of the same notification

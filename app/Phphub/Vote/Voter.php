@@ -29,6 +29,7 @@ class Voter
         }
     }
 
+    // 下面这个方法貌似用不到了
     public function topicDownVote(Topic $topic)
     {
         if ($topic->votes()->byWhom(Auth::id())->withType('downvote')->count()) {
@@ -50,7 +51,7 @@ class Voter
     public function replyUpVote(Reply $reply)
     {
         if (Auth::id() == $reply->user_id) {
-            return dd(lang('Can not vote your feedback'));
+            return flash(lang('Can not vote your feedback'), 'warning');
         }
         
         $return = [];

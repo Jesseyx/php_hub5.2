@@ -3,10 +3,8 @@
         @foreach($banners['website_bottom'] as $banner)
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <div class="item">
-                    <a href="{{ $banner->link ?: 'javascript:;' }}" target="{{ $banner->target }}">
-                        <p class="img">
-                            <span style="background-image: url({{ $banner->image_url }});"></span>
-                        </p>
+                    <a href="{{ $banner->link ?: 'javascript:;' }}" target="{{$banner->target}}">
+                        <p class="img"><span style="background-image: url({{ $banner->image_url }})"></span></p>
                         <p class="caption">{{ $banner->title }}</p>
                     </a>
                 </div>

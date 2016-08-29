@@ -61,9 +61,9 @@ $factory->define(App\Models\Site::class, function (Generator $faker) {
     return [
         'title'             => $faker->userName,
         'description'       => $faker->sentence,
-        'type'              => $faker->randomElement(['site', 'blog', 'weibo', 'dev_service']),
+        'type'              => $faker->randomElement(['site', 'blog', 'weibo', 'dev_service', 'site_foreign']),
         'link'              => $faker->url,
-        'favicon'           => '/assets/images/favicon.png',
+        'favicon'           => 'assets/images/favicon.png',
         'created_at'        => Carbon::now()->toDateTimeString(),
         'updated_at'        => Carbon::now()->toDateTimeString(),
     ];

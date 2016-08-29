@@ -7,6 +7,7 @@ use App\Models\Topic;
 use App\Models\User;
 use App\Phphub\Github\GithubUserDataReader;
 use App\Phphub\Handler\Exception\ImageUploadException;
+use Auth;
 use Cache;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,10 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->is_banned = $user->is_banned == 'yes' ? 'no' : 'yes';
         $user->save();
+
+        // 用户被屏蔽后屏蔽用户所有内容，解封时解封所有内容
+        $user->topics()->update(['is_blocked' => $user->is_banned]);
+        $user->replies()->update(['is_blocked' => $user->is_banned]);
 
         return redirect(route('users.show', $id));
     }
@@ -190,5 +195,22 @@ class UsersController extends Controller
         $this->authorize('update', $user);
 
         return view('users.edit_social_binding', compact('user'));
+    }
+
+    public function doFollow($id)
+    {
+        $user = User::findOrFail($id);
+
+        if (Auth::user()->isFollowing($id)) {
+            Auth::user()->unfollow($id);
+            $user->decrement('follower_count', 1);
+        } else {
+            Auth::user()->follow($id);
+            $user->increment('follower_count', 1);
+            app('App\Phphub\Notification\Notifier')->newFollowNotify(Auth::user(), $user);
+        }
+
+        flash(lang('Operation succeeded.'), 'success');
+        return redirect(route('users.show', $id));
     }
 }

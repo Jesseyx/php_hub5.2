@@ -6,6 +6,7 @@ use App\Jobs\SendActivateMail;
 use App\Models\Traits\UserAvatarHelper;
 use App\Models\Traits\UserRememberTokenHelper;
 use App\Models\Traits\UserSocialiteHelper;
+use Cache;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laracasts\Presenter\PresentableTrait;
@@ -115,6 +116,13 @@ class User extends Authenticatable
         return $query->orderBy('created_at', 'desc');
     }
 
+    public function scopeIsRole($query, $role)
+    {
+        return $query->whereHas('roles', function ($query) use ($role) {
+            $query->where('name', $role);
+        });
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -123,4 +131,13 @@ class User extends Authenticatable
     /* protected $hidden = [
         'password', 'remember_token',
     ]; */
+
+    public static function hallOfFamesUsers()
+    {
+        $data = Cache::remember('phphub_hall_of_fames', 60, function(){
+            return User::isRole('HallOfFame')->orderBy('last_actived_at', 'desc')->get();
+        });
+
+        return $data;
+    }
 }

@@ -17,7 +17,7 @@ class RepliesController extends Controller implements CreatorListener
 
     public function store(Requests\StoreReplyRequest $request)
     {
-        return app('App\Phphub\Creators\replyCreator')->create($this, $request->except('_token'));
+        return app('App\Phphub\Creators\ReplyCreator')->create($this, $request->except('_token'));
     }
 
     public function vote($id)
@@ -55,21 +55,31 @@ class RepliesController extends Controller implements CreatorListener
      */
     public function creatorFailed($errors)
     {
-        return response([
-            'status'  => 500,
-            'message' => lang('Operation failed!'),
-        ]);
+        if (request()->ajax()) {
+            return response([
+                'status'  => 500,
+                'message' => lang('Operation failed!'),
+            ]);
+        } else {
+            flash(lang('Operation failed!'), 'error');
+            return redirect()->back();
+        }
     }
 
     public function creatorSucceed($reply)
     {
         $reply->user->image_url = $reply->user->present()->gravatar;
 
-        return response([
-            'status' => 200,
-            'message' => lang('Operation succeeded!'),
-            'reply' => $reply,
-            'manage_topics' => 'no',
-        ]);
+        if (request()->ajax()) {
+            return response([
+                'status' => 200,
+                'message' => lang('Operation succeeded!'),
+                'reply' => $reply,
+                'manage_topics' => $reply->user->may('manage_topics') ? 'yes' : 'no',
+            ]);
+        } else {
+            flash(lang('Operation succeeded.'), 'success');
+            return redirect()->route('topics.show', [request('topic_id'), '#last-reply']);
+        }
     }
 }

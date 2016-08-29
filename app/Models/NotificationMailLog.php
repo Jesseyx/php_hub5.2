@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Follower extends Model
+class NotificationMailLog extends Model
 {
-    //
+    protected $guarded = ['id'];
 }

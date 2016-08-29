@@ -9,6 +9,9 @@ use Venturecraft\Revisionable\RevisionableTrait;
 
 class Link extends Model
 {
+    // 不想被赋值的属性
+    protected $guarded = ['id'];
+
     /**
      *  友情链接，分类和文章首页用到
      */
@@ -26,7 +29,7 @@ class Link extends Model
         $cache_name = 'links';
 
         return Cache::remember($cache_name, $expire, function () {
-            return self::all();
+            return self::where('is_enabled', 'yes')->get();
         });
     }
 }

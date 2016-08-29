@@ -67,3 +67,8 @@ function get_user_static_domain()
 {
     return config('phphub.user_static') ?: config('phphub.url');
 }
+
+function get_platform()
+{
+    return request()->header('X-Client-Platform');
+}

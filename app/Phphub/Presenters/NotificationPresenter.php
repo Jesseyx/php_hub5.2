@@ -45,8 +45,12 @@ class NotificationPresenter extends Presenter
                 $label = lang('Commented topic has new update:');
                 break;
 
-            case 'attention_append':
+            case 'vote_append':
                 $label = lang('Attented topic has new update:');
+                break;
+
+            case 'follow':
+                $label = lang('Someone following you');
                 break;
 
             default:

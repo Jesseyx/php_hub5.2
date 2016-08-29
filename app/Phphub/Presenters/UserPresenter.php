@@ -67,4 +67,10 @@ class UserPresenter extends Presenter
     {
         return Route::currentRouteName() == $anchor ? 'active' : '';
     }
+
+    public function followingUsersJson()
+    {
+        $users = \Auth::user()->followings()->lists('name');
+        return \GuzzleHttp\json_encode($users);
+    }
 }

@@ -72,3 +72,29 @@ function get_platform()
 {
     return request()->header('X-Client-Platform');
 }
+
+/**
+ * @param $value
+ * @param bool $reverse 颠倒
+ * @return string
+ */
+function admin_enum_style_output($value, $reverse = false)
+{
+    if ($reverse) {
+        $class = ($value === true || $value == 'yes') ? 'danger' : 'success';
+    } else {
+        $class = ($value === true || $value == 'yes') ? 'success' : 'danger';
+    }
+
+    return '<span class="label bg-'.$class.'">'.$value.'</span>';
+}
+
+function model_link($title, $model, $id)
+{
+    return '<a href="' . model_url($model, $id). '" target="_blank">' . $title . '</a>';
+}
+
+function model_url($model, $id)
+{
+    return env('APP_URL') . "/$model/$id";
+}

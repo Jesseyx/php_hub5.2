@@ -49,9 +49,9 @@ return [
         'logs' => [
             'title'  => '操作的 Log',
             'output' => function ($value, $model) {
-                $html = "<div style='text-align:left;'>
-                            <div style='text-indent:2em'>'old_value'&nbsp;&nbsp;&nbsp;=> '$model->old_value',</div>
-                            <div style='text-indent:2em'>'new_value' => '$model->new_value'</div>
+                $html = "<div style='text-align: left;'>
+                            <div style='text-indent: 2em;'>'old_value'&nbsp;&nbsp;&nbsp;=> '$model->old_value',</div>
+                            <div style='text-indent: 2em;'>'new_value' => '$model->new_value'</div>
                         </div>";
                 return $html;
             }

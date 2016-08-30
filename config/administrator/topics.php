@@ -16,22 +16,32 @@ return [
         'title' => [
             'title'    => '标题',
             'sortable' => false,
-        ],
-
-        'order' => [
-            'title'    => '排序',
+            'output'   => function ($value, $model) {
+                return '<div style="max-width: 260px">' . model_link($value, 'topics', $model->id) . '</div>';
+            },
         ],
 
         'user' => [
             'title'    => '用户',
             'sortable' => false,
             'output'   => function ($value, $model) {
-                return admin_link(
-                    $model->user->name,
-                    'users',
-                    $model->user_id
-                );
+                $avatar = $model->user->present()->gravatar();
+                $value = empty($avatar) ? 'N/A' : '<img src="' . $avatar . '" style="height: 44px; width: 44px;"> ' . $model->user->name;
+
+                return model_link($value, 'users', $model->id);
             },
+        ],
+
+        'excerpt' => [
+            'title'    => '文摘',
+            'sortable' => false,
+            'output'   => function ($value, $model) {
+                return '<div style="max-width: 320px;">' . model_link($value, 'topics', $model->id) . '</div>';
+            },
+        ],
+
+        'order' => [
+            'title'    => '排序',
         ],
 
         'category' => [
@@ -47,27 +57,23 @@ return [
         ],
 
         'is_excellent' => [
-            'title'    => '是否是推荐',
+            'title'    => '推荐？',
         ],
 
         'is_blocked' => [
-            'title'    => '是否被屏蔽',
+            'title'    => '屏蔽？',
         ],
 
         'reply_count' => [
-            'title'    => '批量数量',
+            'title'    => '评论',
         ],
 
         'view_count' => [
-            'title'    => '查看数量',
-        ],
-
-        'favorite_count' => [
-            'title'    => '收藏数量',
+            'title'    => '查看',
         ],
 
         'vote_count' => [
-            'title'    => '投票数量',
+            'title'    => '投票',
         ],
 
         'operation' => [
@@ -89,7 +95,7 @@ return [
             'type'               => 'relationship',
             'name_field'         => 'name',
             'autocomplete'       => true,
-            'search_fields'      => array("CONCAT(id, ' ', name)"),
+            'search_fields'      => ["CONCAT(id, ' ', name)"],
             'options_sort_field' => 'id',
         ],
 
@@ -97,7 +103,7 @@ return [
             'title'              => '分类',
             'type'               => 'relationship',
             'name_field'         => 'name',
-            'search_fields'      => array("CONCAT(id, ' ', name)"),
+            'search_fields'      => ["CONCAT(id, ' ', name)"],
             'options_sort_field' => 'id',
         ],
 
@@ -132,19 +138,15 @@ return [
         ],
 
         'reply_count' => [
-            'title'    => '批量数量',
+            'title'    => '评论',
         ],
 
         'view_count' => [
-            'title'    => '查看数量',
-        ],
-
-        'favorite_count' => [
-            'title'    => '收藏数量',
+            'title'    => '查看',
         ],
 
         'vote_count' => [
-            'title'    => '投票数量',
+            'title'    => '投票',
         ],
     ],
 
@@ -158,7 +160,7 @@ return [
             'type'               => 'relationship',
             'name_field'         => 'name',
             'autocomplete'       => true,
-            'search_fields'      => array("CONCAT(id, ' ', name)"),
+            'search_fields'      => ["CONCAT(id, ' ', name)"],
             'options_sort_field' => 'id',
         ],
 
@@ -166,7 +168,7 @@ return [
             'title'              => '分类',
             'type'               => 'relationship',
             'name_field'         => 'name',
-            'search_fields'      => array("CONCAT(id, ' ', screen_name)"),
+            'search_fields'      => ["CONCAT(id, ' ', screen_name)"],
             'options_sort_field' => 'id',
         ],
 
@@ -185,7 +187,6 @@ return [
                 'yes' => '是',
                 'no'  => '否',
             ],
-            'value' => 'no',
         ],
 
         'is_blocked' => [
@@ -195,13 +196,12 @@ return [
                 'yes' => '是',
                 'no'  => '否',
             ],
-            'value' => 'no',
         ],
 
         'view_count' => [
             'type'                => 'number',
             'title'               => '查看次数',
-            'thousands_separator' => ',', //optional, defaults to ','
+            'thousands_separator' => ',',   //optional, defaults to ','
             'decimal_separator'   => '.',   //optional, defaults to '.'
         ],
     ],

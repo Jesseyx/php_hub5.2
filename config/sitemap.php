@@ -2,7 +2,7 @@
 
 /* Simple configuration file for Laravel Sitemap package */
 return [
-	'use_cache'			=> 	false,
+	'use_cache'			=> 	true,
 	'cache_key'			=> 	'laravel-sitemap.' . config('app.url'),
 	'cache_duration'	=> 	3600,
 	'escaping'			=> 	true,
@@ -13,7 +13,7 @@ return [
 	'custom'			=>  [
 		'topics' => [
 			'priority' => '0.9',
-			'freq'     => 'weekly',
+			'freq'     => 'daily',
 			'lastMod'  => 'created_at',
 		],
 		'categories' => [

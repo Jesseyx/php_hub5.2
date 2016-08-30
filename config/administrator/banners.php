@@ -49,7 +49,7 @@ return [
             'title'    => '描述',
             'sortable' => false,
             'output'   => function ($value, $model) {
-                return $value ? "<p style='width:250px'>$value</p>" : 'N/A';
+                return $value ? "<p style='width: 250px;'>$value</p>" : 'N/A';
             },
         ],
 
@@ -70,6 +70,12 @@ return [
     'edit_fields' => [
         'position' => [
             'title' => '位置',
+            'type'     => 'enum',
+            'options'  => [
+                'website_top' => '友站',
+                'footer-sponsor'  => '页脚赞助商',
+                'sidebar-sponsor'  => '右边栏赞助商',
+            ],
         ],
 
         'title' => [

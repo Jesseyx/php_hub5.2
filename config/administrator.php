@@ -28,7 +28,7 @@ return array(
 	 *
 	 * @type string
 	 */
-	'title' => 'PhpAdmin',
+	'title' => 'PHPHub 管理后台',
 
 	/**
 	 * The path to your model config directory
@@ -80,6 +80,8 @@ return array(
 
 		'站点管理' => [
 			'banners',
+			'links',
+			'sites',
 			'site_statuses',
 			'revisions',			// Model 的变更日志
 		],

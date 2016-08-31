@@ -29,6 +29,11 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+
+            // 应该放到这里
+            \App\Http\Middleware\CheckUserIsItBanned::class,
+            \App\Http\Middleware\RecordLastActivedTime::class,
+            \Spatie\Pjax\Middleware\FilterIfPjax::class,
         ],
 
         'api' => [
@@ -49,6 +54,10 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
         'admin_auth' => \App\Http\Middleware\AdminAuth::class,
+        'verified_email' => \App\Http\Middleware\RequireVerifiedEmail::class,
+        // 限制 Web 内容只能是 web 访问
+        'restrict_web_access' => \App\Http\Middleware\RestrictWebAccess::class,
     ];
 }

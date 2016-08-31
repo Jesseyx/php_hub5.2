@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendActivateMail;
 use App\Models\Reply;
 use App\Models\Topic;
 use App\Models\User;
@@ -17,7 +18,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['edit', 'update', 'destroy']]);
+        $this->middleware('auth', ['edit', 'update', 'destroy', 'doFollow', 'editAvatar', 'updateAvatar', 'editEmailNotify', 'updateEmailNotify', 'emailVerificationRequired']);
     }
 
     public function index()
@@ -60,9 +61,16 @@ class UsersController extends Controller
         return redirect(route('users.edit', $id));
     }
 
+    public function destroy($id)
+    {
+
+    }
+
     public function blocking($id)
     {
         $user = User::findOrFail($id);
+        $this->authorize('blocking', $user);
+        
         $user->is_banned = $user->is_banned == 'yes' ? 'no' : 'yes';
         $user->save();
 
@@ -111,6 +119,14 @@ class UsersController extends Controller
         return view('users.following', compact('user', 'users'));
     }
 
+    public function followers($id)
+    {
+        $user = User::findOrFail($id);
+        $users = $user->followers()->orderBy('id', 'desc')->paginate(15);
+
+        return view('users.followers', compact('user', 'users'));
+    }
+
     public function votes($id)
     {
         $user = User::findOrFail($id);
@@ -134,10 +150,16 @@ class UsersController extends Controller
 
         $user_info = (new GithubUserDataReader())->getDataFromUserName($user->github_name);
 
+        // Refresh the GitHub card proxy cache.
+        $cache_name = 'github_api_proxy_user_'.$user->github_name;
+        Cache::put($cache_name, $user_info, 1440);
+
         // Refresh the avatar cache.
         $user->image_url = $user_info['avatar_url'];
-        // 缓存头像并保存
         $user->cacheAvatar();
+        $user->save();
+
+        flash(lang('Refresh cache success'), 'success');
 
         return redirect(route('users.edit', $id));
     }
@@ -212,5 +234,36 @@ class UsersController extends Controller
 
         flash(lang('Operation succeeded.'), 'success');
         return redirect(route('users.show', $id));
+    }
+    
+    public function emailVerificationRequired()
+    {
+        if (Auth::user()->verified) {
+            return redirect()->intended('/');
+        }
+        return view('users.emailVerificationRequired');
+    }
+
+    public function sendVerificationMail()
+    {
+        $user = Auth::user();
+
+        $cache_key = 'send_activite_mail_' . $user->id;
+
+        if (Cache::has($cache_key)) {
+            flash(lang('The mail send failed! Please try again in 60 seconds.', ['seconds' => (Cache::get($cache_key) - time())]), 'error');
+        } else {
+            if (!$user->email) {
+                flash(lang('The mail send failed! Please fill in your email address first.'), 'error');
+            } else {
+                if (!$user->verified) {
+                    dispatch(new SendActivateMail($user));
+                    flash(lang('The mail sent successfully.'), 'success');
+                    Cache::put($cache_key, time() + 60, 1);
+                }
+            }
+        }
+
+        return redirect()->intended('/');
     }
 }

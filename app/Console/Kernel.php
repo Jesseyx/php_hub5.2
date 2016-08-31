@@ -23,6 +23,8 @@ class Kernel extends ConsoleKernel
 
         Commands\CalculateActiveUser::class,
         Commands\CalculateHotTopic::class,
+        Commands\ClearUserData::class,
+        Commands\SyncUserActivedTime::class,
     ];
 
     /**
@@ -39,5 +41,9 @@ class Kernel extends ConsoleKernel
         // 定时任务, 数据库定时备份和清除
         $schedule->command('backup:run --only-db')->cron('0 */4 * * * *');
         $schedule->command('backup:clean')->daily()->at('00:10');
+
+        $schedule->command('phphub:calculate-active-user')->everyTenMinutes();
+        $schedule->command('phphub:calculate-hot-topic')->everyTenMinutes();
+        $schedule->command('phphub:sync-user-actived-time')->everyTenMinutes();
     }
 }

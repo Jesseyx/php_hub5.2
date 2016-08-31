@@ -28,4 +28,9 @@ class UserPolicy
     {
         return $currentUser->may('manage_users') || $currentUser->id == $user->id;
     }
+
+    public function blocking(User $currentUser, User $user)
+    {
+        return $currentUser->may('manage_users');
+    }
 }

@@ -7,6 +7,7 @@ use App\Models\Traits\UserAvatarHelper;
 use App\Models\Traits\UserRememberTokenHelper;
 use App\Models\Traits\UserSocialiteHelper;
 use Cache;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laracasts\Presenter\PresentableTrait;
@@ -139,5 +140,20 @@ class User extends Authenticatable
         });
 
         return $data;
+    }
+
+    public function recordLastActivedAt()
+    {
+        $now = Carbon::now()->toDateTimeString();
+
+        $update_key = config('phphub.actived_time_for_update');
+        $update_data = Cache::get($update_key);
+        $update_data[$this->id] = $now;
+        Cache::forever($update_key, $update_data);
+
+        $show_key = config('phphub.actived_time_data');
+        $show_data = Cache::get($show_key);
+        $show_data[$this->id] = $now;
+        Cache::forever($show_key, $show_data);
     }
 }

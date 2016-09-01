@@ -63,7 +63,7 @@ class User extends Authenticatable
         });
 
         static::deleted(function ($user) {
-            
+            \Artisan::call('phphub:clear-user-data', ['user_id' => $user->id]);
         });
     }
 
@@ -133,6 +133,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ]; */
 
+    /**
+     * Attribute
+     */
+    public function getIntroductionAttribute($value)
+    {
+        return str_limit($value, 68);
+    }
+
+    public function getPersonalWebsiteAttribute($value)
+    {
+        return str_replace(['https://', 'http://'], '', $value);
+    }
+
     public static function hallOfFamesUsers()
     {
         $data = Cache::remember('phphub_hall_of_fames', 60, function(){
@@ -142,6 +155,11 @@ class User extends Authenticatable
         return $data;
     }
 
+    /**
+     * ----------------------------------------
+     * UserInterface
+     * ----------------------------------------
+     */
     public function recordLastActivedAt()
     {
         $now = Carbon::now()->toDateTimeString();

@@ -41,4 +41,9 @@ class Role extends EntrustRole
             return DB::table('roles')->get();
         });
     }
+
+    public function allUsers()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

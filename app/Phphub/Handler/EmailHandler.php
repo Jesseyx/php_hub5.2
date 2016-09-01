@@ -35,7 +35,6 @@ class EmailHandler
 
     public function sendActivateMail(User $user)
     {
-        echo date('H:i:s') . PHP_EOL;
         UserVerification::generate($user);
 
         $token = $user->verification_token;

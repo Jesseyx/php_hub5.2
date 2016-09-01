@@ -28,6 +28,15 @@ class TopicPresenter extends Presenter
         return 'href="' . $link . '"' . $selected;
     }
 
+    public function voteState($vote_type)
+    {
+        if ($this->votes()->ByWhom(Auth::id())->WithType($vote_type)->count()) {
+            return 'active';
+        } else {
+            return;
+        }
+    }
+
     public function replyFloorFromIndex($index)
     {
         $index += 1;

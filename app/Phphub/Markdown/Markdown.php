@@ -24,7 +24,7 @@ class Markdown
 
     public function convertMarkdownToHtml($markdown)
     {
-        $convertedHtml = $this->markdownParser->text($markdown);
+        $convertedHtml = $this->markdownParser->setBreaksEnabled(true)->text($markdown);
         $convertedHtml = Purifier::clean($convertedHtml, 'user_topic_body');
 
         $convertedHtml = str_replace("<pre><code>", '<pre><code class=" language-php">', $convertedHtml);

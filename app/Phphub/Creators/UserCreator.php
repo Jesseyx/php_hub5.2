@@ -5,6 +5,12 @@ namespace App\Phphub\Creators;
 use App\Models\User;
 use App\Phphub\Listeners\UserCreatorListener;
 
+/**
+* This class can call the following methods on the observer object:
+*
+* userValidationError($errors)
+* userCreated($user)
+*/
 class UserCreator
 {
     protected $userModel;

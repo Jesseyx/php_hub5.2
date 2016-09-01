@@ -31,7 +31,6 @@ class ReplyCreator
         }
 
         $data['user_id'] = Auth::id();
-        // 处理 @ 消息，后期处理
         $data['body'] = $this->mentionParser->parse($data['body']);
 
         $markdown = new Markdown();

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1e27ce5f32443768576a19ea56e505b",
-    "content-hash": "676aa5f4780f5cdf7ebabd174bd07a27",
+    "hash": "cdd89ac15c1b9caac77c8c7a080b4821",
+    "content-hash": "761f63aa06609245bbdd80a0793782b5",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -4208,6 +4208,49 @@
                 "test"
             ],
             "time": "2015-05-11 14:41:42"
+        },
+        {
+            "name": "laralib/l5scaffold",
+            "version": "1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laralib/l5scaffold.git",
+                "reference": "623ae6207c42371a60ffce3daceb728217d93c9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/laralib/l5scaffold/623ae6207c42371a60ffce3daceb728217d93c9e.zip",
+                "reference": "623ae6207c42371a60ffce3daceb728217d93c9e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laralib\\L5scaffold\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fernando Brito",
+                    "email": "fernandobritofl@gmail.com"
+                }
+            ],
+            "description": "Extend Laravel 5's generators scaffold.",
+            "keywords": [
+                "generators",
+                "laravel",
+                "laravel5",
+                "scaffold"
+            ],
+            "time": "2016-07-05 12:44:30"
         },
         {
             "name": "mockery/mockery",

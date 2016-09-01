@@ -51,4 +51,9 @@ class TopicPolicy
     {
         return $user->may('manage_topics');
     }
+
+    public function wiki(User $user, Topic $topic)
+    {
+        return $user->may('manage_topics');
+    }
 }

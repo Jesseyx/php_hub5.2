@@ -161,10 +161,13 @@ return [
         Orangehill\Iseed\IseedServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Frozennode\Administrator\AdministratorServiceProvider::class,
-        Dingo\Api\Provider\LaravelServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
         Jrean\UserVerification\UserVerificationServiceProvider::class,
         Naux\Mail\SendCloudServiceProvider::class,
+
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
+        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,6 +232,9 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Rss' => Thujohn\Rss\RssFacade::class,
         'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
+
+        // API
+        'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
 
     ],
 

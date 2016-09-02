@@ -33,7 +33,8 @@
         "jrean/laravel-user-verification": "2.*",
         "naux/sendcloud": "^1.1",
         "smartisan/follow": "^1.0",
-        "spatie/laravel-pjax": "^1.3"
+        "spatie/laravel-pjax": "^1.3",
+        "lucadegasperi/oauth2-server-laravel": "^5.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

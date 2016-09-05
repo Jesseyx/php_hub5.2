@@ -1,7 +1,9 @@
 <div class="navbar navbar-default navbar-static-top topnav" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a href="/" class="navbar-brand">PHPHub</a>
+            <a href="/" class="navbar-brand">
+                <img src="{{ cdn('assets/images/logo2.png') }}" alt="PHPHub" />
+            </a>
         </div>
 
         <duv id="top-navbar-collapse" class="navbar-collapse">
@@ -37,12 +39,12 @@
                 <ul class="nav navbar-nav github-login">
                     @if (Auth::check())
                         <li>
-                            <a class="popover-with-html" href="{{ isset($category) ? route('topics.create', ['category_id' => $category->id]) : route('topics.create') }}" data-placement="bottom" data-content="添加主题" style="margin-top: 3px;">
+                            <a class="popover-with-html" href="{{ isset($category) ? route('topics.create', ['category_id' => $category->id]) : route('topics.create') }}" data-placement="bottom" data-content="添加主题">
                                 <i class="fa fa-plus text-md"></i>
                             </a>
                         </li>
                         <li>
-                            <a class="text-warning" href="{{ route('notifications.index') }}">
+                            <a class="text-warning" href="{{ route('notifications.index') }}" style="margin-top: -4px;">
                                 <span id="notification-count" class="badge badge-{{ $currentUser->notification_count > 0 ? 'important' : 'fade' }}" data-content="消息提醒">
                                     {{ $currentUser->notification_count }}
                                 </span>

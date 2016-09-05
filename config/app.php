@@ -164,6 +164,7 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
         Jrean\UserVerification\UserVerificationServiceProvider::class,
         Naux\Mail\SendCloudServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
 
         Dingo\Api\Provider\LaravelServiceProvider::class,
         LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
@@ -232,6 +233,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Rss' => Thujohn\Rss\RssFacade::class,
         'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
 
         // API
         'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,

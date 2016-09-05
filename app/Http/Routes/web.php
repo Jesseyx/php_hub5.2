@@ -52,6 +52,7 @@ Route::get('/users/{id}/votes', 'UsersController@votes')->name('users.votes');
 Route::get('/users/{id}/edit_email_notify', 'UsersController@editEmailNotify')->name('users.edit_email_notify');
 Route::post('/users/{id}/update_email_notify', 'UsersController@updateEmailNotify')->name('users.update_email_notify');
 Route::get('/users/{id}/edit_social_binding', 'UsersController@editSocialBinding')->name('users.edit_social_binding');
+Route::post('/users/regenerate_login_token', 'UsersController@regenerateLoginToken')->name('users.regenerate_login_token');
 
 # ------------------ Users ------------------------
 Route::get('/users', 'UsersController@index')->name('users.index');

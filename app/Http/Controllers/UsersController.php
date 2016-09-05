@@ -144,25 +144,25 @@ class UsersController extends Controller
         return view('users.favorites', compact('user', 'topics'));
     }
 
-    public function refreshCache($id)
-    {
-        $user = User::findOrFail($id);
-
-        $user_info = (new GithubUserDataReader())->getDataFromUserName($user->github_name);
-
-        // Refresh the GitHub card proxy cache.
-        $cache_name = 'github_api_proxy_user_'.$user->github_name;
-        Cache::put($cache_name, $user_info, 1440);
-
-        // Refresh the avatar cache.
-        $user->image_url = $user_info['avatar_url'];
-        $user->cacheAvatar();
-        $user->save();
-
-        flash(lang('Refresh cache success'), 'success');
-
-        return redirect(route('users.edit', $id));
-    }
+//    public function refreshCache($id)
+//    {
+//        $user = User::findOrFail($id);
+//
+//        $user_info = (new GithubUserDataReader())->getDataFromUserName($user->github_name);
+//
+//        // Refresh the GitHub card proxy cache.
+//        $cache_name = 'github_api_proxy_user_'.$user->github_name;
+//        Cache::put($cache_name, $user_info, 1440);
+//
+//        // Refresh the avatar cache.
+//        $user->image_url = $user_info['avatar_url'];
+//        $user->cacheAvatar();
+//        $user->save();
+//
+//        flash(lang('Refresh cache success'), 'success');
+//
+//        return redirect(route('users.edit', $id));
+//    }
 
     public function editAvatar($id)
     {
@@ -265,5 +265,22 @@ class UsersController extends Controller
         }
 
         return redirect()->intended('/');
+    }
+
+    /**
+     * 生成二维码
+     */
+    public function regenerateLoginToken()
+    {
+        if (Auth::check()) {
+            Auth::user()->login_token = str_random(rand(20, 32));
+            Auth::user()->save();
+
+            flash(lang('Regenerate succeeded.'), 'success');
+        } else {
+            flash(lang('Regenerate failed.'), 'error');
+        }
+
+        return redirect(route('users.show', Auth::id()));
     }
 }

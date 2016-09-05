@@ -86,4 +86,18 @@ class UserPresenter extends Presenter
 
         return $show_data[$this->id];
     }
+
+    public function loginQR($size = 80)
+    {
+        if (!$this->login_token) {
+            $this->entity->login_token = str_random(20);
+            $this->entity->save();
+        }
+
+        return \QrCode::format('png')
+                ->size(200)
+                ->errorCorrection('L')
+                ->margin(0)
+                ->generate($this->github_name . ',' . $this->login_token);
+    }
 }

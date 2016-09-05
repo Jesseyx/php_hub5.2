@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SitesTableSeeder::class);
         $this->call(ActiveUsersTableSeeder::class);
         $this->call(HotTopicsTableSeeder::class);
+        $this->call(OauthClientsTableSeeder::class);
     }
 }

@@ -35,9 +35,15 @@ return [
 
         /*
          * 使用 login_token 获取 access_token
+         * 这个类基于 Password Grant, 但是基于 username 和 login_token 验证。使用方法
+         * 1、https://github.com/lucadegasperi/oauth2-server-laravel/blob/master/docs/authorization-server/password.md 按照这里配置
+         * 需要在 oauth_clients 表里面新建一个应用
+         * 需要的参数：client_id, client_secret, grant_type=login_token, username, login_token
          */
         'login_token' => [
-
+            'class' => '\App\Phphub\OAuth\LoginTokenGrant',
+            'callback' => '\App\Phphub\OAuth\LoginTokenVerifier@verify',
+            'access_token_ttl' => (int) env('OAUTH_ACCESS_TOKEN_TTL', 2592000),
         ],
 
         /*

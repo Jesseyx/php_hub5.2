@@ -15,6 +15,9 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+
+        // API
+        \LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class,
     ];
 
     /**
@@ -59,5 +62,11 @@ class Kernel extends HttpKernel
         'verified_email' => \App\Http\Middleware\RequireVerifiedEmail::class,
         // 限制 Web 内容只能是 web 访问
         'restrict_web_access' => \App\Http\Middleware\RestrictWebAccess::class,
+
+        // API
+        'oauth' => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
+        'oauth-user' => \LucaDegasperi\OAuth2Server\Middleware\OAuthUserOwnerMiddleware::class,
+        'oauth-client' => \LucaDegasperi\OAuth2Server\Middleware\OAuthClientOwnerMiddleware::class,
+        'check-authorization-params' => \LucaDegasperi\OAuth2Server\Middleware\CheckAuthCodeRequestMiddleware::class,
     ];
 }

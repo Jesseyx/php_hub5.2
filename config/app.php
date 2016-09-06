@@ -179,6 +179,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
 
+        // api
+        App\Providers\OAuthServiceProvider::class,
+
     ],
 
     /*

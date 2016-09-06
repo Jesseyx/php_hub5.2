@@ -59,4 +59,16 @@ class NotificationPresenter extends Presenter
 
         return $label;
     }
+
+    // For api
+    public function message()
+    {
+        $message = $this->fromUser->name . ' ⋅ ' . $this->lableUp();
+
+        if (count($this->topic)) {
+            $message .= ' ⋅ ' . $this->topic->title;
+        }
+
+        return $message;
+    }
 }

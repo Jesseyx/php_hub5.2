@@ -64,9 +64,8 @@ class Kernel extends HttpKernel
         'restrict_web_access' => \App\Http\Middleware\RestrictWebAccess::class,
 
         // API
-        'oauth' => \LucaDegasperi\OAuth2Server\Middleware\OAuthMiddleware::class,
-        'oauth-user' => \LucaDegasperi\OAuth2Server\Middleware\OAuthUserOwnerMiddleware::class,
-        'oauth-client' => \LucaDegasperi\OAuth2Server\Middleware\OAuthClientOwnerMiddleware::class,
+        'oauth2' => \App\Http\Middleware\OAuthMiddleware::class,
         'check-authorization-params' => \LucaDegasperi\OAuth2Server\Middleware\CheckAuthCodeRequestMiddleware::class,
+        'api.throttle' => \Dingo\Api\Http\Middleware\RateLimit::class,
     ];
 }

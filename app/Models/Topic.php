@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\TopicApiHelper;
 use App\Models\Traits\TopicFilterable;
 use Cache;
 use Carbon\Carbon;
@@ -46,7 +47,7 @@ class Topic extends Model
     protected $dates = ['deleted_at'];
 
     // for filter
-    use TopicFilterable;
+    use TopicFilterable, TopicApiHelper;
 
     public static function boot()
     {

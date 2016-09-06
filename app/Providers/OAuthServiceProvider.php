@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use Dingo\Api\Auth\Auth;
+use App\Models\User;
+use Auth;
+use Dingo\Api\Auth\Auth as DingoAuth;
 use Dingo\Api\Auth\Provider\OAuth2;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,11 +17,14 @@ class OAuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app[Auth::class]->extend('oauth', function ($app) {
+        $this->app[DingoAuth::class]->extend('oauth', function ($app) {
             $provider = new OAuth2($app['oauth2-server.authorizer']->getChecker());
 
             $provider->setUserResolver(function ($id) {
                 // Logic to return a user by their ID.
+                Auth::loginUsingId($id);
+
+                return User::findOrFail($id);
             });
 
             $provider->setClientResolver(function ($id) {

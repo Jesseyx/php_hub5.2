@@ -98,3 +98,33 @@ function model_url($model, $id)
 {
     return env('APP_URL') . "/$model/$id";
 }
+
+// for api
+function api_per_page($default = null)
+{
+    $max_per_page = config('api.max_per_page');
+    $per_page = (request('per_page') ?: $default) ?: config('api.default_per_page');
+
+    return (int) ($per_page < $max_per_page ? $per_page : $max_per_page);
+}
+
+function get_cdn_domain()
+{
+    return config('phphub.url_static') ?:  config('phphub.url');
+}
+
+// formartted Illuminate\Support\MessageBag
+function output_msb(\Illuminate\Support\MessageBag $messageBag)
+{
+    return implode(", ", $messageBag->all());
+}
+
+/**
+ * 生成用户客户端 URL Schema 技术的链接.
+ */
+function schema_url($path, $parameters = [])
+{
+    $query = empty($parameters) ? '' : '?'.http_build_query($parameters);
+
+    return strtolower(config('app.name')).'://'.trim($path, '/').$query;
+}

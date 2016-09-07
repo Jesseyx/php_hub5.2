@@ -44,7 +44,7 @@ class Banner extends Model
             $file_name = end($parser_url);
         }
 
-        $this->attributes['image_url'] = 'uploads/banners/' . $file_name;
+        $this->attributes['image_url'] = '/uploads/banners/' . $file_name;
     }
 
     public function getImageUrlAttribute($file_name)

@@ -1,9 +1,18 @@
 <?php
 
 return [
-    //'url_static'        => 'https://dn-phphub.qbox.me/',
-    'url'               => 'http://localhost:8000/',
-    'user_static'       => null,
+    /*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | 会用于生成 URL Schema 等.
+    |
+    */
+    'name' => env('APP_NAME', 'PHPHub'),
+    
+    'url_static'        => env('URL_STATIC', null),
+    'user_static'       => env('USER_STATIC', null),
 
     'replies_perpage'         => 80,
     'actived_time_for_update' => 'actived_time_for_update',

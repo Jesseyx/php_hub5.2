@@ -16,9 +16,9 @@ class UserPresenter extends Presenter
         if (config('phphub.url_static') && $this->avatar) {
             //Using Qiniu image processing service.
             $postfix = $size > 0 ? "?imageView2/1/w/{$size}/h/{$size}" : '';
-            return cdn('uploads/avatars/'.$this->avatar) . $postfix;
+            return cdn('/uploads/avatars/'.$this->avatar) . $postfix;
         } else if ($this->avatar) {
-            return config('phphub.url') . 'uploads/avatars/' . $this->avatar;
+            return cdn('/uploads/avatars/' . $this->avatar);
         }
 
         $github_id = $this->github_id;

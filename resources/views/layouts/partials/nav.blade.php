@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-header">
             <a href="/" class="navbar-brand">
-                <img src="{{ cdn('assets/images/logo2.png') }}" alt="PHPHub" />
+                <img src="{{ cdn('/assets/images/logo2.png') }}" alt="PHPHub" />
             </a>
         </div>
 

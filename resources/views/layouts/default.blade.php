@@ -13,12 +13,12 @@
     <meta name="description" content="@section('description') PHPHub 是 PHP 和 Laravel 的中文社区，致力于推动 Laravel，php-fig 等 PHP 新技术，新理念在中国的发展，是国内最靠谱的 PHP 论坛。 @show" />
     <meta name="_token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{ elixir('assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ cdn(elixir('assets/css/styles.css')) }}">
 
-    <link rel="shortcut icon" href="{{ cdn('favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ cdn('/favicon.ico') }}"/>
     <script>
         var Config = {
-            cdnDomain: '{{ getCdnDomain() }}',
+            cdnDomain: '{{ get_cdn_domain() }}',
             user_id: {{ $currentUser ? $currentUser->id : 0 }},
             user_avatar: {!! $currentUser ? "'" . $currentUser->present()->gravatar() . "'" : "''" !!},
             user_link: {!! $currentUser ? "'" . route('users.show', $currentUser->id) . "'" : "''" !!},
@@ -58,7 +58,7 @@
         @include('layouts.partials.footer')
     </div>
 
-    <script src="{{ elixir('assets/js/scripts.js') }}"></script>
+    <script src="{{ cdn(elixir('assets/js/scripts.js')) }}"></script>
 
     @yield('scripts')
 

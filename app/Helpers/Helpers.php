@@ -1,5 +1,6 @@
 <?php
 
+// 如：db:seed 或者 清空数据库命令的地方调用
 function insanity_check()
 {
     if (app()->environment('production')) {
@@ -12,45 +13,24 @@ function cdn($filePath)
     if (config('phphub.url_static')) {
         return config('phphub.url_static') . $filePath;
     } else {
-        return config('phphub.url') . $filePath;
+        return config('app.url') . $filePath;
     }
 }
 
-function getCdnDomain()
+function get_cdn_domain()
 {
-    return config('phphub.url_static') ?:  config('phphub.url');
+    return config('phphub.url_static') ?:  config('app.url');
+}
+
+function get_user_static_domain()
+{
+    return config('phphub.user_static') ?: config('app.url');
 }
 
 function lang($text, $parameters = [])
 {
-    // trans 函数使用本地文件翻译给定语言行
+    // trans 函数使用本地文件翻译给定语言行, $parameters 替换翻译中的参数
     return str_replace('phphub.', '', trans('phphub.' . $text, $parameters));
-}
-
-function getUserStaticDomain()
-{
-    return config('phphub.user_static') ?: config('phphub.url');
-}
-
-function admin_link($title, $path, $id = '')
-{
-    return '<a href="' . admin_url($path, $id) . '" target="_blank">' . $title . '</a>';
-}
-
-function admin_url($path, $id = '')
-{
-    return env('APP_URL') . "admin/$path" . ($id ? '/' . $id : '');
-}
-
-function show_crx_hint()
-{
-    // 存储一次性数据
-    session()->flash('show_crx_hint', 'yes');
-}
-
-function check_show_crx_hint()
-{
-    return session('show_crx_hint') ? true : false;
 }
 
 function navViewActive($anchor)
@@ -63,14 +43,20 @@ function is_request_from_api()
     return $_SERVER['SERVER_NAME'] == env('API_DOMAIN');
 }
 
-function get_user_static_domain()
-{
-    return config('phphub.user_static') ?: config('phphub.url');
-}
-
 function get_platform()
 {
     return request()->header('X-Client-Platform');
+}
+
+// For admin
+function admin_link($title, $path, $id = '')
+{
+    return '<a href="' . admin_url($path, $id) . '" target="_blank">' . $title . '</a>';
+}
+
+function admin_url($path, $id = '')
+{
+    return env('APP_URL') . "/admin/$path" . ($id ? '/' . $id : '');
 }
 
 /**
@@ -108,15 +94,10 @@ function api_per_page($default = null)
     return (int) ($per_page < $max_per_page ? $per_page : $max_per_page);
 }
 
-function get_cdn_domain()
-{
-    return config('phphub.url_static') ?:  config('phphub.url');
-}
-
 // formartted Illuminate\Support\MessageBag
 function output_msb(\Illuminate\Support\MessageBag $messageBag)
 {
-    return implode(", ", $messageBag->all());
+    return implode(', ', $messageBag->all());
 }
 
 /**
@@ -124,7 +105,7 @@ function output_msb(\Illuminate\Support\MessageBag $messageBag)
  */
 function schema_url($path, $parameters = [])
 {
-    $query = empty($parameters) ? '' : '?'.http_build_query($parameters);
+    $query = empty($parameters) ? '' : '?' . http_build_query($parameters);
 
-    return strtolower(config('app.name')).'://'.trim($path, '/').$query;
+    return strtolower(config('phphub.name')) . '://' . trim($path, '/').$query;
 }
